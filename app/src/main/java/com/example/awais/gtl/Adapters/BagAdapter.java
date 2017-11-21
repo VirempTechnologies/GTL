@@ -4,11 +4,13 @@ package com.example.awais.gtl.Adapters;
  * Created by awais on 8/29/2017.
  */
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -21,11 +23,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.awais.gtl.Constants;
 import com.example.awais.gtl.Pojos.BagProduct;
 import com.example.awais.gtl.MediaConversion;
+import com.example.awais.gtl.Pojos.CartItem;
 import com.example.awais.gtl.R;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 /**
  * Created by Ravi Tamada on 18/05/16.
@@ -33,6 +38,8 @@ import java.util.ArrayList;
 public class BagAdapter extends RecyclerView.Adapter<BagAdapter.MyViewHolder> {
 
     private Context mContext;
+    View rootView ;
+    double subTotal=0;
     private ArrayList<BagProduct> bagProductArrayList;
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public ImageView product_image;
@@ -60,6 +67,8 @@ public class BagAdapter extends RecyclerView.Adapter<BagAdapter.MyViewHolder> {
     public BagAdapter(Context mContext, ArrayList<BagProduct> bagProductArrayList) {
         this.mContext = mContext;
         this.bagProductArrayList= bagProductArrayList;
+        rootView = ((Activity)mContext).getWindow().getDecorView().findViewById(R.id.parent_rlv);
+
     }
 
     @Override
@@ -96,8 +105,33 @@ public class BagAdapter extends RecyclerView.Adapter<BagAdapter.MyViewHolder> {
                 }
                 else if(Integer.parseInt(holder.quantity_text.getText().toString())<bagProduct.getMyStock())
                 {
-                    holder.quantity_text.setText((Integer.parseInt(holder.quantity_text.getText().toString())+1)+"");
 
+
+                    int oldQuantity =Integer.parseInt(holder.quantity_text.getText().toString());
+                    int newQuantity = oldQuantity+1;
+                    holder.quantity_text.setText(newQuantity+"");
+                    long price= newQuantity*bagProduct.getSalePrice();
+                    holder.collective_price.setText(price+" €");
+
+                    if(Constants.cartItemsMap.containsKey(bagProduct.getProductName())) {
+                        Log.d(Constants.TAG,"Update old product of ..");
+                        Constants.cartItemsMap.get(bagProduct.getProductName()).setQuantity(newQuantity);
+                        Constants.cartItemsMap.get(bagProduct.getProductName()).setCollective_price(price);
+                        updateSum();
+                    }
+                    else
+                    {
+                        Log.d(Constants.TAG,"add new product to cart..");
+                        CartItem item = new CartItem();
+                        item.setProduct_id(bagProduct.getProduct_id());
+                        item.setProduct_name(bagProduct.getProductName());
+                        item.setQuantity(newQuantity);
+                        item.setSale_price(bagProduct.getSalePrice());
+                        item.setCollective_price(price);
+                        Constants.cartItemsMap.put(bagProduct.getProductName(),item);
+                        Log.d(Constants.TAG,"new item added successfully");
+                        updateSum();
+                    }
                 }
             }
         });
@@ -105,13 +139,34 @@ public class BagAdapter extends RecyclerView.Adapter<BagAdapter.MyViewHolder> {
             @Override
             public void onClick(View v) {
                 Toast.makeText(mContext, "minus btn", Toast.LENGTH_SHORT).show();
+                Log.d(Constants.TAG,holder.quantity_text.getText().toString()+"");
+
                 if(Integer.parseInt(holder.quantity_text.getText().toString())<=0)
                 {
 
                 }
-                else if(Integer.parseInt(holder.quantity_text.getText().toString())<bagProduct.getMyStock())
+                else if(Integer.parseInt(holder.quantity_text.getText().toString())<=bagProduct.getMyStock())
                 {
-                    holder.quantity_text.setText((Integer.parseInt(holder.quantity_text.getText().toString())-1)+"");
+                    int oldQuantity =Integer.parseInt(holder.quantity_text.getText().toString());
+                    int newQuantity = oldQuantity-1;
+                    if(newQuantity<=0)
+                    {
+                            Log.d(Constants.TAG,"delete this product");
+                            Constants.cartItemsMap.remove(bagProduct.getProductName());
+                            Log.d(Constants.TAG,"product successfully deleted...");
+                            holder.quantity_text.setText(newQuantity + "");
+                            updateSum();
+                    }
+                    else {
+                        holder.quantity_text.setText(newQuantity + "");
+                        long price = newQuantity * bagProduct.getSalePrice();
+                        holder.collective_price.setText(price + " €");
+                        Log.d(Constants.TAG, "Update old product of ..");
+                        Constants.cartItemsMap.get(bagProduct.getProductName()).setQuantity(newQuantity);
+                        Constants.cartItemsMap.get(bagProduct.getProductName()).setCollective_price(price);
+                        updateSum();
+                    }
+//                    holder.quantity_text.setText((Integer.parseInt(holder.quantity_text.getText().toString())-1)+"");
 
                 }
             }
@@ -172,5 +227,17 @@ public class BagAdapter extends RecyclerView.Adapter<BagAdapter.MyViewHolder> {
     @Override
     public int getItemCount() {
         return bagProductArrayList.size();
+    }
+
+    public void updateSum()
+    {
+        subTotal=0;
+        Log.d(Constants.TAG,"cart size: "+Constants.cartItemsMap.size());
+
+        for (Map.Entry<String,CartItem> cartItem:Constants.cartItemsMap.entrySet())
+        {
+            subTotal+=cartItem.getValue().getCollective_price();
+        }
+        ((TextView)rootView.findViewById(R.id.client_grand_total)).setText(subTotal+" €");
     }
 }

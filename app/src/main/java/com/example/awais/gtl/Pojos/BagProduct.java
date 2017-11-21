@@ -10,8 +10,17 @@ public class BagProduct {
     private int companyStock;
     private long salePrice;
     private String image;
+    private int product_id;
 
     public BagProduct() {
+    }
+
+    public int getProduct_id() {
+        return product_id;
+    }
+
+    public void setProduct_id(int product_id) {
+        this.product_id = product_id;
     }
 
     public String getProductName() {

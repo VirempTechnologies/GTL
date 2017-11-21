@@ -2,9 +2,9 @@ package com.example.awais.gtl.Activities;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -13,8 +13,10 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
+import android.widget.Button;
 import android.widget.RelativeLayout;
 
 import com.example.awais.gtl.Adapters.BagAdapter;
@@ -58,35 +60,38 @@ public class BagActivity extends AppCompatActivity {
 
             JSONObject params = new JSONObject();
             params.put("headers", headers);
-
-            //---------------//
-//            JSONObject params = new JSONObject();
-//            params.put("ResellerUserName", "PJSoftTest");
-//            params.put("ResellerPassword", "asdf@123");
-//            params.put("ResellerHostAddress", "1.1.1.1.1");
-//            Log.d("checklog", "sending request : " + params.toString());
-
-//            JSONObject respObject = webServiceHelper.sendPostRequest(params,BagActivity.this,"http://85.25.217.41/ResellerAPI_v2/ResellerOperationService.svc/getProductList");
-            respObject = webServiceHelper.sendPostRequest(params, BagActivity.this, Constants.getBagUrl);
-
-            Log.d("checklog", "responce : " + respObject.toString());
-
-            bagProductArrayList = new ArrayList<>();
-            BagProduct bagProduct = new BagProduct();
-            JSONArray allProducts = respObject.getJSONArray("products");
-            for (int i=0;i<allProducts.length();i++)
-            {
-                JSONObject product = allProducts.getJSONObject(i);
-                bagProduct = new BagProduct();
-        bagProduct.setProductName(product.getString("name"));
-        bagProduct.setSalePrice(product.getInt("sale_price"));
-        bagProduct.setMyStock(product.getInt("quantity"));
-        bagProduct.setCompanyStock(00);
-        bagProduct.setImage(MediaConversion.encodeToBase64(BitmapFactory.decodeResource(getResources(),R.drawable.product_1), Bitmap.CompressFormat.PNG,30));
-        bagProductArrayList.add(bagProduct);
-
-            }
 //
+//            //---------------//
+////            JSONObject params = new JSONObject();
+////            params.put("ResellerUserName", "PJSoftTest");
+////            params.put("ResellerPassword", "asdf@123");
+////            params.put("ResellerHostAddress", "1.1.1.1.1");
+            Log.d("checklog", "sending request : " + params.toString());
+////            Log.d("checklog", "url : " + Constants.getBagUrl);
+//
+////           JSONObject respObject = webServiceHelper.sendPostRequest(params,BagActivity.this,"http://85.25.217.41/ResellerAPI_v2/ResellerOperationService.svc/getProductList");
+            respObject = webServiceHelper.sendPostRequest(params, BagActivity.this, Constants.getBagUrl);
+////
+            Log.d("checklog", "responce : " + respObject.toString());
+                        bagProductArrayList = new ArrayList<>();
+                        BagProduct bagProduct = new BagProduct();
+                        JSONArray allProducts = respObject.getJSONArray("products");
+                        for (int i = 0; i < allProducts.length(); i++) {
+                            JSONObject product = allProducts.getJSONObject(i);
+                            bagProduct = new BagProduct();
+                            bagProduct.setProductName(product.getString("name"));
+                            bagProduct.setSalePrice(product.getInt("sale_price"));
+                            bagProduct.setMyStock(product.getInt("quantity"));
+                            bagProduct.setCompanyStock(00);
+                            bagProduct.setProduct_id(product.getInt("id"));
+                            bagProduct.setImage(MediaConversion.encodeToBase64(BitmapFactory.decodeResource(getResources(), R.drawable.product_1), Bitmap.CompressFormat.PNG, 30));
+                            bagProductArrayList.add(bagProduct);
+                        }
+
+
+//            bagProductArrayList = new ArrayList<>();
+//            BagProduct bagProduct = new BagProduct();
+
 //        bagProduct.setProductName("Samsung J5 pro J530");
 //        bagProduct.setSalePrice(990);
 //        bagProduct.setMyStock(10);
@@ -130,7 +135,7 @@ public class BagActivity extends AppCompatActivity {
             //end filling bag list
             RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, 1);
             salesman_bag_recyler_view = (RecyclerView) findViewById(R.id.salesman_bag_recycler_view);
-            adapter = new BagAdapter(this.getApplicationContext(), bagProductArrayList);
+            adapter = new BagAdapter(this, bagProductArrayList);
             salesman_bag_recyler_view.setLayoutManager(mLayoutManager);
 //        candidateRecyclerView.addItemDecoration(new VerticalSpaceItemDecoration(VERTICAL_ITEM_SPACE));
 //        //or
@@ -149,6 +154,15 @@ public class BagActivity extends AppCompatActivity {
             int animId = R.anim.layout_animation_from_bottom;
             LayoutAnimationController animation2 = AnimationUtils.loadLayoutAnimation(this, animId);
             invoice_total_rlv.setLayoutAnimation(animation2);
+              Button button = (Button) findViewById(R.id.btn_viewinvoice);
+              button.setOnClickListener(new View.OnClickListener() {
+                  @Override
+                  public void onClick(View v) {
+                      startActivity(new Intent(BagActivity.this, CartActivity.class));
+                      overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+                  }
+              });
+
         }
         catch (Exception ex)
         {

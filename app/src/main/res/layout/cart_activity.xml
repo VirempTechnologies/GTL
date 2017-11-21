@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:background="@color/colorLightGray"
+    tools:context="com.example.awais.gtl.Activities.ReceiptsActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/client_rlv">
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/products_receipts"
+        android:layout_below="@+id/client_rlv"
+        android:layout_above="@+id/add_new_rlv"
+        android:layout_margin="5dp">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/product_cart_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:scrollbars="vertical"
+            />
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/add_new_rlv"
+        android:background="@drawable/round_corner"
+        android:layout_above="@+id/checkout_rlv"
+        android:padding="10dp"
+        android:layout_margin="5dp">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add Another Item"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="30dp"
+            android:background="@drawable/button_bg"
+            android:id="@+id/btn_addAnother"
+            android:gravity="center"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:layout_centerInParent="true"/>
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/checkout_rlv"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/round_corner"
+        android:layout_margin="5dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/subtotal_rlv"
+            android:layout_margin="10dp"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sub Total"
+                android:textColor="@color/colorDrakGray"
+                android:textSize="16dp"
+                android:id="@+id/subtotal_lable"
+                android:layout_centerVertical="true"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="$ 2303,22"
+                android:textColor="@color/colorDrakGray"
+                android:textSize="15dp"
+                android:id="@+id/product_receipt_total_price"
+                android:layout_centerVertical="true"
+                android:layout_alignParentEnd="true"
+                />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tax_rlv"
+            android:layout_margin="10dp"
+            android:layout_below="@+id/subtotal_rlv"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tax (0%)"
+                android:textColor="@color/colorDrakGray"
+                android:textSize="16dp"
+                android:id="@+id/txt_lable"
+                android:layout_centerVertical="true"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0.00€"
+                android:textColor="@color/colorDrakGray"
+                android:textSize="15dp"
+                android:id="@+id/product_txt_price"
+                android:layout_centerVertical="true"
+                android:layout_alignParentEnd="true"
+                />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorPrimaryDark"
+            android:layout_below="@+id/tax_rlv"
+            android:id="@+id/subtotal_rlv_line"
+            android:layout_margin="5dp">
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/grand_total_rlv"
+            android:layout_below="@+id/subtotal_rlv_line"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TOTAL"
+                android:textColor="@color/colorDrakGray"
+                android:textSize="26dp"
+                android:id="@+id/grand_total_lable"
+                android:layout_centerVertical="true"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0.00"
+                android:textColor="@color/colorDrakGray"
+                android:textSize="25dp"
+                android:id="@+id/product_grand_total_price"
+                android:layout_centerVertical="true"
+                android:layout_alignParentEnd="true"
+                />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/proceed_checkout_rlv"
+            android:layout_below="@+id/grand_total_rlv"
+            android:gravity="center">
+            <Button
+                android:id="@+id/btnProceedCheckOut"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#fff"
+                android:theme="@style/AppTheme.Button.success"
+                android:gravity="center"
+                android:text="Proceed Check Out"/>
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -157,7 +157,7 @@
                     <RelativeLayout
                         android:layout_width="wrap_content"
                         android:layout_height="30dp"
-                        android:background="@drawable/button_bg"
+                        android:background="@drawable/button_only_color_purple"
                         android:layout_centerVertical="true"
                         android:padding="2dp"
                         >

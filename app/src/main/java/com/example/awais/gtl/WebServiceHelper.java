@@ -42,6 +42,89 @@ public class WebServiceHelper {
         }
         return  null;
     }
+    public JSONObject invokeCallAsync(Context context,String URL,JSONObject params){
+        try {
+            // Show Progress Dialog
+
+            // Make RESTful webservice call using AsyncHttpClient object
+            cz.msebera.android.httpclient.entity.StringEntity entity = new cz.msebera.android.httpclient.entity.StringEntity(params.toString());
+            AsyncHttpClient client = new AsyncHttpClient();
+
+            client.post(context ,URL, entity, "application/json",new JsonHttpResponseHandler() {
+
+                @Override
+                public void onStart() {
+                    // called before request is started\
+                    Log.d(Constants.TAG, "here to start preloader");
+
+                    respObject = new JSONObject();
+
+                    // Set Progress Dialog Text
+
+
+                }
+
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, JSONObject resp) {
+                    try {
+
+
+                        super.onSuccess(statusCode, headers, resp);
+                        Log.d(Constants.TAG, "status: " + statusCode);
+                        Log.d(Constants.TAG, "success data say congo : " + resp.toString());
+
+                        if(statusCode==200) {
+
+                            //prgDialog.dismiss();
+                            respObject= resp;
+//                            if (resp.getString("isUserExist").equals("true")) {
+//                                setLogin("true", resp.getString("user_id"), resp.getString("user_name"), resp.getString("user_email"), resp.getString("user_image"));
+//                                //     startActivity(new Intent(LoginActivity.this,ElectionActivity.class).putExtra("JSON",jsonResponse));
+//                                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+//                                overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+//                                finish();
+//                            }
+//                            else
+//                            {
+//                                ((TextView) findViewById(R.id.login_loader_text)).setText("Email or Pass Incorrect..");
+//                                loginLoader.clearAnimation();
+//                                loginLoader.setVisibility(View.GONE);
+//
+//                            }
+
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        ex.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                    super.onFailure(statusCode, headers, throwable, errorResponse);
+                    Log.d(Constants.TAG, "status: " + statusCode);
+                    Log.d(Constants.TAG, "success data say congo : " + errorResponse.toString());
+
+                }
+
+                @Override
+                public void onRetry(int retryNo) {
+                    // called when request is retried
+                }
+
+
+            });
+
+        }
+        catch (Exception ex)
+        {
+            ex.getStackTrace();
+        }
+        return  respObject;
+
+    }
+
     class RetrieveFeedTask extends AsyncTask<String, Void, JSONObject> {
 
         private Exception exception;
