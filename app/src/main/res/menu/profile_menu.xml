@@ -1,0 +1,34 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    ><item android:id="@+id/setting_menu_btn"
+        android:title="settings"
+        android:orderInCategory="100"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_dot_horizontal_white_24dp">
+        <menu xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools" >
+            <group android:checkableBehavior="none"
+                android:id="@+id/setting_menu">
+                <item
+                    android:id="@+id/logout"
+                    android:orderInCategory="1"
+                    app:showAsAction="never"
+                    android:title="logout"
+                    />
+
+                <item android:id="@+id/menu_setting"
+                    android:orderInCategory="1"
+                    app:showAsAction="never"
+                    android:title="Setting"
+                    />
+            </group>
+        </menu>
+    </item>
+
+
+
+
+
+</menu>

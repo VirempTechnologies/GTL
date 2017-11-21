@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    android:id="@+id/parent_rlv"
+    >
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="100dp"
+            android:paddingBottom="100dp">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:id="@+id/rlv_1">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/GTL_title_1"
+                    android:text="Globe"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="32dp"
+                    android:textStyle="normal"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/GTL_title_1"
+                    android:text="Telelink"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="33dp"
+                    android:textStyle="bold"/>
+            </RelativeLayout>
+            <RelativeLayout
+                android:padding="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/round_corner"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/rlv_1"
+                >
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Sign in"
+                    android:textColor="@color/colorAccent"
+                    android:gravity="center"
+                    android:textSize="@dimen/HeadingSize"
+                    android:id="@+id/singin_title"/>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/rlv_username"
+                    android:layout_below="@+id/singin_title"
+                    android:layout_marginTop="10dp">
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/user_icon"
+                        android:padding="10dp"
+                        android:layout_centerVertical="true"
+                        android:id="@+id/user_icon"
+                        />
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/user_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="2dp"
+                        android:layout_gravity="center"
+                        android:theme="@style/TextInputStyle"
+                        android:layout_toRightOf="@+id/user_icon"
+                        >
+
+                        <AutoCompleteTextView
+                            android:id="@+id/login_useremail_text"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="textEmailAddress"
+                            android:maxLines="1"
+                            android:imeOptions="actionNext"
+                            android:singleLine="true"
+                            android:hint="User Name"
+                            android:keepScreenOn="false"
+                            android:textColor="@color/colorAccent"/>
+
+                    </android.support.design.widget.TextInputLayout>
+
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/rlv_pass"
+                    android:layout_below="@+id/rlv_username"
+                    android:layout_marginTop="0dp">
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/lock_icon"
+                        android:padding="10dp"
+                        android:layout_centerVertical="true"
+                        android:id="@+id/pass_icon"
+                        />
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/login_pass"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@+id/pass_icon"
+                        android:padding="2dp"
+                        android:theme="@style/TextInputStyle"
+                        android:textColorHint="@color/colorPrimary">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/login_pass_text"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="password"
+                            android:inputType="textPassword"
+                            android:maxLines="1"
+                            android:imeOptions="actionDone"
+                            android:singleLine="true"
+                            android:keepScreenOn="false"
+                            android:textColor="@color/colorAccent"/>
+
+                    </android.support.design.widget.TextInputLayout>
+
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/rlv_pass"
+                    android:id="@+id/rlv_forgot"
+                    android:layout_marginTop="30dp"
+                    >
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/forgot_rlv"
+                        android:layout_centerVertical="true">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Forgot Password?"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:id="@+id/forgot_text"
+                            android:layout_marginLeft="43dp"
+                            />
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@+id/forgot_rlv"
+                        android:gravity="right">
+                        <Button
+                            android:id="@+id/btnLogin"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="#fff"
+                            android:theme="@style/AppTheme.Button.success"
+                            android:gravity="center"
+
+                            android:text="SIGN IN"/>
+
+                    </RelativeLayout>
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+        </RelativeLayout>
+    </ScrollView>
+    <android.support.design.widget.CoordinatorLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/coordinatorLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+
+        ></android.support.design.widget.CoordinatorLayout>
+</RelativeLayout>
+

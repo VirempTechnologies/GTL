@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:layout_height="68dp"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/colorAccent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/bag_rlv">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorAccent"
+        android:id="@+id/parent_rlv"
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/upper_rlv"
+            android:layout_margin="10dp"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1. "
+                android:textColor="@color/colorDrakGray"
+                android:textSize="12dp"
+                android:id="@+id/item_counter"
+                android:layout_centerVertical="true"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Muhammad Imran"
+                android:textColor="@color/colorDrakGray"
+                android:textSize="16dp"
+                android:id="@+id/client_name"
+                android:layout_toRightOf="@+id/item_counter"
+                android:layout_centerVertical="true"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="$ 2303,22"
+                android:textColor="@color/colorDrakGray"
+                android:textSize="15dp"
+                android:id="@+id/invoice_total_price"
+                android:layout_centerVertical="true"
+                android:layout_alignParentEnd="true"
+                />
+
+
+
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/lower_rlv"
+            android:layout_below="@+id/upper_rlv"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Globe Telelink"
+                android:textColor="@color/colorLightGray"
+                android:textSize="14dp"
+                android:id="@+id/company_name_text"
+                android:layout_marginStart="14dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="invoice # 1044"
+                android:textColor="@color/colorLightGray"
+                android:textSize="14dp"
+                android:id="@+id/invoice_no"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="22dp" />
+
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorPrimaryDark"
+            android:layout_below="@+id/lower_rlv"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp">
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>

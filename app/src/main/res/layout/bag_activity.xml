@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorMenuBar">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/salesman_bag_rlv"
+            android:layout_above="@+id/invoice_total_rlv"
+            android:layout_alignParentTop="true">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/salesman_bag_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:scrollbars="vertical"
+                android:layoutAnimation="@anim/layout_animation_fall_down"
+
+                />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@color/colorMenuBar"
+            android:id="@+id/invoice_total_rlv"
+            >
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:background="@drawable/round_corner_gray"
+                android:layout_margin="3dp">
+                <Button
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:text="View Invoice"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="30dp"
+                    android:background="@drawable/button_bg"
+                    android:id="@+id/btn_minus"/>
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    >
+                    <TextView
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:text="Sub total"
+                        android:textSize="20dp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="10dp"
+                        android:textColor="@color/colorWhite"
+                        android:id="@+id/subtotal_lable"/>
+                    <TextView
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:text="3,443.34 $"
+                        android:layout_marginTop="5dp"
+                        android:textSize="24dp"
+                        android:textColor="@color/colorWhite"
+                        android:layout_below="@+id/subtotal_lable"
+
+                        />
+
+                </RelativeLayout>
+            </RelativeLayout>
+        </RelativeLayout>
+
+    <android.support.design.widget.CoordinatorLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/coordinatorLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+
+        ></android.support.design.widget.CoordinatorLayout>
+</RelativeLayout>
