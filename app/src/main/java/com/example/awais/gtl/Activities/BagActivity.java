@@ -3,6 +3,7 @@ package com.example.awais.gtl.Activities;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -38,6 +39,7 @@ public class BagActivity extends AppCompatActivity {
     WebServiceHelper webServiceHelper;
     ProgressDialog prgDialog;
     JSONObject respObject;
+    SharedPreferences settings;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,11 +54,13 @@ public class BagActivity extends AppCompatActivity {
 
         try {
 
+            settings = getSharedPreferences("GTL-Settings",0);
+            final String headerss = settings.getString("headers",null);
 
-            JSONObject headers = new JSONObject();
-            headers.put("user_id", 10);
-            headers.put("salesman_id", 1);
-            headers.put("api_token", "JAAu8Z2LDXvbWIUtp0Sh3ejTPargCtve0ewuTR9CZT2NYVkQdUvk52p5pHFI");
+            JSONObject headers = new JSONObject(headerss);
+//            headers.put("user_id", 10);
+//            headers.put("salesman_id", 1);
+//            headers.put("api_token", "JAAu8Z2LDXvbWIUtp0Sh3ejTPargCtve0ewuTR9CZT2NYVkQdUvk52p5pHFI");
 
             JSONObject params = new JSONObject();
             params.put("headers", headers);
@@ -76,7 +80,7 @@ public class BagActivity extends AppCompatActivity {
                         //bagProductArrayList = new ArrayList<>();
                         BagProduct bagProduct = new BagProduct();
                         Constants.bagProductArrayList.clear();
-                        JSONArray allProducts = respObject.getJSONArray("products");
+                        JSONArray allProducts = respObject.getJSONObject("data").getJSONArray("products");
                         for (int i = 0; i < allProducts.length(); i++) {
                             JSONObject product = allProducts.getJSONObject(i);
                             bagProduct = new BagProduct();
@@ -88,7 +92,7 @@ public class BagActivity extends AppCompatActivity {
                             bagProduct.setInitialQuantity(0);
                             bagProduct.setBagIndex(i);
 
-                            bagProduct.setImage(MediaConversion.encodeToBase64(BitmapFactory.decodeResource(getResources(), R.drawable.product_1), Bitmap.CompressFormat.PNG, 30));
+                            bagProduct.setImage(product.getString("product_image"));
                            Constants.bagProductArrayList.add(bagProduct);
                         }
 
@@ -183,6 +187,7 @@ public class BagActivity extends AppCompatActivity {
     protected void onPostResume() {
         super.onPostResume();
         Log.d(Constants.TAG,"here to refresh activity salesman adapter");
+        if(salesman_bag_recyler_view!=null)
         salesman_bag_recyler_view.getAdapter().notifyDataSetChanged();
         //runLayoutAnimation(salesman_bag_recyler_view);
 
@@ -191,6 +196,7 @@ public class BagActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         Log.d(Constants.TAG,"here to create owerflow menu");
+
         getMenuInflater().inflate(R.menu.profile_menu,menu);
 
 

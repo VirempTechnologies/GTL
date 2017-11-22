@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
-    android:layout_height="45dp"
+    android:layout_height="wrap_content"
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/colorAccent"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:fancy="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/bag_rlv">
+    android:id="@+id/parent_rlv">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorAccent"
-        android:id="@+id/parent_rlv"
+        android:id="@+id/client_rlv"
         >
         <RelativeLayout
             android:layout_width="match_parent"
@@ -19,7 +19,15 @@
             android:id="@+id/upper_rlv"
             android:layout_margin="10dp"
             >
-
+            <TextView
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:text="Glob TeleLink"
+                android:textColor="@color/colorDrakGray"
+                android:textSize="16dp"
+                android:id="@+id/company_name"
+                android:gravity="center"
+                />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -28,18 +36,12 @@
                 android:textSize="16dp"
                 android:id="@+id/client_name"
                 android:layout_centerVertical="true"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Glob TeleLink"
-                android:textColor="@color/colorDrakGray"
-                android:textSize="16dp"
-                android:id="@+id/company_name"
                 android:gravity="center"
-                android:layout_toRightOf="@+id/client_name"
+                android:layout_toRightOf="@+id/company_name"
                 android:layout_toLeftOf="@+id/current_balance"
+
                 />
+
 
             <TextView
                 android:layout_width="wrap_content"

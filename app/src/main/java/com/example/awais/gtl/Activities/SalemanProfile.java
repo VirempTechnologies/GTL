@@ -111,7 +111,6 @@ public class SalemanProfile extends AppCompatActivity {
 //                new DividerItemDecoration(this, R.drawable.divider));
             salesman_operation_recyler_view.setItemAnimator(new DefaultItemAnimator());
             salesman_operation_recyler_view.setAdapter(adapter);
-            salesman_operation_recyler_view.setAdapter(adapter);
 
             // grid animations
             int resId = R.anim.layout_animation_fall_down;

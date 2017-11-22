@@ -22,6 +22,7 @@ import android.widget.Toast;
 
 import com.example.awais.gtl.Activities.BagActivity;
 import com.example.awais.gtl.Activities.ReceiptsActivity;
+import com.example.awais.gtl.Activities.SalemanClientsActivity;
 import com.example.awais.gtl.Constants;
 import com.example.awais.gtl.Pojos.Operation;
 import com.example.awais.gtl.R;
@@ -86,7 +87,13 @@ public class OperationsAdapter extends RecyclerView.Adapter<OperationsAdapter.My
                         Toast.makeText(mContext, "My Stock", Toast.LENGTH_SHORT).show();
                         (mContext).startActivity((new Intent(mContext, BagActivity.class)).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
                         ((Activity) mContext).overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+
+                    } else if (holder.operationName.getText().toString().equals(("My Clients"))) {
+                        Toast.makeText(mContext, "My Stock", Toast.LENGTH_SHORT).show();
+                        (mContext).startActivity((new Intent(mContext, SalemanClientsActivity.class)).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                        ((Activity) mContext).overridePendingTransition(R.anim.fadein, R.anim.fadeout);
                     }
+
                     // ((Activity) mContext).overridePendingTransition(R.anim.fadein, R.anim.fadeout);
                 }
             });

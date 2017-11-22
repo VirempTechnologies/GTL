@@ -20,6 +20,11 @@
             android:label="Present Stock"
             android:theme="@style/AppTheme"></activity>
         <activity
+            android:name=".Activities.SalemanClientsActivity"
+            android:label="Present Stock"
+            android:theme="@style/AppTheme"></activity>
+
+        <activity
             android:name=".Activities.SalemanProfile"
             android:label="Profile"
             android:theme="@style/AppTheme.blue"></activity>
