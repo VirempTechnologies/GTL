@@ -6,17 +6,25 @@
     android:background="@color/colorWhite"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/operation_rlv"
+    xmlns:fancy="http://schemas.android.com/apk/res-auto"
+
     >
 
-
-    <ImageView
+    <mehdi.sakout.fancybuttons.FancyButton
+        android:id="@+id/operation_icon"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:src="@drawable/today_invoice"
-        android:id="@+id/operation_icon"
-        android:layout_alignParentTop="true"
+        fancy:fb_defaultColor="@color/colorAccent"
+        android:padding="7dp"
+        android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"/>
+        fancy:fb_focusColor="@color/colorPrimary"
+        fancy:fb_iconPaddingLeft="0dp"
+        fancy:fb_iconPaddingRight="0dp"
+        fancy:fb_iconResource="@drawable/today_invoice"
+        fancy:fb_radius="64dp"
+        fancy:fb_textColor="#FFFFFF"/>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

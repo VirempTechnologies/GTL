@@ -47,7 +47,7 @@ public class CartActivity extends AppCompatActivity {
         //setting the recycler view
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, 1);
         product_cart_recycler_view = (RecyclerView) findViewById(R.id.product_cart_recycler_view);
-        adapter = new CartAdapter(this.getApplicationContext(), cartItemArrayList);
+        adapter = new CartAdapter(this, cartItemArrayList);
         product_cart_recycler_view.setLayoutManager(mLayoutManager);
         product_cart_recycler_view.setAdapter(adapter);
         int resId = R.anim.layout_animation_from_left;

@@ -82,12 +82,18 @@ public class BagAdapter extends RecyclerView.Adapter<BagAdapter.MyViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(final MyViewHolder holder, int position) {
+    public void onBindViewHolder(final MyViewHolder holder, final int position) {
         final BagProduct bagProduct= bagProductArrayList.get(position);
         holder.product_name.setText(bagProduct.getProductName());
         holder.my_stock.setText(bagProduct.getMyStock()+"");
         holder.company_stock.setText(bagProduct.getCompanyStock()+"");
         holder.sale_price.setText(bagProduct.getSalePrice()+"");
+        holder.quantity_text.setText(bagProduct.getInitialQuantity()+"");
+        if(bagProduct.getInitialQuantity()==0)
+        {
+            holder.collective_price.setText(0+" €");
+            updateSum();
+        }
         holder.bagRlv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -117,6 +123,8 @@ public class BagAdapter extends RecyclerView.Adapter<BagAdapter.MyViewHolder> {
                         Log.d(Constants.TAG,"Update old product of ..");
                         Constants.cartItemsMap.get(bagProduct.getProductName()).setQuantity(newQuantity);
                         Constants.cartItemsMap.get(bagProduct.getProductName()).setCollective_price(price);
+                        Constants.bagProductArrayList.get(position).setInitialQuantity(newQuantity);
+
                         updateSum();
                     }
                     else
@@ -128,8 +136,11 @@ public class BagAdapter extends RecyclerView.Adapter<BagAdapter.MyViewHolder> {
                         item.setQuantity(newQuantity);
                         item.setSale_price(bagProduct.getSalePrice());
                         item.setCollective_price(price);
+                        item.setBagIndex(position);
                         Constants.cartItemsMap.put(bagProduct.getProductName(),item);
                         Log.d(Constants.TAG,"new item added successfully");
+                        Constants.bagProductArrayList.get(position).setInitialQuantity(newQuantity);
+
                         updateSum();
                     }
                 }
@@ -155,7 +166,9 @@ public class BagAdapter extends RecyclerView.Adapter<BagAdapter.MyViewHolder> {
                             Constants.cartItemsMap.remove(bagProduct.getProductName());
                             Log.d(Constants.TAG,"product successfully deleted...");
                             holder.quantity_text.setText(newQuantity + "");
-                            updateSum();
+                            Constants.bagProductArrayList.get(position).setInitialQuantity(newQuantity);
+
+                        updateSum();
                     }
                     else {
                         holder.quantity_text.setText(newQuantity + "");
@@ -164,6 +177,8 @@ public class BagAdapter extends RecyclerView.Adapter<BagAdapter.MyViewHolder> {
                         Log.d(Constants.TAG, "Update old product of ..");
                         Constants.cartItemsMap.get(bagProduct.getProductName()).setQuantity(newQuantity);
                         Constants.cartItemsMap.get(bagProduct.getProductName()).setCollective_price(price);
+                        Constants.bagProductArrayList.get(position).setInitialQuantity(newQuantity);
+
                         updateSum();
                     }
 //                    holder.quantity_text.setText((Integer.parseInt(holder.quantity_text.getText().toString())-1)+"");

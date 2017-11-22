@@ -33,7 +33,7 @@ import java.util.ArrayList;
 
 public class BagActivity extends AppCompatActivity {
     BagAdapter adapter;
-    ArrayList<BagProduct> bagProductArrayList;
+   // ArrayList<BagProduct> bagProductArrayList;
     RecyclerView salesman_bag_recyler_view;
     WebServiceHelper webServiceHelper;
     ProgressDialog prgDialog;
@@ -73,8 +73,9 @@ public class BagActivity extends AppCompatActivity {
             respObject = webServiceHelper.sendPostRequest(params, BagActivity.this, Constants.getBagUrl);
 ////
             Log.d("checklog", "responce : " + respObject.toString());
-                        bagProductArrayList = new ArrayList<>();
+                        //bagProductArrayList = new ArrayList<>();
                         BagProduct bagProduct = new BagProduct();
+                        Constants.bagProductArrayList.clear();
                         JSONArray allProducts = respObject.getJSONArray("products");
                         for (int i = 0; i < allProducts.length(); i++) {
                             JSONObject product = allProducts.getJSONObject(i);
@@ -84,8 +85,11 @@ public class BagActivity extends AppCompatActivity {
                             bagProduct.setMyStock(product.getInt("quantity"));
                             bagProduct.setCompanyStock(00);
                             bagProduct.setProduct_id(product.getInt("id"));
+                            bagProduct.setInitialQuantity(0);
+                            bagProduct.setBagIndex(i);
+
                             bagProduct.setImage(MediaConversion.encodeToBase64(BitmapFactory.decodeResource(getResources(), R.drawable.product_1), Bitmap.CompressFormat.PNG, 30));
-                            bagProductArrayList.add(bagProduct);
+                           Constants.bagProductArrayList.add(bagProduct);
                         }
 
 
@@ -135,7 +139,7 @@ public class BagActivity extends AppCompatActivity {
             //end filling bag list
             RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, 1);
             salesman_bag_recyler_view = (RecyclerView) findViewById(R.id.salesman_bag_recycler_view);
-            adapter = new BagAdapter(this, bagProductArrayList);
+            adapter = new BagAdapter(this, Constants.bagProductArrayList);
             salesman_bag_recyler_view.setLayoutManager(mLayoutManager);
 //        candidateRecyclerView.addItemDecoration(new VerticalSpaceItemDecoration(VERTICAL_ITEM_SPACE));
 //        //or
@@ -178,7 +182,10 @@ public class BagActivity extends AppCompatActivity {
     @Override
     protected void onPostResume() {
         super.onPostResume();
-        Log.d(Constants.TAG,"her to refresh activity");
+        Log.d(Constants.TAG,"here to refresh activity salesman adapter");
+        salesman_bag_recyler_view.getAdapter().notifyDataSetChanged();
+        //runLayoutAnimation(salesman_bag_recyler_view);
+
     }
 
     @Override
@@ -206,6 +213,9 @@ public class BagActivity extends AppCompatActivity {
         recyclerView.getAdapter().notifyDataSetChanged();
         recyclerView.scheduleLayoutAnimation();
     }
+
+
+
 
 
 

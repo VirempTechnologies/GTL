@@ -11,8 +11,26 @@ public class BagProduct {
     private long salePrice;
     private String image;
     private int product_id;
+    private int initialQuantity;
+    private int bagIndex;
 
     public BagProduct() {
+    }
+
+    public int getBagIndex() {
+        return bagIndex;
+    }
+
+    public void setBagIndex(int bagIndex) {
+        this.bagIndex = bagIndex;
+    }
+
+    public int getInitialQuantity() {
+        return initialQuantity;
+    }
+
+    public void setInitialQuantity(int initialQuantity) {
+        this.initialQuantity = initialQuantity;
     }
 
     public int getProduct_id() {

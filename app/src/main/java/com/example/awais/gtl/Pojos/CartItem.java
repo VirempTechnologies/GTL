@@ -10,8 +10,17 @@ public class CartItem {
     long sale_price;
     int quantity;
     long collective_price;
+    int bagIndex;
 
     public CartItem() {
+    }
+
+    public int getBagIndex() {
+        return bagIndex;
+    }
+
+    public void setBagIndex(int bagIndex) {
+        this.bagIndex = bagIndex;
     }
 
     public int getProduct_id() {

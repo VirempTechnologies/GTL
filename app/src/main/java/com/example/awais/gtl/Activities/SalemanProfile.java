@@ -1,8 +1,12 @@
 package com.example.awais.gtl.Activities;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -11,9 +15,11 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.example.awais.gtl.Constants;
 import com.example.awais.gtl.Pojos.Operation;
@@ -23,6 +29,8 @@ import com.example.awais.gtl.WebServiceHelper;
 
 import java.util.ArrayList;
 
+import mehdi.sakout.fancybuttons.FancyButton;
+
 /**
  * Created by awais on 17/05/2017.
  */
@@ -31,11 +39,21 @@ public class SalemanProfile extends AppCompatActivity {
     ArrayList<Operation> operationArrayList;
     RecyclerView salesman_operation_recyler_view;
     WebServiceHelper webServiceHelper;
+    CoordinatorLayout coordinatorLayout;
+    SharedPreferences setting;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.salesman_profile);
+        coordinatorLayout =(CoordinatorLayout)findViewById(R.id.coordinatorLayout);
+        setting = getSharedPreferences("GTL-Settings",0);
+        String name = setting.getString("name",null);
+        String area = setting.getString("assigned_area",null);
+        ((TextView) findViewById(R.id.saleman_name)).setText(name);
+        ((TextView) findViewById(R.id.saleman_area)).setText(area);
+
         try {
 
 
@@ -112,7 +130,14 @@ public class SalemanProfile extends AppCompatActivity {
             profileImageLayout.setLayoutAnimation(profileImageAnimation);
             //end
 
-
+            FancyButton logoutButton = (FancyButton) findViewById(R.id.logout_icon);
+            logoutButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    setLogout();
+                    //finish();
+                }
+            });
         }
         catch (Exception ex)
         {
@@ -128,6 +153,8 @@ public class SalemanProfile extends AppCompatActivity {
     protected void onPostResume() {
         super.onPostResume();
         Log.d(Constants.TAG,"here to refresh activity");
+        Constants.bagProductArrayList.clear();
+        Constants.cartItemsMap.clear();
     }
 
     @Override
@@ -144,6 +171,41 @@ public class SalemanProfile extends AppCompatActivity {
             return  true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public  void  setLogout()
+    {
+       SharedPreferences.Editor editor = setting.edit();
+        editor.remove("Login");
+        editor.remove("headers");
+        editor.remove("name");
+        editor.remove("assigned_area");
+        editor.commit();
+        final Snackbar snackbar = Snackbar
+                .make(coordinatorLayout, "Logout Successfully", Snackbar.LENGTH_LONG)
+                .setAction("Exit", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        android.os.Process.killProcess(android.os.Process.myPid());
+                        finish();
+                    }
+
+                }).setCallback(new Snackbar.Callback(){
+                    @Override
+                    public void onDismissed(Snackbar snackbar, int event) {
+                        super.onDismissed(snackbar, event);
+                        finish();
+                        startActivity(new Intent(SalemanProfile.this,Login.class));
+                        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+                    }
+                    @Override
+                    public void onShown(Snackbar snackbar) {
+                        super.onShown(snackbar);
+                    }
+                });
+
+        snackbar.show();
+
     }
 
 }

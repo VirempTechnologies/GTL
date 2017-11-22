@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fancy="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -31,22 +33,31 @@
                 android:id="@+id/user_profile_info_rlv"
                 android:layout_below="@+id/user_image_rlv">
                 <RelativeLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="60dp"
                     android:layout_height="wrap_content"
                     android:id="@+id/settings_rlv"
                     android:layout_alignParentStart="true"
                     android:layout_marginLeft="30dp"
                     >
-                    <ImageView
+                    <mehdi.sakout.fancybuttons.FancyButton
+                        android:id="@+id/settings_icon"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:src="@drawable/setting_icon"
-                        android:id="@+id/settings_icon"
-                        />
+                        android:layout_margin="5dp"
+                        fancy:fb_defaultColor="@color/colorAccent"
+                        android:layout_centerVertical="true"
+                        fancy:fb_focusColor="@color/colorPrimaryDark"
+                        fancy:fb_iconPaddingLeft="0dp"
+                        fancy:fb_iconPaddingRight="0dp"
+                        fancy:fb_iconResource="@drawable/setting_icon"
+                        fancy:fb_radius="64dp"
+                        fancy:fb_textColor="#FFFFFF"/>
+
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="60dp"
                         android:layout_height="wrap_content"
                         android:text="Settings"
+                        android:gravity="center"
                         android:textColor="@color/colorPrimary"
                         android:layout_below="@id/settings_icon"/>
                 </RelativeLayout>
@@ -62,7 +73,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Muhammmad Imran"
-                        android:textColor="@color/colorAccent"
+                        android:textColor="@color/colorPrimaryDark"
                         android:gravity="center"
                         android:textSize="@dimen/HeadingSize"
                         android:id="@+id/saleman_name"
@@ -88,27 +99,39 @@
                             android:textColor="@color/colorPrimary"
                             android:layout_toRightOf="@+id/location_icon"
                             android:layout_centerVertical="true"
+                            android:id="@+id/saleman_area"
                             />
 
                     </RelativeLayout>
                 </RelativeLayout>
                 <RelativeLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="60dp"
                     android:layout_height="wrap_content"
                     android:id="@+id/logout_rlv"
                     android:layout_alignParentEnd="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
                     android:layout_marginRight="30dp"
                     >
-                    <ImageView
+                    <mehdi.sakout.fancybuttons.FancyButton
+                        android:id="@+id/logout_icon"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:src="@drawable/logout_icon"
-                        android:id="@+id/logout_icon"
-                        />
+                        android:layout_margin="5dp"
+                        fancy:fb_defaultColor="@color/colorAccent"
+                        android:layout_centerVertical="true"
+                        fancy:fb_focusColor="@color/colorPrimaryDark"
+                        fancy:fb_iconPaddingLeft="0dp"
+                        fancy:fb_iconPaddingRight="0dp"
+                        fancy:fb_iconResource="@drawable/logout_icon"
+                        fancy:fb_radius="64dp"
+                        fancy:fb_textColor="#FFFFFF"/>
+
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="60dp"
                         android:layout_height="wrap_content"
                         android:text="logout"
+                        android:gravity="center"
                         android:textColor="@color/colorPrimary"
                         android:layout_below="@id/logout_icon"/>
                 </RelativeLayout>

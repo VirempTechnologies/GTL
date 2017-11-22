@@ -28,6 +28,8 @@ import com.example.awais.gtl.R;
 
 import java.util.ArrayList;
 
+import mehdi.sakout.fancybuttons.FancyButton;
+
 /**
  * Created by Ravi Tamada on 18/05/16.
  */
@@ -37,7 +39,7 @@ public class OperationsAdapter extends RecyclerView.Adapter<OperationsAdapter.My
     private ArrayList<Operation> operationArrayList;
     ProgressDialog prgDialog;
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public ImageView operationIcon;
+        public FancyButton operationIcon;
         public TextView operationName;
         public RelativeLayout operationRlV;
 
@@ -45,7 +47,7 @@ public class OperationsAdapter extends RecyclerView.Adapter<OperationsAdapter.My
             super(view);
             operationName = (TextView) view.findViewById(R.id.operation_name);
             operationRlV = (RelativeLayout) view.findViewById(R.id.operation_rlv);
-            operationIcon= (ImageView) view.findViewById(R.id.operation_icon);
+            operationIcon= (FancyButton) view.findViewById(R.id.operation_icon);
         }
     }
 
@@ -70,7 +72,7 @@ public class OperationsAdapter extends RecyclerView.Adapter<OperationsAdapter.My
         try {
             final Operation operation = operationArrayList.get(position);
             holder.operationName.setText(operation.getOperationName());
-            holder.operationRlV.setOnClickListener(new View.OnClickListener() {
+            holder.operationIcon.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Log.d(Constants.TAG, holder.operationName.getText() + "");
@@ -93,7 +95,7 @@ public class OperationsAdapter extends RecyclerView.Adapter<OperationsAdapter.My
 //        Glide.with(mContext).load(category.getCatIcon()).into(holder.catIcon);
 
 //        holder.candidateImage.setImageBitmap(MediaConversion.decodeBase64(candidate.getCandidateImageBase64()));
-            holder.operationIcon.setImageResource(operation.getOperationIcon());
+            holder.operationIcon.setIconResource(operation.getOperationIcon());
             //Glide.with(mContext).fromBytes().asBitmap().into(holder.candidateImage);
 //          holder.overflow.setOnClickListener(new View.OnClickListener() {
 //            @Override

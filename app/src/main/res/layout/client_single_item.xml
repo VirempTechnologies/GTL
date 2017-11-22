@@ -1,15 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    android:layout_height="45dp"
     android:layout_width="match_parent"
-    android:layout_height="80dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_marginTop="5dp"
-    android:orientation="vertical"
-    android:id="@+id/item_id"
-    android:padding="5dp"
-    android:background="@color/colorPrimary">
+    android:background="@color/colorAccent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fancy="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/bag_rlv">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorAccent"
+        android:id="@+id/parent_rlv"
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/upper_rlv"
+            android:layout_margin="10dp"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Muhammad Imran"
+                android:textColor="@color/colorDrakGray"
+                android:textSize="16dp"
+                android:id="@+id/client_name"
+                android:layout_centerVertical="true"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Glob TeleLink"
+                android:textColor="@color/colorDrakGray"
+                android:textSize="16dp"
+                android:id="@+id/company_name"
+                android:gravity="center"
+                android:layout_toRightOf="@+id/client_name"
+                android:layout_toLeftOf="@+id/current_balance"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="$ 2303,22"
+                android:textColor="@color/colorDrakGray"
+                android:textSize="15dp"
+                android:id="@+id/current_balance"
+                android:layout_centerVertical="true"
+                android:layout_alignParentEnd="true"
+                />
 
 
 
 
-</LinearLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorPrimaryDark"
+            android:layout_below="@+id/upper_rlv"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="5dp">
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>

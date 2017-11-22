@@ -95,7 +95,7 @@
                             android:singleLine="true"
                             android:hint="User Name"
                             android:keepScreenOn="false"
-                            android:textColor="@color/colorAccent"/>
+                            android:textColor="@color/colorPrimaryDark"/>
 
                     </android.support.design.widget.TextInputLayout>
 
@@ -133,7 +133,7 @@
                             android:imeOptions="actionDone"
                             android:singleLine="true"
                             android:keepScreenOn="false"
-                            android:textColor="@color/colorAccent"/>
+                            android:textColor="@color/colorPrimary"/>
 
                     </android.support.design.widget.TextInputLayout>
 
