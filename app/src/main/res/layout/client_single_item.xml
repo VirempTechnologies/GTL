@@ -6,7 +6,8 @@
     android:background="@color/colorAccent"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:fancy="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/parent_rlv">
+    android:id="@+id/parent_rlv"
+    android:theme="@android:style/Theme.Material.Light.DarkActionBar">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -6,18 +6,90 @@
     android:layout_height="match_parent"
     android:background="@color/colorMenuBar"
     android:id="@+id/parent_rlv">
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/salesman_bag_rlv"
             android:layout_above="@+id/invoice_total_rlv"
             android:layout_alignParentTop="true">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/client_rlv"
+                android:background="@drawable/round_corner_green"
+                android:layout_margin="5dp">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/user_profile_info_rlv"
+                    android:layout_below="@+id/user_image_rlv">
 
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/user_name_rlv"
+                        android:layout_centerInParent="true"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        >
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Muhammmad Imran"
+                            android:gravity="center"
+                            android:textSize="@dimen/HeadingSize"
+                            android:id="@+id/client_name"
+                            android:layout_centerHorizontal="true"
+                            />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Globe teleLink"
+                            android:gravity="center"
+                            android:textSize="14dp"
+                            android:id="@+id/client_company_name"
+                            android:layout_below="@id/client_name"
+                            android:layout_centerHorizontal="true"
+                            />
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/client_company_name"
+                            android:layout_marginBottom="3dp"
+                            android:layout_centerHorizontal="true">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/location_icon"
+                                android:text="Current Balance"
+                                android:layout_marginRight="10dp"
+                                android:layout_centerVertical="true"
+                                />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="13100 €"
+                                android:textStyle="bold"
+                                android:textSize="16dp"
+                                android:layout_toRightOf="@+id/location_icon"
+                                android:layout_centerVertical="true"
+                                android:id="@+id/client_current_balance"
+                                />
+
+                        </RelativeLayout>
+                    </RelativeLayout>
+
+
+                </RelativeLayout>
+            </RelativeLayout>
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/salesman_bag_recycler_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
+                android:layout_below="@id/client_rlv"
                 android:scrollbars="vertical"
                 android:layoutAnimation="@anim/layout_animation_fall_down"
 
@@ -41,7 +113,7 @@
                     android:text="View Invoice"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="30dp"
-                    android:background="@drawable/button_bg"
+                    android:background="@drawable/button_bg_dark"
                     android:id="@+id/btn_viewinvoice"/>
                 <RelativeLayout
                     android:layout_width="wrap_content"

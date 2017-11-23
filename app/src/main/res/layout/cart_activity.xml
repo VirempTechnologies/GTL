@@ -2,6 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:fancy="http://schemas.android.com/apk/res-auto"
+
     android:id="@+id/parent_rlv"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -12,8 +14,73 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/client_rlv">
+        android:id="@+id/client_rlv"
+        android:background="@drawable/round_corner_green"
+        android:layout_margin="5dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/user_profile_info_rlv"
+            android:layout_below="@+id/user_image_rlv">
 
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/user_name_rlv"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Muhammmad Imran"
+                    android:gravity="center"
+                    android:textSize="@dimen/HeadingSize"
+                    android:id="@+id/client_name"
+                    android:layout_centerHorizontal="true"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Globe teleLink"
+                    android:gravity="center"
+                    android:textSize="14dp"
+                    android:id="@+id/client_company_name"
+                    android:layout_below="@id/client_name"
+                    android:layout_centerHorizontal="true"
+                    />
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/client_company_name"
+                    android:layout_marginBottom="3dp"
+                    android:layout_centerHorizontal="true">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/location_icon"
+                        android:text="Current Balance"
+                        android:layout_marginRight="10dp"
+                        android:layout_centerVertical="true"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="13100 €"
+                        android:textStyle="bold"
+                        android:textSize="16dp"
+                        android:layout_toRightOf="@+id/location_icon"
+                        android:layout_centerVertical="true"
+                        android:id="@+id/client_current_balance"
+                        />
+
+                </RelativeLayout>
+            </RelativeLayout>
+
+
+        </RelativeLayout>
     </RelativeLayout>
     <RelativeLayout
         android:layout_width="match_parent"
@@ -37,20 +104,24 @@
         android:id="@+id/add_new_rlv"
         android:background="@drawable/round_corner"
         android:layout_above="@+id/checkout_rlv"
-        android:padding="10dp"
+        android:padding="2dp"
+        android:gravity="center"
         android:layout_margin="5dp">
-        <Button
+        <mehdi.sakout.fancybuttons.FancyButton
+            android:id="@+id/btn_addAnother"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Add Another Item"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="30dp"
-            android:background="@drawable/button_bg"
-            android:id="@+id/btn_addAnother"
-            android:gravity="center"
+            android:layout_marginBottom="1dp"
+            android:paddingBottom="10dp"
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
-            android:layout_centerInParent="true"/>
+            android:paddingTop="10dp"
+            fancy:fb_defaultColor="@color/colorPrimary"
+            fancy:fb_focusColor="@color/colorPrimaryDark"
+            fancy:fb_iconPosition="left"
+            fancy:fb_radius="30dp"
+            fancy:fb_text="Add More"
+            fancy:fb_textColor="#FFFFFF"/>
 
     </RelativeLayout>
     <RelativeLayout
@@ -156,14 +227,22 @@
             android:id="@+id/proceed_checkout_rlv"
             android:layout_below="@+id/grand_total_rlv"
             android:gravity="center">
-            <Button
-                android:id="@+id/btnProceedCheckOut"
+            <mehdi.sakout.fancybuttons.FancyButton
+                android:id="@+id/btn_proceedCheckOut"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="#fff"
-                android:theme="@style/AppTheme.Button.success"
-                android:gravity="center"
-                android:text="Proceed Check Out"/>
+                android:layout_marginBottom="1dp"
+                android:paddingBottom="10dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:paddingTop="10dp"
+                fancy:fb_defaultColor="#7ab800"
+                fancy:fb_focusColor="#9bd823"
+                fancy:fb_iconPosition="left"
+                fancy:fb_radius="30dp"
+                fancy:fb_text="Check Out"
+                fancy:fb_textColor="#FFFFFF"/>
+
 
         </RelativeLayout>
 

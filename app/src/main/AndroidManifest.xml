@@ -13,21 +13,29 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".Activities.BagActivity"
-            android:label="Present Stock"
-            android:theme="@style/AppTheme"></activity>
+            android:label="Bag"
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".Activities.AddClientFirst"
+            android:label="Add Client"
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".Activities.CartActivity"
-            android:label="Present Stock"
-            android:theme="@style/AppTheme"></activity>
+            android:label="Client Cart"
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".Activities.SalemanClientsActivity"
-            android:label="Present Stock"
+            android:label="Clients"
             android:theme="@style/AppTheme"></activity>
 
         <activity
             android:name=".Activities.SalemanProfile"
             android:label="Profile"
-            android:theme="@style/AppTheme.blue"></activity>
+            android:theme="@style/AppTheme.blue"
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".Activities.ReceiptsActivity"
             android:label="Receipts"

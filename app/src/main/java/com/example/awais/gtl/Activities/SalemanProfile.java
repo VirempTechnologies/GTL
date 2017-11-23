@@ -77,13 +77,13 @@ public class SalemanProfile extends AppCompatActivity {
             operation.setOperationIcon(R.drawable.my_client);
             operationArrayList.add(operation);
 
-            operation = new Operation();
-            operation.setOperationName("My Reports");
-            operation.setOperationIcon(R.drawable.my_report);
-            operationArrayList.add(operation);
+//            operation = new Operation();
+//            operation.setOperationName("My Reports");
+//            operation.setOperationIcon(R.drawable.my_report);
+//            operationArrayList.add(operation);
 
             operation = new Operation();
-            operation.setOperationName("Add Customer");
+            operation.setOperationName("Add Client");
             operation.setOperationIcon(R.drawable.add_customer);
             operationArrayList.add(operation);
 
@@ -91,11 +91,11 @@ public class SalemanProfile extends AppCompatActivity {
             operation.setOperationName("My Stock");
             operation.setOperationIcon(R.drawable.my_stock);
             operationArrayList.add(operation);
-
-            operation = new Operation();
-            operation.setOperationName("Company Stock");
-            operation.setOperationIcon(R.drawable.company_stock);
-            operationArrayList.add(operation);
+//
+//            operation = new Operation();
+//            operation.setOperationName("Company Stock");
+//            operation.setOperationIcon(R.drawable.company_stock);
+//            operationArrayList.add(operation);
 
 
             RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, 2);

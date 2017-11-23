@@ -95,7 +95,7 @@ public class ClientAdapter extends RecyclerView.Adapter<ClientAdapter.MyViewHold
                         public void onClick(DialogInterface dialog, int which) {
                             if(which==0)
                             {
-                                (mContext).startActivity((new Intent(mContext, BagActivity.class)).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                                (mContext).startActivity((new Intent(mContext, BagActivity.class).putExtra("client",client)).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
                                 ((Activity) mContext).overridePendingTransition(R.anim.fadein, R.anim.fadeout);
 
                             }

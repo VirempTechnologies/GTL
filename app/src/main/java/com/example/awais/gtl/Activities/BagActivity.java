@@ -19,17 +19,20 @@ import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
 import android.widget.Button;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.example.awais.gtl.Adapters.BagAdapter;
 import com.example.awais.gtl.Constants;
 import com.example.awais.gtl.Pojos.BagProduct;
 import com.example.awais.gtl.MediaConversion;
+import com.example.awais.gtl.Pojos.Client;
 import com.example.awais.gtl.R;
 import com.example.awais.gtl.WebServiceHelper;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.sql.ClientInfoStatus;
 import java.util.ArrayList;
 
 public class BagActivity extends AppCompatActivity {
@@ -48,110 +51,43 @@ public class BagActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowHomeEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);
-        //filling the bag list
-
         webServiceHelper = new WebServiceHelper();
-
         try {
-
             settings = getSharedPreferences("GTL-Settings",0);
             final String headerss = settings.getString("headers",null);
-
             JSONObject headers = new JSONObject(headerss);
-//            headers.put("user_id", 10);
-//            headers.put("salesman_id", 1);
-//            headers.put("api_token", "JAAu8Z2LDXvbWIUtp0Sh3ejTPargCtve0ewuTR9CZT2NYVkQdUvk52p5pHFI");
-
             JSONObject params = new JSONObject();
             params.put("headers", headers);
-//
-//            //---------------//
-////            JSONObject params = new JSONObject();
-////            params.put("ResellerUserName", "PJSoftTest");
-////            params.put("ResellerPassword", "asdf@123");
-////            params.put("ResellerHostAddress", "1.1.1.1.1");
             Log.d("checklog", "sending request : " + params.toString());
-////            Log.d("checklog", "url : " + Constants.getBagUrl);
-//
-////           JSONObject respObject = webServiceHelper.sendPostRequest(params,BagActivity.this,"http://85.25.217.41/ResellerAPI_v2/ResellerOperationService.svc/getProductList");
             respObject = webServiceHelper.sendPostRequest(params, BagActivity.this, Constants.getBagUrl);
-////
             Log.d("checklog", "responce : " + respObject.toString());
-                        //bagProductArrayList = new ArrayList<>();
-                        BagProduct bagProduct = new BagProduct();
-                        Constants.bagProductArrayList.clear();
-                        JSONArray allProducts = respObject.getJSONObject("data").getJSONArray("products");
-                        for (int i = 0; i < allProducts.length(); i++) {
-                            JSONObject product = allProducts.getJSONObject(i);
-                            bagProduct = new BagProduct();
-                            bagProduct.setProductName(product.getString("name"));
-                            bagProduct.setSalePrice(product.getInt("sale_price"));
-                            bagProduct.setMyStock(product.getInt("quantity"));
-                            bagProduct.setCompanyStock(00);
-                            bagProduct.setProduct_id(product.getInt("id"));
-                            bagProduct.setInitialQuantity(0);
-                            bagProduct.setBagIndex(i);
+            BagProduct bagProduct;
+            Constants.bagProductArrayList.clear();
+            JSONArray allProducts = respObject.getJSONObject("data").getJSONArray("products");
+            for (int i = 0; i < allProducts.length(); i++) {
+                JSONObject product = allProducts.getJSONObject(i);
+                bagProduct = new BagProduct();
+                bagProduct.setProductName(product.getString("name"));
+                bagProduct.setSalePrice(product.getInt("sale_price"));
+                bagProduct.setMyStock(product.getInt("quantity"));
+                bagProduct.setCompanyStock(00);
+                bagProduct.setProduct_id(product.getInt("id"));
+                bagProduct.setInitialQuantity(0);
+                bagProduct.setBagIndex(i);
 
-                            bagProduct.setImage(product.getString("product_image"));
-                           Constants.bagProductArrayList.add(bagProduct);
-                        }
+                bagProduct.setImage(product.getString("product_image"));
+               Constants.bagProductArrayList.add(bagProduct);
+            }
+            //client data
+            final Client client = (Client) getIntent().getSerializableExtra("client");
+            ((TextView) findViewById(R.id.client_name)).setText(client.getClient_name());
+            ((TextView) findViewById(R.id.client_current_balance)).setText(client.getCurrent_bal());
+            ((TextView) findViewById(R.id.client_company_name)).setText(client.getCompany_name());
 
-
-//            bagProductArrayList = new ArrayList<>();
-//            BagProduct bagProduct = new BagProduct();
-
-//        bagProduct.setProductName("Samsung J5 pro J530");
-//        bagProduct.setSalePrice(990);
-//        bagProduct.setMyStock(10);
-//        bagProduct.setCompanyStock(200);
-//        bagProduct.setImage(MediaConversion.encodeToBase64(BitmapFactory.decodeResource(getResources(),R.drawable.product_1), Bitmap.CompressFormat.PNG,30));
-//        bagProductArrayList.add(bagProduct);
-//
-//        bagProduct = new BagProduct();
-//        bagProduct.setProductName("Samsung J5 pro J530");
-//        bagProduct.setSalePrice(800);
-//        bagProduct.setMyStock(5);
-//        bagProduct.setCompanyStock(100);
-//        bagProduct.setImage(MediaConversion.encodeToBase64(BitmapFactory.decodeResource(getResources(),R.drawable.product_1), Bitmap.CompressFormat.PNG,30));
-//        bagProductArrayList.add(bagProduct);
-//
-//        bagProduct = new BagProduct();
-//        bagProduct.setProductName("Samsung J5 pro J530");
-//        bagProduct.setSalePrice(610);
-//        bagProduct.setMyStock(20);
-//        bagProduct.setCompanyStock(400);
-//        bagProduct.setImage(MediaConversion.encodeToBase64(BitmapFactory.decodeResource(getResources(),R.drawable.product_1), Bitmap.CompressFormat.PNG,30));
-//        bagProductArrayList.add(bagProduct);
-//
-//        bagProduct = new BagProduct();
-//        bagProduct.setProductName("Samsung J5 pro J530");
-//        bagProduct.setSalePrice(800);
-//        bagProduct.setMyStock(5);
-//        bagProduct.setCompanyStock(100);
-//        bagProduct.setImage(MediaConversion.encodeToBase64(BitmapFactory.decodeResource(getResources(),R.drawable.product_1), Bitmap.CompressFormat.PNG,30));
-//        bagProductArrayList.add(bagProduct);
-//
-//        bagProduct = new BagProduct();
-//        bagProduct.setProductName("Samsung J5 pro J530");
-//        bagProduct.setSalePrice(610);
-//        bagProduct.setMyStock(20);
-//        bagProduct.setCompanyStock(400);
-//        bagProduct.setImage(MediaConversion.encodeToBase64(BitmapFactory.decodeResource(getResources(),R.drawable.product_1), Bitmap.CompressFormat.PNG,30));
-//        bagProductArrayList.add(bagProduct);
-
-
-            //end filling bag list
             RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, 1);
             salesman_bag_recyler_view = (RecyclerView) findViewById(R.id.salesman_bag_recycler_view);
             adapter = new BagAdapter(this, Constants.bagProductArrayList);
             salesman_bag_recyler_view.setLayoutManager(mLayoutManager);
-//        candidateRecyclerView.addItemDecoration(new VerticalSpaceItemDecoration(VERTICAL_ITEM_SPACE));
-//        //or
-//        candidateRecyclerView.addItemDecoration(new DividerItemDecoration(this));
-//        //or
-//        candidateRecyclerView.addItemDecoration(
-//                new DividerItemDecoration(this, R.drawable.divider));
-            //salesman_bag_recyler_view .setItemAnimator(new DefaultItemAnimator());
             salesman_bag_recyler_view.setAdapter(adapter);
             int resId = R.anim.layout_animation_from_left;
             LayoutAnimationController animation = AnimationUtils.loadLayoutAnimation(this, resId);
@@ -166,7 +102,7 @@ public class BagActivity extends AppCompatActivity {
               button.setOnClickListener(new View.OnClickListener() {
                   @Override
                   public void onClick(View v) {
-                      startActivity(new Intent(BagActivity.this, CartActivity.class));
+                      startActivity(new Intent(BagActivity.this, CartActivity.class).putExtra("client",client));
                       overridePendingTransition(R.anim.fadein, R.anim.fadeout);
                   }
               });

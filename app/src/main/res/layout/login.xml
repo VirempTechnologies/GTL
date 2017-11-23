@@ -57,7 +57,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Sign in"
-                    android:textColor="@color/colorAccent"
+                    android:textColor="@color/colorPrimary"
                     android:gravity="center"
                     android:textSize="@dimen/HeadingSize"
                     android:id="@+id/singin_title"/>
@@ -95,7 +95,7 @@
                             android:singleLine="true"
                             android:hint="User Name"
                             android:keepScreenOn="false"
-                            android:textColor="@color/colorPrimaryDark"/>
+                            android:textColor="@color/colorPrimary"/>
 
                     </android.support.design.widget.TextInputLayout>
 
