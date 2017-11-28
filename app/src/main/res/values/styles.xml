@@ -95,6 +95,12 @@
         <item name="colorControlNormal">@color/colorPrimary</item>
         <item name="colorControlActivated">@color/colorAccentDark</item>
     </style>
+    <style name="SpinnerTheme" parent="android:Widget.Spinner">
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:itemBackground">@color/colorAccent</item>
+        <item name="android:background">@color/colorPrimary</item>
+        <item name="android:dropDownSelector">@drawable/ic_arrow_down</item>
+    </style>
 
 
 </resources>
