@@ -195,18 +195,23 @@ public class Login  extends AppCompatActivity {
                 }
 
                 @Override
-                public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                    super.onFailure(statusCode, headers, responseString, throwable);
-                    try {
+                public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                    super.onFailure(statusCode, headers, throwable, errorResponse);
+                    prgDialog.dismiss();
 
+                    AlertDialog.Builder builder =
+                            new AlertDialog.Builder(Login.this, R.style.AppCompatAlertDialogStyle);
+                    builder.setTitle("Opps");
+                    builder.setIcon(R.drawable.corss);
+                    builder.setMessage("Service Failer server not found..! ");
+                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            //finish();
+                        }
+                    });
+                    builder.show();
 
-                        Log.d(Constants.TAG, "status: " + statusCode);
-                        Log.d(Constants.TAG, "data faliur : " + responseString);
-
-                        prgDialog.dismiss();
-                    }
-                    catch (Exception ex) {
-                    }
                 }
 
                 @Override

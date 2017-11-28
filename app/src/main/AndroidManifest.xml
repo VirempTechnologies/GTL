@@ -35,18 +35,20 @@
             android:name=".Activities.SalemanProfile"
             android:label="Profile"
             android:theme="@style/AppTheme.blue"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".Activities.ReceiptsActivity"
             android:label="Receipts"
             android:theme="@style/AppTheme.blue"></activity>
 
         <activity android:name=".Activities.Login">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
     </application>
