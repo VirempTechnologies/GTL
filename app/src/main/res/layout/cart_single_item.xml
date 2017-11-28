@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:layout_height="85dp"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/colorAccent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fancy="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/bag_rlv">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorAccent"
+        android:id="@+id/parent_rlv"
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/upper_rlv"
+            android:layout_margin="10dp"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="iPhone 7x"
+                android:textColor="@color/colorDrakGray"
+                android:textSize="16dp"
+                android:id="@+id/product_name"
+                android:layout_centerVertical="true"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="$ 2303,22"
+                android:textColor="@color/colorDrakGray"
+                android:textSize="15dp"
+                android:id="@+id/product_total_price"
+                android:layout_centerVertical="true"
+                android:layout_alignParentEnd="true"
+                />
+
+
+
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/lower_rlv"
+            android:layout_below="@+id/upper_rlv"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2 x 1230$"
+                android:textColor="@color/colorLightGray"
+                android:textSize="14dp"
+                android:id="@+id/product_quantity_price"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="14dp" />
+            <mehdi.sakout.fancybuttons.FancyButton
+                android:id="@+id/btn_delete_item"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentEnd="true"
+                fancy:fb_defaultColor="@color/colorAccent"
+                android:padding="7dp"
+                android:layout_centerVertical="true"
+                fancy:fb_focusColor="@color/colorPrimaryDark"
+                fancy:fb_iconPaddingLeft="0dp"
+                fancy:fb_iconPaddingRight="0dp"
+                fancy:fb_iconResource="@drawable/btn_delete"
+                fancy:fb_radius="64dp"
+                fancy:fb_textColor="#FFFFFF"/>
+
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorPrimaryDark"
+            android:layout_below="@+id/lower_rlv"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="5dp">
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>
