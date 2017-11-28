@@ -92,7 +92,7 @@ public class SalemanClientsActivity extends AppCompatActivity {
                 {
                     JSONObject firstObject = parentArray.getJSONObject(i);
                     client.setClient_id(firstObject.getInt("id"));
-                    client.setCompany_name(firstObject.getString("company_name")+" Globe TeleLink GmbH");
+                    client.setCompany_name(firstObject.getString("company_name"));
                     if(firstObject.getString("current_bal").equals("null"))
                     {
                         client.setCurrent_bal("0.00 €");

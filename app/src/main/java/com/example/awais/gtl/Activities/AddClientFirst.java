@@ -24,6 +24,12 @@ public class AddClientFirst extends AppCompatActivity {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(AddClientFirst.this, android.R.layout.simple_dropdown_item_1line, SPINNER_DATA);
         city_spinner.setAdapter(adapter);
 
+        MaterialBetterSpinner status_spinner ;
+        String[] statusSpinnerData= {"Active","InActive"};
+        status_spinner = (MaterialBetterSpinner)findViewById(R.id.status_spinner);
+        ArrayAdapter<String> satus_adapter = new ArrayAdapter<String>(AddClientFirst.this, android.R.layout.simple_dropdown_item_1line, statusSpinnerData);
+        status_spinner.setAdapter(satus_adapter);
+
     }
 
 }

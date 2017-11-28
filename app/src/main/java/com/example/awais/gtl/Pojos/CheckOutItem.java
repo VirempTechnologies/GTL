@@ -1,51 +1,49 @@
 package com.example.awais.gtl.Pojos;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by awais on 11/28/2017.
  */
 
-public class SoldItem {
-    int product_id;
-    String product_name;
-    long sale_price;
-    String imei;
+public class CheckOutItem {
+    String productName;
+    long collectivePrice;
+    long salePrice;
+    ArrayList<String> IMEINos=new ArrayList<>();
 
-    public SoldItem() {
+    public CheckOutItem() {
     }
 
-    public int getProduct_id() {
-        return product_id;
+    public String getProductName() {
+        return productName;
     }
 
-    public void setProduct_id(int product_id) {
-        this.product_id = product_id;
+    public void setProductName(String productName) {
+        this.productName = productName;
     }
 
-    public String getProduct_name() {
-        return product_name;
+    public long getCollectivePrice() {
+        return collectivePrice;
     }
 
-    public void setProduct_name(String product_name) {
-        this.product_name = product_name;
+    public void setCollectivePrice(long collectivePrice) {
+        this.collectivePrice = collectivePrice;
     }
 
-    public long getSale_price() {
-        return sale_price;
+    public long getSalePrice() {
+        return salePrice;
     }
 
-    public void setSale_price(long sale_price) {
-        this.sale_price = sale_price;
+    public void setSalePrice(long salePrice) {
+        this.salePrice = salePrice;
     }
 
-    public String getImei() {
-        return imei;
+    public ArrayList<String> getIMEINos() {
+        return IMEINos;
     }
 
-    public void setImei(String imei) {
-        this.imei = imei;
+    public void setIMEINos(ArrayList<String> IMEINos) {
+        this.IMEINos = IMEINos;
     }
 }

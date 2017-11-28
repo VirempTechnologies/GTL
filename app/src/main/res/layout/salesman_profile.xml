@@ -46,6 +46,7 @@
                         android:layout_margin="5dp"
                         fancy:fb_defaultColor="@color/colorAccent"
                         android:layout_centerVertical="true"
+
                         fancy:fb_focusColor="@color/colorPrimaryDark"
                         fancy:fb_iconPaddingLeft="0dp"
                         fancy:fb_iconPaddingRight="0dp"

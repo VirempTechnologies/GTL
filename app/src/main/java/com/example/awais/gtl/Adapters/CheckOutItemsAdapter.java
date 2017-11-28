@@ -3,12 +3,10 @@ package com.example.awais.gtl.Adapters;
 /**
  * Created by awais on 8/29/2017.
  */
-import android.app.Activity;
 import android.content.Context;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -23,19 +21,16 @@ import android.widget.Toast;
 import com.example.awais.gtl.Constants;
 import com.example.awais.gtl.Pojos.CartItem;
 import com.example.awais.gtl.Pojos.CheckOutItem;
-import com.example.awais.gtl.Pojos.SoldItem;
 import com.example.awais.gtl.R;
 import com.riyagayasen.easyaccordion.AccordionView;
 
 import java.util.ArrayList;
 import java.util.Map;
 
-import mehdi.sakout.fancybuttons.FancyButton;
-
 /**
  * Created by Ravi Tamada on 18/05/16.
  */
-public class SoldItemsAdapter extends RecyclerView.Adapter<SoldItemsAdapter.MyViewHolder> {
+public class CheckOutItemsAdapter extends RecyclerView.Adapter<CheckOutItemsAdapter.MyViewHolder> {
 
     private Context mContext;
     private ArrayList<CheckOutItem> checkOutItemsArrayList;
@@ -44,7 +39,7 @@ public class SoldItemsAdapter extends RecyclerView.Adapter<SoldItemsAdapter.MyVi
     long subTotal=0;
     IMEIAdapter adapter;
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView product_name,product_total_price;
+        public TextView product_name,product_total_price,quantity_saleprice;
         AccordionView accordionView ;
         RecyclerView imei_no_recycler_view;
 
@@ -55,11 +50,12 @@ public class SoldItemsAdapter extends RecyclerView.Adapter<SoldItemsAdapter.MyVi
             imei_no_recycler_view = (RecyclerView) accordionView.findViewById(R.id.imei_no_recycler_view);
             //  product_quantity_price = (TextView) view.findViewById(R.id.product_quantity_price);
             product_total_price = (TextView) view.findViewById(R.id.product_total_price);
+            quantity_saleprice = (TextView) view.findViewById(R.id.quantity_price);
         }
     }
 
 
-    public SoldItemsAdapter(Context mContext, ArrayList<CheckOutItem> checkOutItemsArrayList) {
+    public CheckOutItemsAdapter(Context mContext, ArrayList<CheckOutItem> checkOutItemsArrayList) {
         this.mContext = mContext;
         this.checkOutItemsArrayList= checkOutItemsArrayList;
         //rootView = ((Activity)mContext).getWindow().getDecorView().findViewById(R.id.parent_rlv);
@@ -81,27 +77,21 @@ public class SoldItemsAdapter extends RecyclerView.Adapter<SoldItemsAdapter.MyVi
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
         try {
             final CheckOutItem checkOutItem= checkOutItemsArrayList.get(position);
-            holder.product_name.setText(checkOutItem.getProductName());
+            holder.product_name.setText(checkOutItem.getProductName()+"");
 //            holder.product_quantity_price.setText(cartItem.getQuantity()+" x "+cartItem.getSale_price()+"€");
-            holder.product_total_price.setText(checkOutItem.getCollectivePrice()+"€");
-            holder.accordionView.setHeadingString("IMEI Numbers");
+            holder.product_total_price.setText(checkOutItem.getCollectivePrice()+" €");
+            holder.accordionView.setHeadingString("IMEI/Serial Numbers");
             ((TextView)holder.accordionView.findViewById(R.id.heading)).setTextColor(mContext.getResources().getColor(R.color.colorPrimaryDark));
+            ((TextView)holder.accordionView.findViewById(R.id.heading)).setTextSize(15);
+            //((TextView)holder.accordionView.findViewById(R.id.heading));
             ((ImageView)holder.accordionView.findViewById(R.id.dropup_image)).getDrawable().setTint(mContext.getResources().getColor(R.color.colorPrimaryDark));
 
             //setting the imei adapter
             adapter = new IMEIAdapter(mContext,checkOutItem.getIMEINos());
             RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(mContext, 1);
-            //= (RecyclerView) accordionView.findViewById(R.id.today_receipt_recycler_view);
-            //adapter= new ReceiptAdapter(getContext(),receiptsArrayList);
-             holder.imei_no_recycler_view.setLayoutManager(mLayoutManager);
-//        candidateRecyclerView.addItemDecoration(new VerticalSpaceItemDecoration(VERTICAL_ITEM_SPACE));
-//        //or
-//        candidateRecyclerView.addItemDecoration(new DividerItemDecoration(this));
-//        //or
-//        candidateRecyclerView.addItemDecoration(
-//                new DividerItemDecoration(this, R.drawable.divider));
-            //salesman_bag_recyler_view .setItemAnimator(new DefaultItemAnimator());
+            holder.imei_no_recycler_view.setLayoutManager(mLayoutManager);
             holder.imei_no_recycler_view.setAdapter(adapter);
+            holder.quantity_saleprice.setText("("+checkOutItem.getIMEINos().size()+" x "+checkOutItem.getSalePrice()+" €)");
 
 
 

@@ -87,11 +87,11 @@
         android:layout_height="wrap_content"
         android:id="@+id/products_receipts"
         android:layout_below="@+id/client_rlv"
-        android:layout_above="@+id/add_new_rlv"
+        android:layout_above="@+id/grand_total_rlv"
         android:layout_margin="5dp">
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/product_cart_recycler_view"
+            android:id="@+id/checkout_product_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -101,152 +101,31 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/add_new_rlv"
-        android:background="@drawable/round_corner"
-        android:layout_above="@+id/checkout_rlv"
-        android:padding="2dp"
-        android:gravity="center"
-        android:layout_margin="5dp">
-        <mehdi.sakout.fancybuttons.FancyButton
-            android:id="@+id/btn_addAnother"
+        android:id="@+id/grand_total_rlv"
+        android:layout_marginLeft="3dp"
+        android:layout_marginRight="3dp"
+        android:padding="10dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/round_corner">
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="1dp"
-            android:paddingBottom="10dp"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp"
-            android:paddingTop="10dp"
-            fancy:fb_defaultColor="@color/colorPrimary"
-            fancy:fb_focusColor="@color/colorPrimaryDark"
-            fancy:fb_iconPosition="left"
-            fancy:fb_radius="30dp"
-            fancy:fb_text="Add More"
-            fancy:fb_textColor="#FFFFFF"/>
-
-    </RelativeLayout>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/checkout_rlv"
-        android:layout_alignParentBottom="true"
-        android:background="@drawable/round_corner"
-        android:layout_margin="5dp">
-        <RelativeLayout
-            android:layout_width="match_parent"
+            android:text="TOTAL"
+            android:textColor="@color/colorDrakGray"
+            android:textSize="26dp"
+            android:id="@+id/grand_total_lable"
+            android:layout_centerVertical="true"
+            />
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/subtotal_rlv"
-            android:layout_margin="10dp"
-            >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Sub Total"
-                android:textColor="@color/colorDrakGray"
-                android:textSize="16dp"
-                android:id="@+id/subtotal_lable"
-                android:layout_centerVertical="true"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="$ 2303,22"
-                android:textColor="@color/colorDrakGray"
-                android:textSize="15dp"
-                android:id="@+id/product_receipt_total_price"
-                android:layout_centerVertical="true"
-                android:layout_alignParentEnd="true"
-                />
-        </RelativeLayout>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/tax_rlv"
-            android:layout_margin="10dp"
-            android:layout_below="@+id/subtotal_rlv"
-            >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Tax (0%)"
-                android:textColor="@color/colorDrakGray"
-                android:textSize="16dp"
-                android:id="@+id/txt_lable"
-                android:layout_centerVertical="true"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="0.00€"
-                android:textColor="@color/colorDrakGray"
-                android:textSize="15dp"
-                android:id="@+id/product_txt_price"
-                android:layout_centerVertical="true"
-                android:layout_alignParentEnd="true"
-                />
-        </RelativeLayout>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/colorPrimaryDark"
-            android:layout_below="@+id/tax_rlv"
-            android:id="@+id/subtotal_rlv_line"
-            android:layout_margin="5dp">
-        </RelativeLayout>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/grand_total_rlv"
-            android:layout_below="@+id/subtotal_rlv_line"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="TOTAL"
-                android:textColor="@color/colorDrakGray"
-                android:textSize="26dp"
-                android:id="@+id/grand_total_lable"
-                android:layout_centerVertical="true"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="0.00"
-                android:textColor="@color/colorDrakGray"
-                android:textSize="25dp"
-                android:id="@+id/product_grand_total_price"
-                android:layout_centerVertical="true"
-                android:layout_alignParentEnd="true"
-                />
-        </RelativeLayout>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/proceed_checkout_rlv"
-            android:layout_below="@+id/grand_total_rlv"
-            android:gravity="center">
-            <mehdi.sakout.fancybuttons.FancyButton
-                android:id="@+id/btn_proceedCheckOut"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="1dp"
-                android:paddingBottom="10dp"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp"
-                android:paddingTop="10dp"
-                fancy:fb_defaultColor="#7ab800"
-                fancy:fb_focusColor="#9bd823"
-                fancy:fb_iconPosition="left"
-                fancy:fb_radius="30dp"
-                fancy:fb_text="Check Out"
-                fancy:fb_textColor="#FFFFFF"/>
-
-
-        </RelativeLayout>
-
-
+            android:text="0.00"
+            android:textColor="@color/colorDrakGray"
+            android:textSize="25dp"
+            android:id="@+id/product_grand_total_price"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            />
     </RelativeLayout>
 
 </RelativeLayout>

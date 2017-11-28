@@ -165,42 +165,61 @@ public class BagActivity extends AppCompatActivity {
 
                         if(statusCode==200) {
                             if(resp.getString("status_code").equals("200")) {
+
                                 prgDialog.dismiss();
+
                                 //set the view here
                                 Log.d("checklog", "responce : " + resp.toString());
                                 BagProduct bagProduct;
                                 Constants.bagProductArrayList.clear();
                                 JSONArray allProducts = resp.getJSONObject("data").getJSONArray("products");
-                                for (int i = 0; i < allProducts.length(); i++) {
-                                    JSONObject product = allProducts.getJSONObject(i);
-                                    bagProduct = new BagProduct();
-                                    bagProduct.setProductName(product.getString("name"));
-                                    bagProduct.setSalePrice(product.getInt("sale_price"));
-                                    bagProduct.setMyStock(product.getInt("quantity"));
-                                    bagProduct.setCompanyStock(00);
-                                    bagProduct.setProduct_id(product.getInt("id"));
-                                    bagProduct.setInitialQuantity(0);
-                                    bagProduct.setBagIndex(i);
+                                if(allProducts.length()!=0) {
+                                    for (int i = 0; i < allProducts.length(); i++) {
+                                        JSONObject product = allProducts.getJSONObject(i);
+                                        bagProduct = new BagProduct();
+                                        bagProduct.setProductName(product.getString("name"));
+                                        bagProduct.setSalePrice(product.getInt("sale_price"));
+                                        bagProduct.setMyStock(product.getInt("quantity"));
+                                        bagProduct.setCompanyStock(00);
+                                        bagProduct.setProduct_id(product.getInt("id"));
+                                        bagProduct.setInitialQuantity(0);
+                                        bagProduct.setBagIndex(i);
 
-                                    bagProduct.setImage(product.getString("product_image"));
-                                    Constants.bagProductArrayList.add(bagProduct);
+                                        bagProduct.setImage(product.getString("product_image"));
+                                        Constants.bagProductArrayList.add(bagProduct);
+                                    }
+                                    //client data
+
+                                    RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(BagActivity.this, 1);
+                                    salesman_bag_recyler_view = (RecyclerView) findViewById(R.id.salesman_bag_recycler_view);
+                                    adapter = new BagAdapter(BagActivity.this, Constants.bagProductArrayList);
+                                    salesman_bag_recyler_view.setLayoutManager(mLayoutManager);
+                                    salesman_bag_recyler_view.setAdapter(adapter);
+                                    int resId = R.anim.layout_animation_from_left;
+                                    LayoutAnimationController animation = AnimationUtils.loadLayoutAnimation(BagActivity.this, resId);
+                                    salesman_bag_recyler_view.setLayoutAnimation(animation);
+
+
+                                    RelativeLayout invoice_total_rlv = ((RelativeLayout) findViewById(R.id.invoice_total_rlv));
+                                    int animId = R.anim.layout_animation_from_bottom;
+                                    LayoutAnimationController animation2 = AnimationUtils.loadLayoutAnimation(BagActivity.this, animId);
+                                    invoice_total_rlv.setLayoutAnimation(animation2);
                                 }
-                                //client data
-
-                                RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(BagActivity.this, 1);
-                                salesman_bag_recyler_view = (RecyclerView) findViewById(R.id.salesman_bag_recycler_view);
-                                adapter = new BagAdapter(BagActivity.this, Constants.bagProductArrayList);
-                                salesman_bag_recyler_view.setLayoutManager(mLayoutManager);
-                                salesman_bag_recyler_view.setAdapter(adapter);
-                                int resId = R.anim.layout_animation_from_left;
-                                LayoutAnimationController animation = AnimationUtils.loadLayoutAnimation(BagActivity.this, resId);
-                                salesman_bag_recyler_view.setLayoutAnimation(animation);
-
-
-                                RelativeLayout invoice_total_rlv = ((RelativeLayout) findViewById(R.id.invoice_total_rlv));
-                                int animId = R.anim.layout_animation_from_bottom;
-                                LayoutAnimationController animation2 = AnimationUtils.loadLayoutAnimation(BagActivity.this, animId);
-                                invoice_total_rlv.setLayoutAnimation(animation2);
+                                else
+                                {
+                                    AlertDialog.Builder builder =
+                                            new AlertDialog.Builder(BagActivity.this, R.style.AppCompatAlertDialogStyle);
+                                    builder.setTitle("Opps");
+                                    builder.setIcon(R.drawable.corss);
+                                    builder.setMessage("Your bag is Empty");
+                                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            finish();
+                                        }
+                                    });
+                                    builder.show();
+                                }
                                 //end set
                             }
                             else  if(resp.getString("status_code").equals("404"))

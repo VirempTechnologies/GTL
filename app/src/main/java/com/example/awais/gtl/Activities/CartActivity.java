@@ -87,7 +87,7 @@ public class CartActivity extends AppCompatActivity {
         });
         TextView product_receipt_total_price = (TextView) findViewById(R.id.product_receipt_total_price);
         TextView product_grand_total_price = (TextView) findViewById(R.id.product_grand_total_price);
-        product_receipt_total_price.setText(subTotal+"€");
+        product_receipt_total_price.setText(subTotal+" €");
         Log.d(Constants.TAG," setting the cart proce "+(subTotal-Double.parseDouble(client.getCurrent_bal().replace("€","")))+"€");
         product_grand_total_price.setText((subTotal-Double.parseDouble(client.getCurrent_bal().replace("€","")))+"€");
 
@@ -139,8 +139,8 @@ public class CartActivity extends AppCompatActivity {
 
                         Log.d("checklog", "sending request : " + params.toString());
                         Log.d(Constants.TAG, "here to call the web service to proceed check out..");
-
-                    } catch (Exception ex) {
+                        invokeWS(params,CartActivity.this,client);
+                       } catch (Exception ex) {
                         ex.printStackTrace();
                         Log.d("checklog", "exception : " + ex.getMessage());
 
@@ -150,7 +150,7 @@ public class CartActivity extends AppCompatActivity {
             }
         });
     }
-    public void invokeWS(JSONObject params, Context context){
+    public void invokeWS(JSONObject params, final Context context,final Client salesmanClient){
         final ProgressDialog prgDialog;
         prgDialog = new ProgressDialog(context);
         // Set Progress Dialog Text
@@ -164,7 +164,7 @@ public class CartActivity extends AppCompatActivity {
             // Make RESTful webservice call using AsyncHttpClient object
             cz.msebera.android.httpclient.entity.StringEntity entity = new cz.msebera.android.httpclient.entity.StringEntity(params.toString());
             AsyncHttpClient client = new AsyncHttpClient();
-            client.post(context ,Constants.loginURL, entity, "application/json",new JsonHttpResponseHandler() {
+            client.post(context ,Constants.getCheckOutUrl, entity, "application/json",new JsonHttpResponseHandler() {
 
                 @Override
                 public void onStart() {
@@ -182,15 +182,18 @@ public class CartActivity extends AppCompatActivity {
                         Log.d(Constants.TAG, "success data say congo : " + resp.toString());
 
                         if(statusCode==200) {
-
-
+                            if(resp.getString("status_code").equals("200")) {
+                                prgDialog.dismiss();
+                                startActivity(new Intent(CartActivity.this, CheckOutActivity.class).putExtra("client", salesmanClient).putExtra("respObject",resp.toString()));
+                                overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+                            }
                         }
                         if(statusCode==500)
                         {
                             prgDialog.dismiss();
 
                             AlertDialog.Builder builder =
-                                    new AlertDialog.Builder(CartActivity.this, R.style.AppCompatAlertDialogStyle);
+                                    new AlertDialog.Builder(context, R.style.AppCompatAlertDialogStyle);
                             builder.setTitle("500");
                             builder.setIcon(R.drawable.corss);
                             builder.setMessage("internal Server Error ! ");
@@ -210,18 +213,23 @@ public class CartActivity extends AppCompatActivity {
                 }
 
                 @Override
-                public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                    super.onFailure(statusCode, headers, responseString, throwable);
-                    try {
+                public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                    super.onFailure(statusCode, headers, throwable, errorResponse);
+                    prgDialog.dismiss();
 
+                    AlertDialog.Builder builder =
+                            new AlertDialog.Builder(context, R.style.AppCompatAlertDialogStyle);
+                    builder.setTitle("Opps");
+                    builder.setIcon(R.drawable.corss);
+                    builder.setMessage("Service Failer server not found..! ");
+                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            //finish();
+                        }
+                    });
+                    builder.show();
 
-                        Log.d(Constants.TAG, "status: " + statusCode);
-                        Log.d(Constants.TAG, "data faliur : " + responseString);
-
-                        prgDialog.dismiss();
-                    }
-                    catch (Exception ex) {
-                    }
                 }
 
                 @Override
