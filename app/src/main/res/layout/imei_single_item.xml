@@ -18,41 +18,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/upper_rlv"
-            android:layout_margin="10dp"
+            android:layout_marginBottom="2dp"
             >
             <TextView
-                android:layout_width="100dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Glob TeleLink"
                 android:textColor="@color/colorDrakGray"
                 android:textSize="16dp"
-                android:id="@+id/company_name"
+                android:id="@+id/imei_no"
                 android:gravity="center"
-                />
-            <TextView
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:text="Muhammad Imran"
-                android:textColor="@color/colorDrakGray"
-                android:textSize="16dp"
-                android:id="@+id/client_name"
-                android:layout_centerVertical="true"
-                android:gravity="center"
-                android:layout_toRightOf="@+id/company_name"
-                android:layout_toLeftOf="@+id/current_balance"
-                android:layout_marginRight="10dp"
-                />
-
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="$ 2303,22"
-                android:textColor="@color/colorDrakGray"
-                android:textSize="15dp"
-                android:id="@+id/current_balance"
-                android:layout_centerVertical="true"
-                android:layout_alignParentEnd="true"
                 />
 
 

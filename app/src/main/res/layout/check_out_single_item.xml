@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fancy="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/bag_rlv"
+    android:layout_margin="10dp"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:background="@drawable/round_corner_primary"
+        android:id="@+id/parent_rlv"
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/upper_rlv"
+            android:layout_margin="10dp"
+            >
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="iPhone 7x"
+                android:textColor="@color/colorWhite"
+                android:textSize="16dp"
+                android:id="@+id/product_name"
+                android:layout_centerVertical="true"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="(1 x 270 $)"
+                android:textColor="@color/colorWhite"
+                android:textSize="16dp"
+                android:layout_marginLeft="4dp"
+                android:id="@+id/quantity_price"
+                android:layout_toRightOf="@+id/product_name"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="$ 2303,22"
+                android:textColor="@color/colorWhite"
+                android:textSize="15dp"
+                android:id="@+id/product_total_price"
+
+                android:layout_alignParentEnd="true"
+                />
+
+
+
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/lower_rlv"
+            android:layout_below="@+id/upper_rlv"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            >
+            <com.riyagayasen.easyaccordion.AccordionView
+                android:layout_width="220dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:id="@+id/imei_accordion"
+                android:visibility="visible"
+                app:isAnimated="true"
+                app:heading="IMEI Numbers"
+                app:isExpanded="false"
+                app:isPartitioned="true"
+                >
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/imei_no_recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:scrollbars="vertical"
+                    />
+
+            </com.riyagayasen.easyaccordion.AccordionView>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>

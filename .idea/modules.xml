@@ -3,7 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/GTL.iml" filepath="$PROJECT_DIR$/GTL.iml" />
+      <module fileurl="file://C:\Users\awais\OneDrive\VirempGitProjects\GTL\GTL.iml" filepath="C:\Users\awais\OneDrive\VirempGitProjects\GTL\GTL.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://C:\Users\awais\OneDrive\VirempGitProjects\GTL\app\app.iml" filepath="C:\Users\awais\OneDrive\VirempGitProjects\GTL\app\app.iml" />
     </modules>
   </component>
 </project>

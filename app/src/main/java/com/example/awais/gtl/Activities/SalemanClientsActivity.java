@@ -25,9 +25,11 @@ import android.view.animation.LayoutAnimationController;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.awais.gtl.Adapters.BagAdapter;
 import com.example.awais.gtl.Adapters.ClientAdapter;
 import com.example.awais.gtl.Adapters.OperationsAdapter;
 import com.example.awais.gtl.Constants;
+import com.example.awais.gtl.Pojos.BagProduct;
 import com.example.awais.gtl.Pojos.Client;
 import com.example.awais.gtl.Pojos.Operation;
 import com.example.awais.gtl.R;
@@ -82,59 +84,60 @@ public class SalemanClientsActivity extends AppCompatActivity {
             JSONObject params = new JSONObject();
             params.put("headers", headers);
             Log.d("checklog", "sending request : " + params.toString());
-            finalRespObject = webServiceHelper.sendPostRequest(params,this,Constants.getClientsUrl);
-            if (finalRespObject!=null)
-            {
-                //Log.d(Constants.TAG,"the clients are: "+finalRespObject.toString());
-                Client client = new Client();
-                JSONArray parentArray = finalRespObject.getJSONArray("data");
-                for (int i= 0; i<parentArray.length();i++)
-                {
-                    JSONObject firstObject = parentArray.getJSONObject(i);
-                    client.setClient_id(firstObject.getInt("id"));
-                    client.setCompany_name(firstObject.getString("company_name")+" Globe TeleLink GmbH");
-                    if(firstObject.getString("current_bal").equals("null"))
-                    {
-                        client.setCurrent_bal("0.00 €");
-                    }
-                    else
-                    {
-                        client.setCurrent_bal(firstObject.getString("current_bal")+" €");
-
-                    }
-                    JSONObject userObject = firstObject.getJSONObject("user");
-                    JSONObject personObject = userObject.getJSONObject("person");
-                    client.setClient_name(personObject.getString("first_name")+" " +personObject.getString("last_name"));
-                    clientArrayList.add(client);
-                    client= new Client();
-                }
-            }
-
-
-            RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, 1);
-
-            salesman_clients_recycler_view = (RecyclerView) findViewById(R.id.salesman_clients_recycler_view);
-            adapter = new ClientAdapter(this, clientArrayList);
-            salesman_clients_recycler_view.setLayoutManager(mLayoutManager);
-            salesman_clients_recycler_view.setItemAnimator(new DefaultItemAnimator());
-            salesman_clients_recycler_view.setAdapter(adapter);
-
-            // grid animations
-            int resId = R.anim.layout_animation_fall_down;
-            LayoutAnimationController animation = AnimationUtils.loadLayoutAnimation(this, resId);
-            salesman_clients_recycler_view.setLayoutAnimation(animation);
-            //end
-            //user profile animiation
-            RelativeLayout profileLayout = (RelativeLayout) findViewById(R.id.user_profile_info_rlv);
-            int animationId = R.anim.layout_animation_from_left;
-            LayoutAnimationController profileDataAnimation = AnimationUtils.loadLayoutAnimation(this, animationId);
-            profileLayout.setLayoutAnimation(profileDataAnimation);
-            //end
-            RelativeLayout profileImageLayout = (RelativeLayout) findViewById(R.id.parent_rlv);
-            int profileImageAnimationId = R.anim.layout_animation_fall_down;
-            LayoutAnimationController profileImageAnimation = AnimationUtils.loadLayoutAnimation(this, profileImageAnimationId);
-            profileImageLayout.setLayoutAnimation(profileImageAnimation);
-            //end
+            //finalRespObject = webServiceHelper.sendPostRequest(params,this,Constants.getClientsUrl);
+            invokeWS(params,SalemanClientsActivity.this);
+//            if (finalRespObject!=null)
+//            {
+//                //Log.d(Constants.TAG,"the clients are: "+finalRespObject.toString());
+//                Client client = new Client();
+//                JSONArray parentArray = finalRespObject.getJSONArray("data");
+//                for (int i= 0; i<parentArray.length();i++)
+//                {
+//                    JSONObject firstObject = parentArray.getJSONObject(i);
+//                    client.setClient_id(firstObject.getInt("id"));
+//                    client.setCompany_name(firstObject.getString("company_name"));
+//                    if(firstObject.getString("current_bal").equals("null"))
+//                    {
+//                        client.setCurrent_bal("0.00 €");
+//                    }
+//                    else
+//                    {
+//                        client.setCurrent_bal(firstObject.getString("current_bal")+" €");
+//
+//                    }
+//                    JSONObject userObject = firstObject.getJSONObject("user");
+//                    JSONObject personObject = userObject.getJSONObject("person");
+//                    client.setClient_name(personObject.getString("first_name")+" " +personObject.getString("last_name"));
+//                    clientArrayList.add(client);
+//                    client= new Client();
+//                }
+//            }
+//
+//
+//            RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, 1);
+//
+//            salesman_clients_recycler_view = (RecyclerView) findViewById(R.id.salesman_clients_recycler_view);
+//            adapter = new ClientAdapter(this, clientArrayList);
+//            salesman_clients_recycler_view.setLayoutManager(mLayoutManager);
+//            salesman_clients_recycler_view.setItemAnimator(new DefaultItemAnimator());
+//            salesman_clients_recycler_view.setAdapter(adapter);
+//
+//            // grid animations
+//            int resId = R.anim.layout_animation_fall_down;
+//            LayoutAnimationController animation = AnimationUtils.loadLayoutAnimation(this, resId);
+//            salesman_clients_recycler_view.setLayoutAnimation(animation);
+//            //end
+//            //user profile animiation
+//            RelativeLayout profileLayout = (RelativeLayout) findViewById(R.id.user_profile_info_rlv);
+//            int animationId = R.anim.layout_animation_from_left;
+//            LayoutAnimationController profileDataAnimation = AnimationUtils.loadLayoutAnimation(this, animationId);
+//            profileLayout.setLayoutAnimation(profileDataAnimation);
+//            //end
+//            RelativeLayout profileImageLayout = (RelativeLayout) findViewById(R.id.parent_rlv);
+//            int profileImageAnimationId = R.anim.layout_animation_fall_down;
+//            LayoutAnimationController profileImageAnimation = AnimationUtils.loadLayoutAnimation(this, profileImageAnimationId);
+//            profileImageLayout.setLayoutAnimation(profileImageAnimation);
+//            //end
 
 
         }
@@ -172,7 +175,180 @@ public class SalemanClientsActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    public void invokeWS(JSONObject params, final Context context){
+        final ProgressDialog prgDialog;
+        prgDialog = new ProgressDialog(context);
+        // Set Progress Dialog Text
+        prgDialog.setMessage("Please wait... loading your client");
+        // Set Cancelable as False
+        prgDialog.setCancelable(false);
+        prgDialog.show();
+        try {
+            // Show Progress Dialog
 
+            // Make RESTful webservice call using AsyncHttpClient object
+            cz.msebera.android.httpclient.entity.StringEntity entity = new cz.msebera.android.httpclient.entity.StringEntity(params.toString());
+            AsyncHttpClient client = new AsyncHttpClient();
+            client.post(context ,Constants.getClientsUrl, entity, "application/json",new JsonHttpResponseHandler() {
+
+                @Override
+                public void onStart() {
+                    // called before request is started
+
+                }
+
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, JSONObject resp) {
+                    try {
+
+
+                        super.onSuccess(statusCode, headers, resp);
+                        Log.d(Constants.TAG, "status: " + statusCode);
+                        Log.d(Constants.TAG, "success data say congo : " + resp.toString());
+
+                        if(statusCode==200) {
+                            if(resp.getString("status_code").equals("200")) {
+
+                                prgDialog.dismiss();
+                                try
+                                {
+                                if (resp!=null)
+                                {
+                                    //Log.d(Constants.TAG,"the clients are: "+finalRespObject.toString());
+                                    Client client = new Client();
+                                    JSONArray parentArray = resp.getJSONArray("data");
+                                    for (int i= 0; i<parentArray.length();i++)
+                                    {
+                                        JSONObject firstObject = parentArray.getJSONObject(i);
+                                        client.setClient_id(firstObject.getInt("id"));
+                                        client.setCompany_name(firstObject.getString("company_name"));
+                                        if(firstObject.getString("current_bal").equals("null"))
+                                        {
+                                            client.setCurrent_bal("0.00 €");
+                                        }
+                                        else
+                                        {
+                                            client.setCurrent_bal(firstObject.getString("current_bal")+" €");
+
+                                        }
+                                        JSONObject userObject = firstObject.getJSONObject("user");
+                                        JSONObject personObject = userObject.getJSONObject("person");
+                                        client.setClient_name(personObject.getString("first_name")+" " +personObject.getString("last_name"));
+                                        clientArrayList.add(client);
+                                        client= new Client();
+                                    }
+                                }
+
+
+                                RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(context, 1);
+
+                                salesman_clients_recycler_view = (RecyclerView) findViewById(R.id.salesman_clients_recycler_view);
+                                adapter = new ClientAdapter(context, clientArrayList);
+                                salesman_clients_recycler_view.setLayoutManager(mLayoutManager);
+                                salesman_clients_recycler_view.setItemAnimator(new DefaultItemAnimator());
+                                salesman_clients_recycler_view.setAdapter(adapter);
+
+                                // grid animations
+                                int resId = R.anim.layout_animation_fall_down;
+                                LayoutAnimationController animation = AnimationUtils.loadLayoutAnimation(context, resId);
+                                salesman_clients_recycler_view.setLayoutAnimation(animation);
+                                //end
+                                //user profile animiation
+                                RelativeLayout profileLayout = (RelativeLayout) findViewById(R.id.user_profile_info_rlv);
+                                int animationId = R.anim.layout_animation_from_left;
+                                LayoutAnimationController profileDataAnimation = AnimationUtils.loadLayoutAnimation(context, animationId);
+                                profileLayout.setLayoutAnimation(profileDataAnimation);
+                                //end
+                                RelativeLayout profileImageLayout = (RelativeLayout) findViewById(R.id.parent_rlv);
+                                int profileImageAnimationId = R.anim.layout_animation_fall_down;
+                                LayoutAnimationController profileImageAnimation = AnimationUtils.loadLayoutAnimation(context, profileImageAnimationId);
+                                profileImageLayout.setLayoutAnimation(profileImageAnimation);
+                                //end
+
+
+                            }
+                             catch (Exception ex)
+                            {
+                                ex.printStackTrace();
+                            }
+                                //end set
+                            }
+                            else  if(resp.getString("status_code").equals("404"))
+                            {
+                                prgDialog.dismiss();
+
+                                AlertDialog.Builder builder =
+                                        new AlertDialog.Builder(context, R.style.AppCompatAlertDialogStyle);
+                                builder.setTitle("Opps");
+                                builder.setIcon(R.drawable.corss);
+                                builder.setMessage("Clients not found ");
+                                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        //finish();
+                                    }
+                                });
+                                builder.show();
+                            }
+                        }
+                        if(statusCode==500)
+                        {
+                            prgDialog.dismiss();
+
+                            AlertDialog.Builder builder =
+                                    new AlertDialog.Builder(context, R.style.AppCompatAlertDialogStyle);
+                            builder.setTitle("500");
+                            builder.setIcon(R.drawable.corss);
+                            builder.setMessage("internal Server Error ! ");
+                            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    //finish();
+                                }
+                            });
+                            builder.show();
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        ex.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                    super.onFailure(statusCode, headers, throwable, errorResponse);
+                    prgDialog.dismiss();
+
+                    AlertDialog.Builder builder =
+                            new AlertDialog.Builder(context, R.style.AppCompatAlertDialogStyle);
+                    builder.setTitle("Opps");
+                    builder.setIcon(R.drawable.corss);
+                    builder.setMessage("Service Failer server not found..! ");
+                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            //finish();
+                        }
+                    });
+                    builder.show();
+
+                }
+
+                @Override
+                public void onRetry(int retryNo) {
+                    // called when request is retried
+                }
+
+
+            });
+
+        }
+        catch (Exception ex)
+        {
+            ex.getStackTrace();
+        }
+    }
 
 
 
