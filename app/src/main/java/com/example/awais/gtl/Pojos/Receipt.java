@@ -5,41 +5,53 @@ package com.example.awais.gtl.Pojos;
  */
 
 public class Receipt {
-    String clientName;
-    String receiptPrice;
-    String invoiceID;
-    String companyName;
+    int invoice_id;
+    String total_amount;
+    String company_name;
+    String quantity;
+    String client_name;
 
-    public String getClientName() {
-        return clientName;
+    public Receipt() {
     }
 
-    public void setClientName(String clientName) {
-        this.clientName = clientName;
+    public int getInvoice_id() {
+        return invoice_id;
     }
 
-    public String getReceiptPrice() {
-        return receiptPrice;
+    public void setInvoice_id(int invoice_id) {
+        this.invoice_id = invoice_id;
     }
 
-    public void setReceiptPrice(String receiptPrice) {
-        this.receiptPrice = receiptPrice;
+    public String getTotal_amount() {
+        return total_amount;
     }
 
-    public String getInvoiceID() {
-        return invoiceID;
+    public void setTotal_amount(String total_amount) {
+        this.total_amount = total_amount;
     }
 
-    public void setInvoiceID(String invoiceID) {
-        this.invoiceID = invoiceID;
+    public String getCompany_name() {
+        return company_name;
     }
 
-    public String getCompanyName() {
-        return companyName;
+    public void setCompany_name(String company_name) {
+        this.company_name = company_name;
     }
 
-    public void setCompanyName(String companyName) {
-        this.companyName = companyName;
+    public String getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(String quantity) {
+        this.quantity = quantity;
+    }
+
+    public String getClient_name() {
+        return client_name;
+    }
+
+    public void setClient_name(String client_name) {
+        this.client_name = client_name;
     }
 }
 

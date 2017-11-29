@@ -529,7 +529,7 @@
                         android:layout_height="wrap_content"
                         android:inputType="textEmailAddress"
                         android:maxLines="1"
-                        android:imeOptions="actionNext"
+                        android:imeOptions="actionDone"
                         android:singleLine="true"
                         android:hint="Comments"
                         android:textSize="@dimen/addClientTextSize"

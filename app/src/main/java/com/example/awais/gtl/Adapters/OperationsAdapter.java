@@ -22,6 +22,7 @@ import android.widget.Toast;
 
 import com.example.awais.gtl.Activities.AddClientFirst;
 import com.example.awais.gtl.Activities.BagActivity;
+import com.example.awais.gtl.Activities.MyStockAcitivity;
 import com.example.awais.gtl.Activities.ReceiptsActivity;
 import com.example.awais.gtl.Activities.SalemanClientsActivity;
 import com.example.awais.gtl.Constants;
@@ -86,8 +87,8 @@ public class OperationsAdapter extends RecyclerView.Adapter<OperationsAdapter.My
 
                     } else if (holder.operationName.getText().toString().equals(("My Stock"))) {
                         Toast.makeText(mContext, "My Stock", Toast.LENGTH_SHORT).show();
-//                        (mContext).startActivity((new Intent(mContext, BagActivity.class)).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
-//                        ((Activity) mContext).overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+                        (mContext).startActivity((new Intent(mContext, MyStockAcitivity.class)).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                        ((Activity) mContext).overridePendingTransition(R.anim.fadein, R.anim.fadeout);
 
                     } else if (holder.operationName.getText().toString().equals(("My Clients"))) {
                         Toast.makeText(mContext, "My Clients", Toast.LENGTH_SHORT).show();
@@ -95,7 +96,7 @@ public class OperationsAdapter extends RecyclerView.Adapter<OperationsAdapter.My
                         ((Activity) mContext).overridePendingTransition(R.anim.fadein, R.anim.fadeout);
                     }
                     else if (holder.operationName.getText().toString().equals(("Add Client"))) {
-                        Toast.makeText(mContext, "My Clients", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(mContext, "Add Client", Toast.LENGTH_SHORT).show();
                         (mContext).startActivity((new Intent(mContext, AddClientFirst.class)).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
                         ((Activity) mContext).overridePendingTransition(R.anim.fadein, R.anim.fadeout);
                     }

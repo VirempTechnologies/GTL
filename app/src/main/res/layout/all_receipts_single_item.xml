@@ -1,7 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
@@ -9,12 +9,26 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.awais.gtl.Fragments.AllReceipts">
 
+
+    <com.riyagayasen.easyaccordion.AccordionView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:id="@+id/sale_accordion"
+        android:visibility="visible"
+        app:isAnimated="true"
+        app:heading="This is a demo accordion"
+        app:isExpanded="false"
+        app:isPartitioned="true"
+        >
+
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/all_receipts_recycler_view"
+            android:id="@+id/date_receipt_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:scrollbars="vertical"
             />
 
+    </com.riyagayasen.easyaccordion.AccordionView>
 </RelativeLayout>

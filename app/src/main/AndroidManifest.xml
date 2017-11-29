@@ -47,6 +47,14 @@
             android:screenOrientation="portrait">
 
         </activity>
+        <activity
+            android:name=".Activities.MyStockAcitivity"
+            android:label="Profile"
+            android:theme="@style/AppTheme.blue"
+            android:screenOrientation="portrait">
+
+        </activity>
+
 
         <activity
             android:name=".Activities.ReceiptsActivity"

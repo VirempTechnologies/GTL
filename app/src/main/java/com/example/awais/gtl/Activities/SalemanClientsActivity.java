@@ -67,7 +67,7 @@ public class SalemanClientsActivity extends AppCompatActivity {
         String area = settings.getString("assigned_area",null);
         ((TextView) findViewById(R.id.saleman_name)).setText(name);
         ((TextView) findViewById(R.id.saleman_area)).setText(area);
-        webServiceHelper= new WebServiceHelper();
+        //webServiceHelper= new WebServiceHelper();
         clientArrayList= new ArrayList<>();
         try {
 
@@ -77,7 +77,7 @@ public class SalemanClientsActivity extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.colorPrimary)));
             actionBar.setElevation(0);
-            settings = getSharedPreferences("GTL-Settings",0);
+            //settings = getSharedPreferences("GTL-Settings",0);
             final String headerss = settings.getString("headers",null);
 
             JSONObject headers = new JSONObject(headerss);

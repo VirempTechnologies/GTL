@@ -70,14 +70,15 @@ public class ReceiptAdapter extends RecyclerView.Adapter<ReceiptAdapter.MyViewHo
     public void onBindViewHolder(final MyViewHolder holder, int position) {
         try {
             final Receipt receipt = receiptsArrayList.get(position);
-            holder.clientName.setText(receipt.getClientName());
-            holder.companyName.setText(receipt.getCompanyName());
-            holder.invoiceID.setText(receipt.getInvoiceID());
-            holder.receiptPrice.setText(receipt.getReceiptPrice());
+            holder.clientName.setText(receipt.getClient_name());
+            holder.companyName.setText(receipt.getCompany_name());
+            holder.invoiceID.setText("invoice # "+receipt.getInvoice_id());
+            holder.receiptPrice.setText(receipt.getTotal_amount()+" €");
             holder.receiptElementRlV.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Log.d(Constants.TAG, holder.clientName.getText() + "");
+//                    Log.d(Constants.TAG, holder.clientName.getText() + "");
+                    Toast.makeText(mContext, "invoice id: "+receipt.getInvoice_id(), Toast.LENGTH_SHORT).show();
                 }
             });
 
