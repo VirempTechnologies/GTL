@@ -15,10 +15,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.awais.gtl.Activities.BagActivity;
 import com.example.awais.gtl.Adapters.AllReciptsAdapter;
@@ -48,6 +50,16 @@ public class AllReceipts extends Fragment {
     ArrayList<Sale> salesArrayList;
     RecyclerView all_receipts_recycler_view;
     View rootView;
+    private RecyclerViewReadyCallback recyclerViewReadyCallback;
+    private boolean fragmentResume=false;
+    private boolean fragmentVisible=false;
+    private boolean fragmentOnCreated=false;
+    boolean serviceCall=false;
+    JSONObject params = new JSONObject();
+    public interface RecyclerViewReadyCallback {
+        void onLayoutReady();
+    }
+
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -58,13 +70,15 @@ public class AllReceipts extends Fragment {
             ;
             final String headerss = setting.getString("headers", null);
             JSONObject headers = new JSONObject(headerss);
-            JSONObject params = new JSONObject();
+            params = new JSONObject();
             params.put("headers", headers);
             Log.d("checklog", "sending request : " + params.toString());
             // invoke web service here
             //respObject = webServiceHelper.sendPostRequest(params, BagActivity.this, Constants.getBagUrl);
             ///
-            getAllSales(params, getActivity());
+               getAllSales(params, getActivity());
+
+            //getAllSales(params, getActivity());
         }
         catch (Exception ex)
         {
@@ -132,16 +146,36 @@ public class AllReceipts extends Fragment {
                                 salesArrayList.add(sale);
                                 sale= new Sale();
                             }
-                            prgDialog.dismiss();
                             //setting the recycler view
                             RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(context, 1);
                             all_receipts_recycler_view = (RecyclerView) rootView.findViewById(R.id.all_receipts_recycler_view);
                             adapter = new AllReciptsAdapter(context, salesArrayList);
                             all_receipts_recycler_view.setLayoutManager(mLayoutManager);
                             all_receipts_recycler_view.setAdapter(adapter);
-                            int resId = R.anim.layout_animation_from_left;
-                            LayoutAnimationController animation = AnimationUtils.loadLayoutAnimation(context, resId);
-                            all_receipts_recycler_view.setLayoutAnimation(animation);
+                            all_receipts_recycler_view.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                                @Override
+                                public void onGlobalLayout() {
+                                    if (recyclerViewReadyCallback != null) {
+                                        recyclerViewReadyCallback.onLayoutReady();
+                                    }
+                                    recyclerViewReadyCallback = null;
+                                }
+                            });
+                            recyclerViewReadyCallback = new RecyclerViewReadyCallback() {
+                                @Override
+                                public void onLayoutReady() {
+                                    //
+                                    //here comes your code that will be executed after all items has are laid down
+                                    //
+                                    Toast.makeText(getActivity(), "layout competed", Toast.LENGTH_SHORT).show();
+                                    prgDialog.dismiss();
+//                                    int resId = R.anim.layout_animation_from_left;
+//                                    LayoutAnimationController animation = AnimationUtils.loadLayoutAnimation(context, resId);
+//                                    all_receipts_recycler_view.setLayoutAnimation(animation);
+////
+                                }
+                            };
+//
 
                             //end setting
 

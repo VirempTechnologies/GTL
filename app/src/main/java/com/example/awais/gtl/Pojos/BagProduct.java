@@ -13,8 +13,18 @@ public class BagProduct {
     private int product_id;
     private int initialQuantity;
     private int bagIndex;
+    private String model;
+
 
     public BagProduct() {
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
     }
 
     public int getBagIndex() {

@@ -20,7 +20,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.awais.gtl.Activities.BagActivity;
+import com.example.awais.gtl.Activities.MyStockAcitivity;
 import com.example.awais.gtl.Activities.ReceiptsActivity;
+import com.example.awais.gtl.Activities.SaleDetailActitvity;
 import com.example.awais.gtl.Constants;
 import com.example.awais.gtl.Pojos.Operation;
 import com.example.awais.gtl.Pojos.Receipt;
@@ -79,6 +81,9 @@ public class ReceiptAdapter extends RecyclerView.Adapter<ReceiptAdapter.MyViewHo
                 public void onClick(View v) {
 //                    Log.d(Constants.TAG, holder.clientName.getText() + "");
                     Toast.makeText(mContext, "invoice id: "+receipt.getInvoice_id(), Toast.LENGTH_SHORT).show();
+                    (mContext).startActivity((new Intent(mContext, SaleDetailActitvity.class).putExtra("invoice_id",receipt.getInvoice_id())).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                    ((Activity) mContext).overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+
                 }
             });
 

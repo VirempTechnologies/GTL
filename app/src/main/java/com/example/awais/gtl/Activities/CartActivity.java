@@ -233,6 +233,26 @@ public class CartActivity extends AppCompatActivity {
                 }
 
                 @Override
+                public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                    super.onFailure(statusCode, headers, responseString, throwable);
+                    prgDialog.dismiss();
+
+                    AlertDialog.Builder builder =
+                            new AlertDialog.Builder(context, R.style.AppCompatAlertDialogStyle);
+                    builder.setTitle("Opps");
+                    builder.setIcon(R.drawable.corss);
+                    builder.setMessage("Service Failer server not found..! ");
+                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            //finish();
+                        }
+                    });
+                    builder.show();
+
+                }
+
+                @Override
                 public void onRetry(int retryNo) {
                     // called when request is retried
                 }

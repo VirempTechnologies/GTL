@@ -26,8 +26,9 @@
                 android:text="Glob TeleLink"
                 android:textColor="@color/colorDrakGray"
                 android:textSize="16dp"
+
                 android:id="@+id/company_name"
-                android:gravity="center"
+                android:gravity="left"
                 />
             <TextView
                 android:layout_width="150dp"
@@ -37,10 +38,11 @@
                 android:textSize="16dp"
                 android:id="@+id/client_name"
                 android:layout_centerVertical="true"
-                android:gravity="center"
+                android:gravity="left"
                 android:layout_toRightOf="@+id/company_name"
                 android:layout_toLeftOf="@+id/current_balance"
                 android:layout_marginRight="10dp"
+                android:paddingLeft="20dp"
                 />
 
 

@@ -183,7 +183,7 @@ public class MyStockAcitivity extends AppCompatActivity {
                                         bagProduct.setProduct_id(product.getInt("id"));
                                         bagProduct.setInitialQuantity(0);
                                         bagProduct.setBagIndex(i);
-
+                                        bagProduct.setModel(product.getString("model"));
                                         bagProduct.setImage(product.getString("product_image"));
                                         Constants.bagProductArrayList.add(bagProduct);
                                     }

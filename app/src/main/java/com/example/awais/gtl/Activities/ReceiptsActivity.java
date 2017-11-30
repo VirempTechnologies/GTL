@@ -56,7 +56,7 @@ public class ReceiptsActivity extends AppCompatActivity {
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
-
+        mViewPager.setCurrentItem(1);
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
         //setting the icons of the tabs
@@ -94,6 +94,10 @@ public class ReceiptsActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
+        }
+        if(item.getItemId()==android.R.id.home) {
+            finish();
+            return  true;
         }
 
         return super.onOptionsItemSelected(item);

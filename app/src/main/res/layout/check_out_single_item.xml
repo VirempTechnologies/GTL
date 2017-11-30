@@ -75,7 +75,7 @@
                 android:visibility="visible"
                 app:isAnimated="true"
                 app:heading="IMEI Numbers"
-                app:isExpanded="false"
+                app:isExpanded="true"
                 app:isPartitioned="true"
                 >
 

@@ -132,7 +132,7 @@ public class BagActivity extends AppCompatActivity {
         recyclerView.scheduleLayoutAnimation();
     }
 
-    public void invokeWS(JSONObject params, Context context){
+    public void invokeWS(JSONObject params, final Context context){
         final ProgressDialog prgDialog;
         prgDialog = new ProgressDialog(context);
         // Set Progress Dialog Text
@@ -184,7 +184,7 @@ public class BagActivity extends AppCompatActivity {
                                         bagProduct.setProduct_id(product.getInt("id"));
                                         bagProduct.setInitialQuantity(0);
                                         bagProduct.setBagIndex(i);
-
+                                        bagProduct.setModel(product.getString("model"));
                                         bagProduct.setImage(product.getString("product_image"));
                                         Constants.bagProductArrayList.add(bagProduct);
                                     }
@@ -238,6 +238,23 @@ public class BagActivity extends AppCompatActivity {
                                     }
                                 });
                                 builder.show();
+                            }
+                            else if(resp.getString("status_code").equals("199")) {
+                                prgDialog.dismiss();
+
+                                AlertDialog.Builder builder =
+                                        new AlertDialog.Builder(context, R.style.AppCompatAlertDialogStyle);
+                                builder.setTitle("Opps");
+                                builder.setIcon(R.drawable.corss);
+                                builder.setMessage(resp.optString("error"));
+                                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        //finish();
+                                    }
+                                });
+                                builder.show();
+
                             }
                         }
                         if(statusCode==500)

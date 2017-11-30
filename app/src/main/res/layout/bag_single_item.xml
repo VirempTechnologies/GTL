@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
-    android:layout_height="160dp"
+    android:layout_height="wrap_content"
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/colorMenuBar"
@@ -15,7 +15,7 @@
         android:layout_marginRight="10dp">
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:id="@+id/upper_rlv"
             >
 
@@ -35,11 +35,11 @@
 
             </RelativeLayout>
             <RelativeLayout
-                android:layout_width="wrap_content"
+                android:layout_width="190dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/product_details_rlv"
-                android:layout_centerVertical="true"
                 android:layout_centerHorizontal="true"
+                android:layout_toRightOf="@+id/product_image_rlv"
                 android:layout_marginRight="5dp">
                 <RelativeLayout
                     android:layout_width="wrap_content"
@@ -148,7 +148,7 @@
 
                 <RelativeLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="fill_parent"
+                    android:layout_height="wrap_content"
                     android:layout_below="@+id/product_price_rlv"
                     android:background="@color/colorWhite"
                     android:id="@+id/lower_rlv"
@@ -199,11 +199,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true">
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true">
                 <RelativeLayout
                     android:layout_width="1sp"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:background="@color/colorPrimary"
                     android:layout_marginTop="20dp"
                     android:layout_marginBottom="20dp"
@@ -215,6 +215,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:layout_marginLeft="12dp"
+
                     android:layout_marginRight="10dp">
                     <RelativeLayout
                         android:layout_width="wrap_content"

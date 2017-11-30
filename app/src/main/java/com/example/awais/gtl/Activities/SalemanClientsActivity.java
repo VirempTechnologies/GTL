@@ -207,7 +207,8 @@ public class SalemanClientsActivity extends AppCompatActivity {
                         Log.d(Constants.TAG, "success data say congo : " + resp.toString());
 
                         if(statusCode==200) {
-                            if(resp.getString("status_code").equals("200")) {
+                            if(resp.getString("status_code").equals("200"))
+                            {
 
                                 prgDialog.dismiss();
                                 try
@@ -264,15 +265,14 @@ public class SalemanClientsActivity extends AppCompatActivity {
                                 LayoutAnimationController profileImageAnimation = AnimationUtils.loadLayoutAnimation(context, profileImageAnimationId);
                                 profileImageLayout.setLayoutAnimation(profileImageAnimation);
                                 //end
+                                }
+                                 catch (Exception ex)
+                                {
+                                    ex.printStackTrace();
+                                }
+                                    //end set
+                            }
 
-
-                            }
-                             catch (Exception ex)
-                            {
-                                ex.printStackTrace();
-                            }
-                                //end set
-                            }
                             else  if(resp.getString("status_code").equals("404"))
                             {
                                 prgDialog.dismiss();
@@ -289,6 +289,23 @@ public class SalemanClientsActivity extends AppCompatActivity {
                                     }
                                 });
                                 builder.show();
+                            }
+                            else if(resp.getString("status_code").equals("199")) {
+                                prgDialog.dismiss();
+
+                                AlertDialog.Builder builder =
+                                        new AlertDialog.Builder(context, R.style.AppCompatAlertDialogStyle);
+                                builder.setTitle("Opps");
+                                builder.setIcon(R.drawable.corss);
+                                builder.setMessage(resp.optString("error"));
+                                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        //finish();
+                                    }
+                                });
+                                builder.show();
+
                             }
                         }
                         if(statusCode==500)

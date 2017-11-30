@@ -290,7 +290,7 @@ public class SalemanProfile extends AppCompatActivity {
                                         new AlertDialog.Builder(context, R.style.AppCompatAlertDialogStyle);
                                 builder.setTitle("Opps");
                                 builder.setIcon(R.drawable.corss);
-                                builder.setMessage("bag not found ");
+                                builder.setMessage(resp.optString("error"));
                                 builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
@@ -299,8 +299,42 @@ public class SalemanProfile extends AppCompatActivity {
                                 });
                                 builder.show();
                             }
+                            else if(resp.getString("status_code").equals("199")) {
+                                prgDialog.dismiss();
+
+                                AlertDialog.Builder builder =
+                                        new AlertDialog.Builder(context, R.style.AppCompatAlertDialogStyle);
+                                builder.setTitle("Opps");
+                                builder.setIcon(R.drawable.corss);
+                                builder.setMessage(resp.optString("error"));
+                                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        setLogout();
+                                    }
+                                });
+                                builder.show();
+
+                            }
                         }
-                        if(statusCode==500)
+                        else if(statusCode==500)
+                        {
+                            prgDialog.dismiss();
+
+                            AlertDialog.Builder builder =
+                                    new AlertDialog.Builder(context, R.style.AppCompatAlertDialogStyle);
+                            builder.setTitle("Opps");
+                            builder.setIcon(R.drawable.corss);
+                            builder.setMessage("internal Server Error ! ");
+                            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    //finish();
+                                }
+                            });
+                            builder.show();
+                        }
+                        else if(statusCode==404)
                         {
                             prgDialog.dismiss();
 
@@ -308,7 +342,7 @@ public class SalemanProfile extends AppCompatActivity {
                                     new AlertDialog.Builder(context, R.style.AppCompatAlertDialogStyle);
                             builder.setTitle("500");
                             builder.setIcon(R.drawable.corss);
-                            builder.setMessage("internal Server Error ! ");
+                            builder.setMessage("server not found! ");
                             builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
@@ -333,7 +367,7 @@ public class SalemanProfile extends AppCompatActivity {
                             new AlertDialog.Builder(context, R.style.AppCompatAlertDialogStyle);
                     builder.setTitle("Opps");
                     builder.setIcon(R.drawable.corss);
-                    builder.setMessage("server not found..! ");
+                    builder.setMessage("service Failer..! ");
                     builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
@@ -352,7 +386,7 @@ public class SalemanProfile extends AppCompatActivity {
                             new AlertDialog.Builder(context, R.style.AppCompatAlertDialogStyle);
                     builder.setTitle("Opps");
                     builder.setIcon(R.drawable.corss);
-                    builder.setMessage("server not found..! ");
+                    builder.setMessage("service failer! ");
                     builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {

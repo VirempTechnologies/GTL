@@ -78,7 +78,7 @@ public class MyStockAdapter extends RecyclerView.Adapter<MyStockAdapter.MyViewHo
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
         final BagProduct bagProduct= bagProductArrayList.get(position);
-        holder.product_name.setText(bagProduct.getProductName());
+        holder.product_name.setText(bagProduct.getProductName() + " "+bagProduct.getModel()+"");
         holder.my_stock.setText(bagProduct.getMyStock()+"");
         holder.company_stock.setText(bagProduct.getCompanyStock()+"");
         holder.sale_price.setText(bagProduct.getSalePrice()+"");
