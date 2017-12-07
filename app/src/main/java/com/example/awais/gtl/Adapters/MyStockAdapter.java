@@ -72,6 +72,8 @@ public class MyStockAdapter extends RecyclerView.Adapter<MyStockAdapter.MyViewHo
 //        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 //        params.addRule(RelativeLayout.CENTER_HORIZONTAL);
 //        itemView.setLayoutParams(params);
+        Log.d(Constants.TAG,"view holder product name"+((TextView)itemView.findViewById(R.id.product_name)).getText().toString());
+
         return new MyViewHolder(itemView);
     }
 

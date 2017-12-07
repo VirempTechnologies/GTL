@@ -20,8 +20,6 @@ import android.widget.Toast;
 
 import com.example.awais.gtl.Constants;
 import com.example.awais.gtl.Pojos.CartItem;
-import com.example.awais.gtl.Pojos.CheckOutItem;
-import com.example.awais.gtl.Pojos.Receipt;
 import com.example.awais.gtl.Pojos.Sale;
 import com.example.awais.gtl.R;
 import com.riyagayasen.easyaccordion.AccordionView;

@@ -225,6 +225,7 @@ public class SelectiveDateReceipts extends Fragment{
                                         receipt.setCompany_name(saleObejct.getString("company_name"));
                                         receipt.setQuantity(saleObejct.getString("quantity"));
                                         receipt.setTotal_amount(saleObejct.getString("total_amount"));
+                                        receipt.setInvoice_date(datesArray.getString(i));
                                         receipts.add(receipt);
                                         receipt = new Receipt();
                                     }

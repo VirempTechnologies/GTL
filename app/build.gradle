@@ -32,6 +32,7 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.reginald:editspinner:1.0.0'
     compile 'com.google.code.gson:gson:2.8.2'
+    compile 'com.itextpdf:itextg:5.5.9'
 
 }
 repositories{

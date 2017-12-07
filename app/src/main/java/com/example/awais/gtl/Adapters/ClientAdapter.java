@@ -23,6 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.awais.gtl.Activities.BagActivity;
+import com.example.awais.gtl.Activities.SaleHistoryActivity;
 import com.example.awais.gtl.Activities.SalemanClientsActivity;
 import com.example.awais.gtl.Constants;
 import com.example.awais.gtl.Pojos.CartItem;
@@ -99,6 +100,14 @@ public class ClientAdapter extends RecyclerView.Adapter<ClientAdapter.MyViewHold
                                 ((Activity) mContext).overridePendingTransition(R.anim.fadein, R.anim.fadeout);
 
                             }
+                            else if(which==1)
+                            {
+                                (mContext).startActivity((new Intent(mContext, SaleHistoryActivity.class).putExtra("client",client)).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                                ((Activity) mContext).overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+
+                            }
+
+
                         }
                     });
                     builder.show();

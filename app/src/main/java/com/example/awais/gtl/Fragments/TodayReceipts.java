@@ -159,6 +159,7 @@ public class TodayReceipts extends Fragment {
                                     receipt.setCompany_name(saleObejct.getString("company_name"));
                                     receipt.setQuantity(saleObejct.getString("quantity"));
                                     receipt.setTotal_amount(saleObejct.getString("total_amount"));
+                                    receipt.setInvoice_date(todayDate);
                                     allReceiptsArrayList.add(receipt);
                                     receipt=new Receipt();
                                 }
@@ -172,6 +173,23 @@ public class TodayReceipts extends Fragment {
                                 today_receipt_recycler_view.setLayoutManager(mLayoutManager);
                                 today_receipt_recycler_view.setAdapter(adapter);
                                 prgDialog.dismiss();
+                            }
+                            else if(resp.getString("status_code").equals("177"))
+                            {
+                                prgDialog.dismiss();
+
+                                AlertDialog.Builder builder =
+                                        new AlertDialog.Builder(context, R.style.AppCompatAlertDialogStyle);
+                                builder.setTitle("Opps");
+                                builder.setIcon(R.drawable.corss);
+                                builder.setMessage(resp.optString("error"));
+                                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        //finish();
+                                    }
+                                });
+                                builder.show();
                             }
 
                                 //end setting

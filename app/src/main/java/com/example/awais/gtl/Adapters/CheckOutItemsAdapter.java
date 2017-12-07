@@ -4,9 +4,11 @@ package com.example.awais.gtl.Adapters;
  * Created by awais on 8/29/2017.
  */
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -38,6 +40,7 @@ public class CheckOutItemsAdapter extends RecyclerView.Adapter<CheckOutItemsAdap
     View rootView ;
     long subTotal=0;
     IMEIAdapter adapter;
+    ArrayList<Bitmap> checkOutItemBitmaps = new ArrayList<>();
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView product_name,product_total_price,quantity_saleprice;
         AccordionView accordionView ;
@@ -70,6 +73,7 @@ public class CheckOutItemsAdapter extends RecyclerView.Adapter<CheckOutItemsAdap
 //        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 //        params.addRule(RelativeLayout.CENTER_HORIZONTAL);
 //        itemView.setLayoutParams(params);
+        Log.d(Constants.TAG,"view holder product name"+((TextView)itemView.findViewById(R.id.product_name)).getText().toString());
         return new MyViewHolder(itemView);
     }
 
@@ -77,7 +81,7 @@ public class CheckOutItemsAdapter extends RecyclerView.Adapter<CheckOutItemsAdap
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
         try {
             final CheckOutItem checkOutItem= checkOutItemsArrayList.get(position);
-            holder.product_name.setText(checkOutItem.getProductName()+"");
+            holder.product_name.setText(checkOutItem.getProductName()+" " + checkOutItem.getProductModel());
 //            holder.product_quantity_price.setText(cartItem.getQuantity()+" x "+cartItem.getSale_price()+"€");
             holder.product_total_price.setText(checkOutItem.getCollectivePrice()+" €");
             holder.accordionView.setHeadingString("IMEI/Serial Numbers");

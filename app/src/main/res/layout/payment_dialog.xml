@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp"
+    >
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/ic_euro"
+        android:padding="10dp"
+        android:layout_centerVertical="true"
+        android:id="@+id/user_icon"
+        />
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/payment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="2dp"
+        android:layout_gravity="center"
+        android:theme="@style/TextInputStyle"
+        android:layout_toRightOf="@+id/user_icon">
+
+        <AutoCompleteTextView
+            android:id="@+id/payment_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:maxLines="1"
+            android:imeOptions="actionDone"
+            android:singleLine="true"
+            android:hint="Payment"
+            android:textSize="@dimen/addClientTextSize"
+            android:keepScreenOn="false"
+            android:textColor="@color/colorPrimary"/>
+    </android.support.design.widget.TextInputLayout>
+</RelativeLayout>

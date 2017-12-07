@@ -81,7 +81,7 @@ public class ReceiptAdapter extends RecyclerView.Adapter<ReceiptAdapter.MyViewHo
                 public void onClick(View v) {
 //                    Log.d(Constants.TAG, holder.clientName.getText() + "");
                     Toast.makeText(mContext, "invoice id: "+receipt.getInvoice_id(), Toast.LENGTH_SHORT).show();
-                    (mContext).startActivity((new Intent(mContext, SaleDetailActitvity.class).putExtra("invoice_id",receipt.getInvoice_id())).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                    (mContext).startActivity((new Intent(mContext, SaleDetailActitvity.class).putExtra("invoice_id",receipt.getInvoice_id()).putExtra("invoice_date",receipt.getInvoice_date())).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
                     ((Activity) mContext).overridePendingTransition(R.anim.fadein, R.anim.fadeout);
 
                 }

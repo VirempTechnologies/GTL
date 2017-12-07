@@ -10,12 +10,21 @@ public class Receipt {
     String company_name;
     String quantity;
     String client_name;
+    String invoice_date;
 
     public Receipt() {
     }
 
     public int getInvoice_id() {
         return invoice_id;
+    }
+
+    public String getInvoice_date() {
+        return invoice_date;
+    }
+
+    public void setInvoice_date(String invoice_date) {
+        this.invoice_date = invoice_date;
     }
 
     public void setInvoice_id(int invoice_id) {

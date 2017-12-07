@@ -78,7 +78,7 @@ public class BagActivity extends AppCompatActivity {
               button.setOnClickListener(new View.OnClickListener() {
                   @Override
                   public void onClick(View v) {
-                      startActivity(new Intent(BagActivity.this, CartActivity.class).putExtra("client",client));
+                      startActivity(new Intent(BagActivity.this, CartActivity.class).putExtra("client",client).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
                       overridePendingTransition(R.anim.fadein, R.anim.fadeout);
                   }
               });
@@ -102,7 +102,10 @@ public class BagActivity extends AppCompatActivity {
         if(salesman_bag_recyler_view!=null)
         salesman_bag_recyler_view.getAdapter().notifyDataSetChanged();
         //runLayoutAnimation(salesman_bag_recyler_view);
-
+        if(Constants.gotoClient)
+        {
+             finish();
+        }
     }
 
     @Override

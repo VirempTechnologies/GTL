@@ -11,10 +11,19 @@ import java.util.List;
 public class SoldItem {
     int product_id;
     String product_name;
+    String product_Model;
     long sale_price;
     String imei;
 
     public SoldItem() {
+    }
+
+    public String getProduct_Model() {
+        return product_Model;
+    }
+
+    public void setProduct_Model(String product_Model) {
+        this.product_Model = product_Model;
     }
 
     public int getProduct_id() {

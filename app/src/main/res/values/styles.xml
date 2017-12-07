@@ -51,6 +51,7 @@
         <item name="colorAccent">@color/colorPrimary</item>
         <item name="android:textColorPrimary">#606060</item>
         <item name="android:background">#ECECEC</item>
+
     </style>
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 

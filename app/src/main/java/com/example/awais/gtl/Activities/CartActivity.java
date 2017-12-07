@@ -12,10 +12,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,6 +35,7 @@ import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -125,12 +131,12 @@ public class CartActivity extends AppCompatActivity {
                             productArray.put(product);
                             product = new JSONObject();
                         }
-                        double total_amount =  Double.parseDouble(((TextView) findViewById(R.id.product_grand_total_price)).getText().toString().replace("€",""));
+                        final double total_amount =  Double.parseDouble(((TextView) findViewById(R.id.product_receipt_total_price)).getText().toString().replace("€",""));
                         Toast.makeText(CartActivity.this, "check out", Toast.LENGTH_SHORT).show();
                         settings = getSharedPreferences("GTL-Settings", 0);
                         final String headerss = settings.getString("headers", null);
                         JSONObject headers = new JSONObject(headerss);
-                        JSONObject params = new JSONObject();
+                        final JSONObject params = new JSONObject();
                         params.put("headers", headers);
                         params.put("products", productArray);
                         params.put("total_sets", quantity);
@@ -139,8 +145,44 @@ public class CartActivity extends AppCompatActivity {
 
                         Log.d("checklog", "sending request : " + params.toString());
                         Log.d(Constants.TAG, "here to call the web service to proceed check out..");
-                        invokeWS(params,CartActivity.this,client);
-                       } catch (Exception ex) {
+                        //set payment  of the client
+                        AlertDialog.Builder builder = new AlertDialog.Builder(CartActivity.this, R.style.AppCompatAlertDialogStyle);
+                        builder.setTitle("Enter Payment Received");
+                        // I'm using fragment here so I'm using getView() to provide ViewGroup
+                        // but you can provide here any other instance of ViewGroup from your Fragment / Activity
+                        View viewInflated = getLayoutInflater().inflate(R.layout.payment_dialog, null);
+//                        View viewInflated = LayoutInflater.from(getApplicationContext()).inflate(R.layout.payment_dialog,new ,  false);
+                        // Set up the input
+                        final AutoCompleteTextView input = (AutoCompleteTextView) viewInflated.findViewById(R.id.payment_text);
+                        // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
+                        builder.setView(viewInflated);
+
+                        // Set up the buttons
+                        builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                                try {
+                                    params.put("payment", input.getText().toString());
+                                    invokeWS(params,CartActivity.this,client);
+
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        });
+                        builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+
+                            }
+                        });
+
+                        builder.show();
+
+
+                        } catch (Exception ex) {
                         ex.printStackTrace();
                         Log.d("checklog", "exception : " + ex.getMessage());
 
@@ -184,8 +226,9 @@ public class CartActivity extends AppCompatActivity {
                         if(statusCode==200) {
                             if(resp.getString("status_code").equals("200")) {
                                 prgDialog.dismiss();
-                                startActivity(new Intent(CartActivity.this, CheckOutActivity.class).putExtra("client", salesmanClient).putExtra("respObject",resp.toString()));
+                                startActivity(new Intent(CartActivity.this, CheckOutActivity.class).putExtra("client", salesmanClient).putExtra("respObject",resp.toString()).putExtra("current_balance","-"+resp.getString("current_bal")).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
                                 overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+                                finish();
                             }
                         }
                         if(statusCode==500)

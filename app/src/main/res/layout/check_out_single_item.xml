@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:fancy="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/bag_rlv"
+    android:id="@+id/check_out_item_parent"
     android:layout_margin="10dp"
     >
 
@@ -24,7 +24,7 @@
             >
 
             <TextView
-                android:layout_width="100dp"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:text="iPhone 7x"
                 android:textColor="@color/colorWhite"

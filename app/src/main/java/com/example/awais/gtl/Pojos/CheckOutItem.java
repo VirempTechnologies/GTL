@@ -1,5 +1,7 @@
 package com.example.awais.gtl.Pojos;
 
+import android.graphics.Bitmap;
+
 import java.util.ArrayList;
 
 /**
@@ -8,11 +10,23 @@ import java.util.ArrayList;
 
 public class CheckOutItem {
     String productName;
+    String ProductModel;
+
     long collectivePrice;
     long salePrice;
     ArrayList<String> IMEINos=new ArrayList<>();
 
+
+
     public CheckOutItem() {
+    }
+
+    public String getProductModel() {
+        return ProductModel;
+    }
+
+    public void setProductModel(String productModel) {
+        ProductModel = productModel;
     }
 
     public String getProductName() {

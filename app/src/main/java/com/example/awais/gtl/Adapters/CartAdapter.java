@@ -15,19 +15,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.awais.gtl.Constants;
 import com.example.awais.gtl.Pojos.CartItem;
-import com.example.awais.gtl.Pojos.Receipt;
 import com.example.awais.gtl.R;
 
 import java.util.ArrayList;
 import java.util.Map;
-import java.util.concurrent.CompletionService;
 
 import mehdi.sakout.fancybuttons.FancyButton;
 

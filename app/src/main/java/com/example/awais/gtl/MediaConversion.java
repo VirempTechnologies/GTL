@@ -2,8 +2,13 @@ package com.example.awais.gtl;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.util.Base64;
+import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 
 import java.io.ByteArrayOutputStream;
@@ -53,5 +58,39 @@ public class MediaConversion {
     {
         return  BitmapFactory.decodeByteArray(array,0,array.length);
     }
+    public static Bitmap getBitmapFromView(View v) {
+        //v.measure(View.MeasureSpec.makeMeasureSpec(v.getLayoutParams().width, View.MeasureSpec.EXACTLY),
+      //          View.MeasureSpec.makeMeasureSpec(v.getLayoutParams().height, View.MeasureSpec.EXACTLY));
+        //v.layout(0, 0, v.getMeasuredWidth(), v.getMeasuredHeight());
+
+        //Define a bitmap with the same size as the view
+        Bitmap returnedBitmap = Bitmap.createBitmap(v.getWidth(), v.getHeight(),Bitmap.Config.ARGB_8888);
+        //Bind a canvas to it
+        Canvas canvas = new Canvas(returnedBitmap);
+        //Get the view's background
+        Drawable bgDrawable =v.getBackground();
+        if (bgDrawable!=null)
+            //has background drawable, then draw it on the canvas
+            bgDrawable.draw(canvas);
+        else
+            //does not have background drawable, then draw white background on the canvas
+            canvas.drawColor(Color.WHITE);
+        // draw the view on the canvas
+        v.draw(canvas);
+        //return the bitmap
+        return returnedBitmap;
+    }
+    public static Bitmap getBitmapFromViewNew(View v) {
+        v.measure(View.MeasureSpec.makeMeasureSpec(v.getLayoutParams().width, View.MeasureSpec.EXACTLY),
+                View.MeasureSpec.makeMeasureSpec(v.getLayoutParams().height, View.MeasureSpec.EXACTLY));
+        v.layout(0, 0, v.getMeasuredWidth(), v.getMeasuredHeight());
+
+        Log.d(Constants.TAG,v.getHeight()+"");
+        Bitmap b = Bitmap.createBitmap(v.getWidth(), v.getHeight(), Bitmap.Config.ALPHA_8);
+        Canvas c = new Canvas(b);
+        v.draw(c);
+        return b;
+    }
+
 
 }

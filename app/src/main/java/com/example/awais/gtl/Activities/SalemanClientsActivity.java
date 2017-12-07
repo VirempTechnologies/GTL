@@ -56,6 +56,7 @@ public class SalemanClientsActivity extends AppCompatActivity {
     SharedPreferences settings;
     JSONObject finalRespObject;
     WebServiceHelper webServiceHelper;
+    JSONObject params;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
 
@@ -81,7 +82,7 @@ public class SalemanClientsActivity extends AppCompatActivity {
             final String headerss = settings.getString("headers",null);
 
             JSONObject headers = new JSONObject(headerss);
-            JSONObject params = new JSONObject();
+            params = new JSONObject();
             params.put("headers", headers);
             Log.d("checklog", "sending request : " + params.toString());
             //finalRespObject = webServiceHelper.sendPostRequest(params,this,Constants.getClientsUrl);
@@ -157,6 +158,13 @@ public class SalemanClientsActivity extends AppCompatActivity {
         Log.d(Constants.TAG,"here to refresh activity");
         Constants.bagProductArrayList.clear();
         Constants.cartItemsMap.clear();
+        if(Constants.gotoClient)
+        {
+
+            Constants.gotoClient=false;
+            clientArrayList.clear();
+            invokeWS(params,SalemanClientsActivity.this);
+        }
     }
 
     @Override
@@ -229,7 +237,7 @@ public class SalemanClientsActivity extends AppCompatActivity {
                                         }
                                         else
                                         {
-                                            client.setCurrent_bal(firstObject.getString("current_bal")+" €");
+                                            client.setCurrent_bal("-"+firstObject.getString("current_bal")+" €");
 
                                         }
                                         JSONObject userObject = firstObject.getJSONObject("user");
