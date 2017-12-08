@@ -1,0 +1,364 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/client_rlv"
+            android:background="@color/colorWhite">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/upper_rlv"
+                    android:padding="5dp"
+                       >
+                        <TextView
+                            android:layout_width="80dp"
+                            android:layout_height="wrap_content"
+                            android:text="Date"
+                            android:textColor="@color/colorDrakGray"
+                            android:textSize="11dp"
+                            android:id="@+id/transaction_date_label"
+                            android:layout_centerVertical="true"
+                            android:gravity="center"
+                            android:textStyle="bold"
+                            />
+                        <TextView
+                            android:layout_width="160dp"
+                            android:layout_height="wrap_content"
+                            android:text="Description"
+                            android:textColor="@color/colorDrakGray"
+                            android:textSize="11dp"
+                            android:id="@+id/account_disc_label"
+                            android:layout_centerVertical="true"
+                            android:gravity="center"
+                            android:layout_toRightOf="@+id/transaction_date_label"
+                            android:textStyle="bold"
+                            />
+
+
+                        <TextView
+                            android:layout_width="60dp"
+                            android:layout_height="wrap_content"
+                            android:text="Debit"
+                            android:textColor="@color/colorDrakGray"
+                            android:textSize="11dp"
+                            android:id="@+id/debit_balance_label"
+                            android:layout_centerVertical="true"
+                            android:layout_toRightOf="@+id/account_disc_label"
+                            android:layout_toLeftOf="@+id/credit_balance_label"
+                            android:gravity="center"
+                            android:textStyle="bold"
+                            />
+                        <TextView
+                            android:layout_width="60dp"
+                            android:layout_height="wrap_content"
+                            android:text="Credit"
+                            android:textColor="@color/colorDrakGray"
+                            android:textSize="11dp"
+                            android:gravity="center"
+                            android:layout_marginRight="10dp"
+                            android:id="@+id/credit_balance_label"
+                            android:layout_centerVertical="true"
+                            android:layout_alignParentEnd="true"
+                            android:textStyle="bold"
+                            />
+
+
+
+                </RelativeLayout>
+        </RelativeLayout>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/all_transaction_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:scrollbars="vertical"
+            android:layout_below="@+id/client_rlv"
+            android:layout_above="@+id/debit_cradit_sum"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/debit_cradit_sum"
+            android:layout_above="@+id/transaction_summery"
+            android:background="@color/colorWhite"
+            android:padding="5dp"
+            android:layout_marginBottom="1dp"
+            >
+
+
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:text="Debit"
+                    android:textColor="@color/colorDrakGray"
+                    android:textSize="14dp"
+                    android:id="@+id/debit_sum"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@+id/credit_sum"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Credit"
+                    android:textColor="@color/colorDrakGray"
+                    android:textSize="14dp"
+                    android:layout_marginRight="10dp"
+                    android:gravity="center"
+                    android:id="@+id/credit_sum"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentEnd="true"
+                    android:textStyle="bold"
+                    />
+
+
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/transaction_summery"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/round_corner"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="10dp"
+            >
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/summary_heding_rlv"
+                    >
+                        <TextView
+                            android:layout_width="170dp"
+                            android:layout_height="wrap_content"
+                            android:text="Account"
+                            android:textColor="@color/colorDrakGray"
+                            android:textSize="16dp"
+                            android:id="@+id/account_label"
+                            android:layout_centerVertical="true"
+                            android:gravity="left"
+                            android:textStyle="bold"
+                            />
+
+
+                        <TextView
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:text="Debit"
+                            android:textColor="@color/colorDrakGray"
+                            android:textSize="16dp"
+                            android:id="@+id/debit_summary_label"
+                            android:layout_centerVertical="true"
+                            android:layout_toRightOf="@+id/account_label"
+                            android:layout_toLeftOf="@+id/credit_label"
+                            android:gravity="center"
+                            android:textStyle="bold"
+                            />
+                        <TextView
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:text="Credit"
+                            android:textColor="@color/colorDrakGray"
+                            android:textSize="16dp"
+                            android:gravity="center"
+                            android:id="@+id/credit_label"
+                            android:layout_centerVertical="true"
+                            android:layout_alignParentEnd="true"
+                            android:textStyle="bold"
+
+                            />
+
+
+
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/cash_account_rlv"
+                    android:layout_below="@+id/summary_heding_rlv"
+                    android:padding="3dp">
+                        <TextView
+                            android:layout_width="170dp"
+                            android:layout_height="wrap_content"
+                            android:text="Cash"
+                            android:textColor="@color/colorDrakGray"
+                            android:textSize="14dp"
+                            android:id="@+id/cash_label"
+                            android:layout_centerVertical="true"
+                            android:gravity="left"
+                            />
+
+
+                        <TextView
+                            android:layout_width="130dp"
+                            android:layout_height="wrap_content"
+                            android:text="400.12$"
+                            android:textColor="@color/colorDrakGray"
+                            android:textSize="14dp"
+                            android:id="@+id/cash_debit_text"
+                            android:layout_centerVertical="true"
+                            android:layout_toRightOf="@+id/cash_label"
+                            android:layout_toLeftOf="@+id/cash_credit_text"
+                            android:gravity="center"
+                            />
+                        <TextView
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:text="400.12$"
+                            android:textColor="@color/colorDrakGray"
+                            android:textSize="14dp"
+                            android:gravity="center"
+                            android:id="@+id/cash_credit_text"
+                            android:layout_centerVertical="true"
+                            android:layout_alignParentEnd="true"
+                            />
+
+
+
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/sales_account_rlv"
+                    android:layout_below="@+id/cash_account_rlv"
+                    android:padding="3dp">
+                        <TextView
+                            android:layout_width="170dp"
+                            android:layout_height="wrap_content"
+                            android:text="Sales"
+                            android:textColor="@color/colorDrakGray"
+                            android:textSize="14dp"
+                            android:id="@+id/sale_label"
+                            android:layout_centerVertical="true"
+                            android:gravity="left"
+                            />
+
+
+                        <TextView
+                            android:layout_width="130dp"
+                            android:layout_height="wrap_content"
+                            android:text="400.12$"
+                            android:textColor="@color/colorDrakGray"
+                            android:textSize="14dp"
+                            android:id="@+id/sale_debit_text"
+                            android:layout_centerVertical="true"
+                            android:layout_toRightOf="@+id/sale_label"
+                            android:layout_toLeftOf="@+id/sale_credit_text"
+                            android:gravity="center"
+                            />
+                        <TextView
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:text="400.12$"
+                            android:textColor="@color/colorDrakGray"
+                            android:textSize="14dp"
+                            android:gravity="center"
+                            android:id="@+id/sale_credit_text"
+                            android:layout_centerVertical="true"
+                            android:layout_alignParentEnd="true"
+                            />
+
+
+
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/ar_account_rlv"
+                    android:layout_below="@+id/sales_account_rlv"
+                    android:padding="3dp">
+                        <TextView
+                            android:layout_width="170dp"
+                            android:layout_height="wrap_content"
+                            android:text="Accounts Receivable"
+                            android:textColor="@color/colorDrakGray"
+                            android:textSize="14dp"
+                            android:id="@+id/ar_label"
+                            android:layout_centerVertical="true"
+                            android:gravity="left"
+                            />
+
+
+                        <TextView
+                            android:layout_width="130dp"
+                            android:layout_height="wrap_content"
+                            android:text="400.12$"
+                            android:textColor="@color/colorDrakGray"
+                            android:textSize="14dp"
+                            android:id="@+id/ar_debit_text"
+                            android:layout_centerVertical="true"
+                            android:layout_toRightOf="@+id/ar_label"
+                            android:layout_toLeftOf="@+id/ar_credit_text"
+                            android:gravity="center"
+                            />
+                        <TextView
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:text="400.12$"
+                            android:textColor="@color/colorDrakGray"
+                            android:textSize="14dp"
+                            android:gravity="center"
+                            android:id="@+id/ar_credit_text"
+                            android:layout_centerVertical="true"
+                            android:layout_alignParentEnd="true"
+                            />
+
+
+
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/ap_account_rlv"
+                    android:layout_below="@+id/ar_account_rlv"
+                    android:padding="3dp">
+                        <TextView
+                            android:layout_width="170dp"
+                            android:layout_height="wrap_content"
+                            android:text="Accounts Payable"
+                            android:textColor="@color/colorDrakGray"
+                            android:textSize="14dp"
+                            android:id="@+id/ap_label"
+                            android:layout_centerVertical="true"
+                            android:gravity="left"
+                            />
+
+
+                        <TextView
+                            android:layout_width="130dp"
+                            android:layout_height="wrap_content"
+                            android:text="400.12$"
+                            android:textColor="@color/colorDrakGray"
+                            android:textSize="14dp"
+                            android:id="@+id/ap_debit_text"
+                            android:layout_centerVertical="true"
+                            android:layout_toRightOf="@+id/ap_label"
+                            android:layout_toLeftOf="@+id/ap_credit_text"
+                            android:gravity="center"
+                            />
+                        <TextView
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:text="400.12$"
+                            android:textColor="@color/colorDrakGray"
+                            android:textSize="14dp"
+                            android:gravity="center"
+                            android:id="@+id/ap_credit_text"
+                            android:layout_centerVertical="true"
+                            android:layout_alignParentEnd="true"
+                            />
+
+
+
+                </RelativeLayout>
+        </RelativeLayout>
+
+</RelativeLayout>

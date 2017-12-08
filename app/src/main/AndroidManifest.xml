@@ -62,6 +62,13 @@
             android:screenOrientation="portrait">
 
         </activity>
+        <activity
+            android:name=".Activities.ClientLedgerActivity"
+            android:label="Client Ledger Report"
+            android:theme="@style/AppTheme.blue"
+            android:screenOrientation="portrait">
+
+        </activity>
 
 
         <activity

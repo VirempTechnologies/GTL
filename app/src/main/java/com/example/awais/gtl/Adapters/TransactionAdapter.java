@@ -10,7 +10,6 @@ import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -23,46 +22,41 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.awais.gtl.Activities.BagActivity;
-import com.example.awais.gtl.Activities.ClientLedgerActivity;
 import com.example.awais.gtl.Activities.SaleHistoryActivity;
-import com.example.awais.gtl.Activities.SalemanClientsActivity;
-import com.example.awais.gtl.Constants;
-import com.example.awais.gtl.Pojos.CartItem;
 import com.example.awais.gtl.Pojos.Client;
+import com.example.awais.gtl.Pojos.Transaction;
 import com.example.awais.gtl.R;
 
 import java.util.ArrayList;
-import java.util.Map;
-
-import mehdi.sakout.fancybuttons.FancyButton;
 
 /**
  * Created by Ravi Tamada on 18/05/16.
  */
-public class ClientAdapter extends RecyclerView.Adapter<ClientAdapter.MyViewHolder> {
+public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.MyViewHolder> {
 
     private Context mContext;
-    private ArrayList<Client> clientArrayList;
+    private ArrayList<Transaction> transactionsArrayList;
     RecyclerView recyclerView;
     View rootView ;
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView client_name,company_name,current_balance;
-        public RelativeLayout client_item;
+        public TextView transaction_date,account_disc,debit_balance,credit_balance;
+        public RelativeLayout transaction_item;
 
         public MyViewHolder(View view) {
             super(view);
-            client_name = (TextView) view.findViewById(R.id.client_name);
-            company_name = (TextView) view.findViewById(R.id.company_name);
-            current_balance = (TextView) view.findViewById(R.id.current_balance);
-            client_item = (RelativeLayout) view.findViewById(R.id.parent_rlv);
+            transaction_date = (TextView) view.findViewById(R.id.transaction_date_text);
+            account_disc = (TextView) view.findViewById(R.id.account_disc_text);
+            debit_balance = (TextView) view.findViewById(R.id.debit_balance_text);
+            credit_balance = (TextView) view.findViewById(R.id.credit_balance_text);
+            transaction_item = (RelativeLayout) view.findViewById(R.id.parent_rlv);
         }
     }
 
 
-    public ClientAdapter(Context mContext, ArrayList<Client> clientArrayList) {
+    public TransactionAdapter(Context mContext, ArrayList<Transaction> transactionsArrayList) {
         this.mContext = mContext;
-        this.clientArrayList = clientArrayList;
-        rootView = ((Activity)mContext).getWindow().getDecorView().findViewById(R.id.parent_rlv);
+        this.transactionsArrayList = transactionsArrayList;
+        //rootView = ((Activity)mContext).getWindow().getDecorView().findViewById(R.id.parent_rlv);
         //recyclerView = (RecyclerView) rootView.findViewById(R.id.product_cart_recycler_view);
 
     }
@@ -70,7 +64,7 @@ public class ClientAdapter extends RecyclerView.Adapter<ClientAdapter.MyViewHold
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.client_single_item, parent, false);
+                .inflate(R.layout.transaction_single_item, parent, false);
 //        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 //        params.addRule(RelativeLayout.CENTER_HORIZONTAL);
 //        itemView.setLayoutParams(params);
@@ -80,44 +74,16 @@ public class ClientAdapter extends RecyclerView.Adapter<ClientAdapter.MyViewHold
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
         try {
-            final Client client = clientArrayList.get(position);
-            holder.client_name.setText(client.getClient_name());
-            holder.company_name.setText(client.getCompany_name());
-            holder.current_balance.setText(client.getCurrent_bal());
+            final Transaction transaction = transactionsArrayList.get(position);
+            holder.transaction_date.setText(transaction.getTransactionDate());
+            holder.account_disc.setText(transaction.getAccountType()+"|"+transaction.getAccountTitle());
+            holder.debit_balance.setText(transaction.getDebitBalance()+" €");
+            holder.credit_balance.setText(transaction.getCreditBalance()+" €");
 
-            holder.client_item.setOnLongClickListener(new View.OnLongClickListener() {
+            holder.transaction_item.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
-                    final String[]items = new String[]{"Create New Order","Orders History","View Profile","Ledger Report","Statistics"};
-                    AlertDialog.Builder builder =
-                            new AlertDialog.Builder(mContext, R.style.AppCompatAlertDialogStyle);
-                    builder.setTitle("Select an Option");
-                    builder.setItems(items, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            if(which==0)
-                            {
-                                (mContext).startActivity((new Intent(mContext, BagActivity.class).putExtra("client",client)).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
-                                ((Activity) mContext).overridePendingTransition(R.anim.fadein, R.anim.fadeout);
 
-                            }
-                            else if(which==1)
-                            {
-                                (mContext).startActivity((new Intent(mContext, SaleHistoryActivity.class).putExtra("client",client)).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
-                                ((Activity) mContext).overridePendingTransition(R.anim.fadein, R.anim.fadeout);
-
-                            }
-                            else if(which==3)
-                            {
-                                (mContext).startActivity((new Intent(mContext, ClientLedgerActivity.class).putExtra("client",client)).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
-                                ((Activity) mContext).overridePendingTransition(R.anim.fadein, R.anim.fadeout);
-
-                            }
-
-
-                        }
-                    });
-                    builder.show();
                     return false;
                 }
             });
@@ -180,7 +146,7 @@ public class ClientAdapter extends RecyclerView.Adapter<ClientAdapter.MyViewHold
 
     @Override
     public int getItemCount() {
-        return clientArrayList.size();
+        return transactionsArrayList.size();
     }
 
     private void runLayoutAnimation(final RecyclerView recyclerView) {

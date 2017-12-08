@@ -26,6 +26,7 @@ public class Constants {
     public static String getSaleDetailUrl="http://"+IPAddress+"/api/sale";
     public static String getDateSaleUrl="http://"+IPAddress+"/api/date_invoice";
     public static String getSaleHistoryUrl="http://"+IPAddress+"/api/client_sale_history";
+    public static String getClientLedgerUrl="http://"+IPAddress+"/api/user_ledger";
     public static HashMap<String,CartItem> cartItemsMap= new HashMap<String, CartItem>();
     public  static ArrayList<BagProduct> bagProductArrayList = new ArrayList<>();
     public  static ArrayList<City> allCities= new ArrayList<>();
