@@ -22,50 +22,56 @@
                 android:id="@+id/transaction_rlv"
                 >
                 <TextView
-                    android:layout_width="120dp"
+                    android:layout_width="80dp"
                     android:layout_height="wrap_content"
                     android:text="Date"
                     android:textColor="@color/colorDrakGray"
                     android:textSize="11dp"
                     android:id="@+id/transaction_date_text"
                     android:layout_centerVertical="true"
-                    android:gravity="center"
-                    />
-
-                <TextView
-                    android:id="@+id/account_disc_text"
-                    android:layout_width="140dp"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_toEndOf="@+id/transaction_date_text"
                     android:gravity="left"
+                    android:textStyle="bold"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:text="Description"
                     android:textColor="@color/colorDrakGray"
-                    android:textSize="11dp" />
+                    android:textSize="11dp"
+                    android:id="@+id/account_disc_text"
+                    android:layout_centerVertical="true"
+                    android:gravity="left"
+                    android:layout_toRightOf="@+id/transaction_date_text"
+                    android:layout_toLeftOf="@+id/debit_balance_text"
+                    android:textStyle="bold"
+                    android:layout_marginLeft="10dp"
+                    />
 
 
                 <TextView
-                    android:layout_width="60dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Debit"
                     android:textColor="@color/colorDrakGray"
                     android:textSize="11dp"
                     android:id="@+id/debit_balance_text"
                     android:layout_centerVertical="true"
-                    android:layout_toRightOf="@+id/account_disc_text"
+                    android:layout_toLeftOf="@+id/credit_balance_text"
+                    android:layout_marginRight="20dp"
                     android:gravity="left"
+                    android:textStyle="bold"
                     />
                 <TextView
-                    android:layout_width="60dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Credit"
                     android:textColor="@color/colorDrakGray"
                     android:textSize="11dp"
                     android:gravity="left"
-                    android:layout_marginRight="10dp"
                     android:id="@+id/credit_balance_text"
                     android:layout_centerVertical="true"
-                    android:layout_toRightOf="@+id/debit_balance_text"
+                    android:layout_alignParentEnd="true"
+                    android:textStyle="bold"
                     />
 
 
