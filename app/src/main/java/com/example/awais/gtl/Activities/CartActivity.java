@@ -132,7 +132,7 @@ public class CartActivity extends AppCompatActivity {
                             product = new JSONObject();
                         }
                         final double total_amount =  Double.parseDouble(((TextView) findViewById(R.id.product_receipt_total_price)).getText().toString().replace("€",""));
-                        Toast.makeText(CartActivity.this, "check out", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(CartActivity.this, "check out", Toast.LENGTH_SHORT).show();
                         settings = getSharedPreferences("GTL-Settings", 0);
                         final String headerss = settings.getString("headers", null);
                         JSONObject headers = new JSONObject(headerss);
@@ -148,13 +148,9 @@ public class CartActivity extends AppCompatActivity {
                         //set payment  of the client
                         AlertDialog.Builder builder = new AlertDialog.Builder(CartActivity.this, R.style.AppCompatAlertDialogStyle);
                         builder.setTitle("Enter Payment Received");
-                        // I'm using fragment here so I'm using getView() to provide ViewGroup
-                        // but you can provide here any other instance of ViewGroup from your Fragment / Activity
                         View viewInflated = getLayoutInflater().inflate(R.layout.payment_dialog, null);
-//                        View viewInflated = LayoutInflater.from(getApplicationContext()).inflate(R.layout.payment_dialog,new ,  false);
-                        // Set up the input
                         final AutoCompleteTextView input = (AutoCompleteTextView) viewInflated.findViewById(R.id.payment_text);
-                        // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
+                        input.setText("0");
                         builder.setView(viewInflated);
 
                         // Set up the buttons
@@ -163,9 +159,42 @@ public class CartActivity extends AppCompatActivity {
                             public void onClick(DialogInterface dialog, int which) {
                                 dialog.dismiss();
                                 try {
-                                    params.put("payment", input.getText().toString());
-                                    invokeWS(params,CartActivity.this,client);
-
+                                    if(!(input.getText().toString()=="")) {
+                                        if (Long.parseLong(input.getText().toString()) < 0 || Long.parseLong(input.getText().toString())>(subTotal-Double.parseDouble(client.getCurrent_bal().replace("€","")))) {
+                                            AlertDialog.Builder builder =
+                                                    new AlertDialog.Builder(CartActivity.this, R.style.AppCompatAlertDialogStyle);
+                                            builder.setTitle("Opps");
+                                            builder.setIcon(R.drawable.corss);
+                                            builder.setMessage("price should be equal or greter then 0 and less then or equal to current balance  €! ");
+                                            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialog, int which) {
+                                                    //finish();
+                                                }
+                                            });
+                                            builder.show();
+                                        }
+                                        else {
+                                            params.put("payment", input.getText().toString());
+                                            Log.d(Constants.TAG,"params: "+params.toString());
+                                            invokeWS(params, CartActivity.this, client);
+                                        }
+                                    }
+                                    else
+                                    {
+                                        AlertDialog.Builder builder =
+                                                new AlertDialog.Builder(CartActivity.this, R.style.AppCompatAlertDialogStyle);
+                                        builder.setTitle("Opps");
+                                        builder.setIcon(R.drawable.corss);
+                                        builder.setMessage("price should be equal or greter then 0 €! ");
+                                        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                //finish();
+                                            }
+                                        });
+                                        builder.show();
+                                    }
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
@@ -226,6 +255,7 @@ public class CartActivity extends AppCompatActivity {
                         if(statusCode==200) {
                             if(resp.getString("status_code").equals("200")) {
                                 prgDialog.dismiss();
+
                                 startActivity(new Intent(CartActivity.this, CheckOutActivity.class).putExtra("client", salesmanClient).putExtra("respObject",resp.toString()).putExtra("current_balance","-"+resp.getString("current_bal")).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
                                 overridePendingTransition(R.anim.fadein, R.anim.fadeout);
                                 finish();

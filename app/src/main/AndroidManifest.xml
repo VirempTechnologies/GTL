@@ -6,6 +6,8 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
 
     <application
         android:allowBackup="true"
@@ -15,6 +17,11 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".Activities.BagActivity"
+            android:label="Bag"
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".Activities.FindProductActivity"
             android:label="Bag"
             android:theme="@style/AppTheme"
             android:screenOrientation="portrait"></activity>
@@ -70,6 +77,10 @@
 
         </activity>
 
+        <service android:name=".Services.LocationServiceNew2"
+            android:exported="false">
+
+        </service>
 
         <activity
             android:name=".Activities.ReceiptsActivity"
@@ -88,6 +99,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="${applicationId}.provider"

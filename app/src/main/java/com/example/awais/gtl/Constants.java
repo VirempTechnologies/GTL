@@ -7,6 +7,8 @@ import com.example.awais.gtl.Pojos.City;
 import java.util.ArrayList;
 import java.util.Dictionary;
 import java.util.HashMap;
+import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * Created by awais on 15/05/2017.
@@ -14,8 +16,8 @@ import java.util.HashMap;
 public class Constants {
     public static String  TAG = "CheckLog";
     public static int  bagItemHeight = 0;
-    public static String IPAddress= "85.25.217.41:8080";
-//    public static String IPAddress= "192.168.100.6:8000";
+//    public static String IPAddress= "85.25.217.41:8080";
+    public static String IPAddress= "192.168.100.8:8000";
     public static String loginURL ="http://"+IPAddress+"/api/login";
     public static String getBagUrl ="http://"+IPAddress+"/api/my_bag";
     public static String getClientsUrl ="http://"+IPAddress+"/api/my_clients";
@@ -27,10 +29,13 @@ public class Constants {
     public static String getDateSaleUrl="http://"+IPAddress+"/api/date_invoice";
     public static String getSaleHistoryUrl="http://"+IPAddress+"/api/client_sale_history";
     public static String getClientLedgerUrl="http://"+IPAddress+"/api/user_ledger";
+    public static String getSavePaymentUrl="http://"+IPAddress+"/api/save_payment";
+    public static String getSaveSalesmanCordsUrl="http://"+IPAddress+"/api/my_cords";
+    public static String getFindProductUrl="http://"+IPAddress+"/api/find_product";
     public static HashMap<String,CartItem> cartItemsMap= new HashMap<String, CartItem>();
     public  static ArrayList<BagProduct> bagProductArrayList = new ArrayList<>();
     public  static ArrayList<City> allCities= new ArrayList<>();
-    public  static HashMap<String,Integer> allCitiesMap= new HashMap<>();
+    public  static Map<String,Integer> allCitiesMap= new TreeMap<>();
 
     public static boolean gotoClient=false;
 }

@@ -123,9 +123,10 @@ public class ClientLedgerActivity extends AppCompatActivity {
                                         transaction= new Transaction();
                                         transaction.setAccountTitle(transactionObj.getString("account_title"));
                                         transaction.setAccountType(transactionObj.getString("account_type"));
-                                        String olddate = transactionObj.getString("date").replace('|',' ');
-                                        String[] date = olddate.split(" ");
-                                        transaction.setTransactionDate(date[2]+" "+date[1]+" "+ date[3]);
+//                                        String olddate = transactionObj.getString("date").replace('|',' ');
+//                                        String[] date = olddate.split(" ");
+//                                        transaction.setTransactionDate(date[2]+" "+date[1]+" "+ date[3]);
+                                        transaction.setTransactionDate( transactionObj.getString("date"));
                                         transaction.setDebitBalance(transactionObj.getLong("Dr"));
                                         transaction.setCreditBalance(transactionObj.getLong("Cr"));
                                         transactionArrayList.add(transaction);
@@ -136,10 +137,10 @@ public class ClientLedgerActivity extends AppCompatActivity {
                                     ((TextView) findViewById(R.id.cash_credit_text)).setText(summaryObject.getString("cashCr")+" €");
                                     ((TextView) findViewById(R.id.sale_debit_text)).setText(summaryObject.getString("salesDr")+" €");
                                     ((TextView) findViewById(R.id.sale_credit_text)).setText(summaryObject.getString("salesCr")+" €");
-                                    ((TextView) findViewById(R.id.ar_debit_text)).setText(summaryObject.getString("accountsReceivableDr")+" €");
-                                    ((TextView) findViewById(R.id.ar_credit_text)).setText(summaryObject.getString("accountsReceivableCr")+" €");
-                                    ((TextView) findViewById(R.id.ap_debit_text)).setText(summaryObject.getString("accountsPayableDr")+" €");
-                                    ((TextView) findViewById(R.id.ap_credit_text)).setText(summaryObject.getString("accountsPayableCr")+" €");
+//                                    ((TextView) findViewById(R.id.ar_debit_text)).setText(summaryObject.getString("accountsReceivableDr")+" €");
+//                                    ((TextView) findViewById(R.id.ar_credit_text)).setText(summaryObject.getString("accountsReceivableCr")+" €");
+//                                    ((TextView) findViewById(R.id.ap_debit_text)).setText(summaryObject.getString("accountsPayableDr")+" €");
+//                                    ((TextView) findViewById(R.id.ap_credit_text)).setText(summaryObject.getString("accountsPayableCr")+" €");
                                     //set credit debit sum
                                     ((TextView) findViewById(R.id.debit_sum)).setText(data.getString("debit_total")+" €");
                                     ((TextView) findViewById(R.id.credit_sum)).setText(data.getString("credit_total")+" €");
@@ -164,7 +165,7 @@ public class ClientLedgerActivity extends AppCompatActivity {
                                             new AlertDialog.Builder(ClientLedgerActivity.this, R.style.AppCompatAlertDialogStyle);
                                     builder.setTitle("Opps");
                                     builder.setIcon(R.drawable.corss);
-                                    builder.setMessage("Your bag is Empty");
+                                    builder.setMessage("Your ledger is empty");
                                     builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialog, int which) {
@@ -183,11 +184,27 @@ public class ClientLedgerActivity extends AppCompatActivity {
                                         new AlertDialog.Builder(ClientLedgerActivity.this, R.style.AppCompatAlertDialogStyle);
                                 builder.setTitle("Opps");
                                 builder.setIcon(R.drawable.corss);
-                                builder.setMessage("bag not found ");
+                                builder.setMessage(resp.optString("error"));
                                 builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
-                                        //finish();
+                                        finish();
+                                    }
+                                });
+                                builder.show();
+                            }else  if(resp.getString("status_code").equals("494"))
+                            {
+                                prgDialog.dismiss();
+
+                                AlertDialog.Builder builder =
+                                        new AlertDialog.Builder(ClientLedgerActivity.this, R.style.AppCompatAlertDialogStyle);
+                                builder.setTitle("Opps");
+                                builder.setIcon(R.drawable.corss);
+                                builder.setMessage(resp.optString("error"));
+                                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        finish();
                                     }
                                 });
                                 builder.show();
@@ -205,7 +222,7 @@ public class ClientLedgerActivity extends AppCompatActivity {
                             builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
-                                    //finish();
+                                    finish();
                                 }
                             });
                             builder.show();

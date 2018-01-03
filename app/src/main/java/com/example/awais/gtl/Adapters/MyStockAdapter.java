@@ -83,7 +83,7 @@ public class MyStockAdapter extends RecyclerView.Adapter<MyStockAdapter.MyViewHo
         holder.product_name.setText(bagProduct.getProductName() + " "+bagProduct.getModel()+"");
         holder.my_stock.setText(bagProduct.getMyStock()+"");
         holder.company_stock.setText(bagProduct.getCompanyStock()+"");
-        holder.sale_price.setText(bagProduct.getSalePrice()+"");
+        holder.sale_price.setText(bagProduct.getSalePrice()+".00 ");
               Drawable d = new BitmapDrawable(mContext.getResources(), MediaConversion.decodeBase64(bagProduct.getImage()));
         Glide.with(mContext)
                 .load("")
@@ -126,10 +126,10 @@ public class MyStockAdapter extends RecyclerView.Adapter<MyStockAdapter.MyViewHo
         public boolean onMenuItemClick(MenuItem menuItem) {
             switch (menuItem.getItemId()) {
                 case R.id.setting_menu:
-                    Toast.makeText(mContext, "settings", Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(mContext, "settings", Toast.LENGTH_SHORT).show();
                     return true;
                 case R.id.logout:
-                    Toast.makeText(mContext, "logout", Toast.LENGTH_SHORT).show();
+                  //  Toast.makeText(mContext, "logout", Toast.LENGTH_SHORT).show();
                     return true;
                 default:
             }

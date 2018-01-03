@@ -25,13 +25,11 @@ import android.view.animation.LayoutAnimationController;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.example.awais.gtl.Adapters.BagAdapter;
 import com.example.awais.gtl.Constants;
-import com.example.awais.gtl.Pojos.BagProduct;
-import com.example.awais.gtl.Pojos.City;
 import com.example.awais.gtl.Pojos.Operation;
 import com.example.awais.gtl.Adapters.OperationsAdapter;
 import com.example.awais.gtl.R;
+import com.example.awais.gtl.Services.LocationServiceNew2;
 import com.example.awais.gtl.WebServiceHelper;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -60,6 +58,7 @@ public class SalemanProfile extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.salesman_profile);
+        startService(new Intent(this, LocationServiceNew2.class));
         coordinatorLayout =(CoordinatorLayout)findViewById(R.id.coordinatorLayout);
         setting = getSharedPreferences("GTL-Settings",0);
         String name = setting.getString("name",null);
@@ -105,10 +104,10 @@ public class SalemanProfile extends AppCompatActivity {
             operation.setOperationIcon(R.drawable.my_stock);
             operationArrayList.add(operation);
 //
-//            operation = new Operation();
-//            operation.setOperationName("Company Stock");
-//            operation.setOperationIcon(R.drawable.company_stock);
-//            operationArrayList.add(operation);
+            operation = new Operation();
+            operation.setOperationName("Search Product");
+            operation.setOperationIcon(R.drawable.search_product_icon);
+            operationArrayList.add(operation);
 
 
             RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, 2);
@@ -183,7 +182,7 @@ public class SalemanProfile extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         Log.d(Constants.TAG,"here to create owerflow menu");
-        getMenuInflater().inflate(R.menu.profile_menu,menu);
+        //getMenuInflater().inflate(R.menu.profile_menu,menu);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -279,6 +278,7 @@ public class SalemanProfile extends AppCompatActivity {
                                 {
                                     JSONObject object = cities.getJSONObject(i);
                                     Constants.allCitiesMap.put(object.getString("name"),object.getInt("id"));
+
                                 }
                                 prgDialog.dismiss();
                             }
@@ -300,6 +300,22 @@ public class SalemanProfile extends AppCompatActivity {
                                 builder.show();
                             }
                             else if(resp.getString("status_code").equals("199")) {
+                                prgDialog.dismiss();
+
+                                AlertDialog.Builder builder =
+                                        new AlertDialog.Builder(context, R.style.AppCompatAlertDialogStyle);
+                                builder.setTitle("Opps");
+                                builder.setIcon(R.drawable.corss);
+                                builder.setMessage(resp.optString("error"));
+                                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        setLogout();
+                                    }
+                                });
+                                builder.show();
+
+                            }else if(resp.getString("status_code").equals("193")) {
                                 prgDialog.dismiss();
 
                                 AlertDialog.Builder builder =

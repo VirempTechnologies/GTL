@@ -164,6 +164,7 @@
             android:id="@+id/tax_rlv"
             android:layout_margin="10dp"
             android:layout_below="@+id/subtotal_rlv"
+            android:visibility="gone"
             >
 
             <TextView

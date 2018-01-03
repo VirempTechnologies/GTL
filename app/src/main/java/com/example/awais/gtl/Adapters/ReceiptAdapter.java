@@ -75,12 +75,12 @@ public class ReceiptAdapter extends RecyclerView.Adapter<ReceiptAdapter.MyViewHo
             holder.clientName.setText(receipt.getClient_name());
             holder.companyName.setText(receipt.getCompany_name());
             holder.invoiceID.setText("invoice # "+receipt.getInvoice_id());
-            holder.receiptPrice.setText(receipt.getTotal_amount()+" €");
+            holder.receiptPrice.setText(receipt.getTotal_amount()+".00 €");
             holder.receiptElementRlV.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 //                    Log.d(Constants.TAG, holder.clientName.getText() + "");
-                    Toast.makeText(mContext, "invoice id: "+receipt.getInvoice_id(), Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(mContext, "invoice id: "+receipt.getInvoice_id(), Toast.LENGTH_SHORT).show();
                     (mContext).startActivity((new Intent(mContext, SaleDetailActitvity.class).putExtra("invoice_id",receipt.getInvoice_id()).putExtra("invoice_date",receipt.getInvoice_date())).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
                     ((Activity) mContext).overridePendingTransition(R.anim.fadein, R.anim.fadeout);
 
@@ -129,10 +129,10 @@ public class ReceiptAdapter extends RecyclerView.Adapter<ReceiptAdapter.MyViewHo
         public boolean onMenuItemClick(MenuItem menuItem) {
             switch (menuItem.getItemId()) {
                 case R.id.setting_menu:
-                    Toast.makeText(mContext, "settings", Toast.LENGTH_SHORT).show();
+                  //  Toast.makeText(mContext, "settings", Toast.LENGTH_SHORT).show();
                     return true;
                 case R.id.logout:
-                    Toast.makeText(mContext, "logout", Toast.LENGTH_SHORT).show();
+                //    Toast.makeText(mContext, "logout", Toast.LENGTH_SHORT).show();
                     return true;
                 default:
             }

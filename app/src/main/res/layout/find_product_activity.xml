@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:fancy="http://schemas.android.com/apk/res-auto"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorAccentDark"
+    android:id="@+id/parent_rlv">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/border_round_white"
+        android:id="@+id/search_container"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/pass_body"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="10dp"
+            >
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/search_product_edittext"
+                android:background="@android:color/transparent"
+                android:hint="Enter Product IMEI No"
+                android:inputType="number"
+                android:imeOptions="actionDone|actionGo"
+                android:singleLine="true"
+                android:layout_centerVertical="true"
+                android:textColor="@color/colorWhite"
+                android:layout_alignParentStart="true"
+                android:layout_toLeftOf="@+id/search_icon"/>
+            <mehdi.sakout.fancybuttons.FancyButton
+                android:id="@+id/search_icon"
+                android:layout_width="38dp"
+                android:layout_height="38dp"
+                fancy:fb_defaultColor="@color/colorAccentDark"
+                fancy:fb_focusColor="@color/colorAccent"
+                fancy:fb_iconPaddingLeft="0dp"
+                fancy:fb_iconPaddingRight="0dp"
+                fancy:fb_iconResource="@drawable/ic_search_white_24dp"
+                fancy:fb_radius="64dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentEnd="true"
+                fancy:fb_textColor="@color/colorAccentDark"/>
+        </RelativeLayout>
+</RelativeLayout>
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/search_product_details_rlv"
+        android:layout_below="@+id/search_container">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/round_corner"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/product_details_rlv"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:padding="20dp"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Samsung J5 pro J5"
+                    android:textColor="@color/colorAccentDark"
+                    android:textSize="28dp"
+                    android:id="@+id/product_name"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="123456789456879546"
+                    android:textColor="@color/colorAccentDark"
+                    android:textSize="18dp"
+                    android:id="@+id/product_imei_no"
+                    android:layout_marginTop="5dp"
+                    android:layout_below="@+id/product_name"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="State: SALE"
+                    android:textColor="@color/colorAccentDark"
+                    android:textSize="18dp"
+                    android:id="@+id/product_sate"
+                    android:layout_marginTop="5dp"
+                    android:layout_below="@+id/product_imei_no"
+                    />
+
+            </RelativeLayout>
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <android.support.design.widget.CoordinatorLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/coordinatorLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+
+        ></android.support.design.widget.CoordinatorLayout>
+</RelativeLayout>
+

@@ -10,12 +10,14 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -166,12 +168,36 @@ public class SalemanClientsActivity extends AppCompatActivity {
             invokeWS(params,SalemanClientsActivity.this);
         }
     }
+    public static void refresh()
+    {
+
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         Log.d(Constants.TAG,"here to create owerflow menu");
-        getMenuInflater().inflate(R.menu.profile_menu,menu);
+        getMenuInflater().inflate(R.menu.menu_salesman_clients,menu);
+        MenuItem search = menu.findItem(R.id.search);
+        SearchView searchView = (SearchView) MenuItemCompat.getActionView(search);
+        search(searchView);
         return super.onCreateOptionsMenu(menu);
+    }
+    private void search(SearchView searchView) {
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+
+                adapter.getFilter().filter(newText);
+                return true;
+            }
+        });
     }
 
     @Override
@@ -217,6 +243,7 @@ public class SalemanClientsActivity extends AppCompatActivity {
                         if(statusCode==200) {
                             if(resp.getString("status_code").equals("200"))
                             {
+                                clientArrayList.clear();
 
                                 prgDialog.dismiss();
                                 try
@@ -237,8 +264,7 @@ public class SalemanClientsActivity extends AppCompatActivity {
                                         }
                                         else
                                         {
-                                            client.setCurrent_bal("-"+firstObject.getString("current_bal")+" €");
-
+                                            client.setCurrent_bal("-"+firstObject.getString("current_bal")+".00 €");
                                         }
                                         JSONObject userObject = firstObject.getJSONObject("user");
                                         JSONObject personObject = userObject.getJSONObject("person");
@@ -256,11 +282,11 @@ public class SalemanClientsActivity extends AppCompatActivity {
                                 salesman_clients_recycler_view.setLayoutManager(mLayoutManager);
                                 salesman_clients_recycler_view.setItemAnimator(new DefaultItemAnimator());
                                 salesman_clients_recycler_view.setAdapter(adapter);
-
                                 // grid animations
                                 int resId = R.anim.layout_animation_fall_down;
                                 LayoutAnimationController animation = AnimationUtils.loadLayoutAnimation(context, resId);
                                 salesman_clients_recycler_view.setLayoutAnimation(animation);
+                                salesman_clients_recycler_view.setVerticalScrollBarEnabled(true);
                                 //end
                                 //user profile animiation
                                 RelativeLayout profileLayout = (RelativeLayout) findViewById(R.id.user_profile_info_rlv);

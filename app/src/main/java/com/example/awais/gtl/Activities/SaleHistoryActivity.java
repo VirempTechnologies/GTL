@@ -107,65 +107,83 @@ public class SaleHistoryActivity extends AppCompatActivity {
                         Log.d(Constants.TAG, "success data say congo : " + resp.toString());
 
                         if(statusCode==200) {
-                            salesArrayList = new ArrayList<>();
-                            Sale sale = new Sale();
-                            resp=resp.getJSONObject("sale");
-                            JSONArray datesArray = resp.names();
-                            //Log.d(Constants.TAG,jsonArray.toString());
-                            for (int i = 0; i < datesArray.length(); i++) {
-                                JSONArray sales = resp.getJSONArray(datesArray.getString(i));
-                                sale.setSale_date(datesArray.getString(i));
-                                ArrayList<Receipt> receipts = new ArrayList<>();
-                                Receipt receipt = new Receipt();
-                                for (int j = 0; j < sales.length(); j++) {
-                                    JSONObject saleObejct = sales.getJSONObject(j);
-                                    receipt.setInvoice_id(saleObejct.getInt("invoice_id"));
-                                    receipt.setClient_name(saleObejct.getString("client_name"));
-                                    receipt.setCompany_name(saleObejct.getString("company_name"));
-                                    receipt.setQuantity(saleObejct.getString("quantity"));
-                                    receipt.setTotal_amount(saleObejct.getString("total_amount"));
-                                    receipt.setInvoice_date(datesArray.getString(i));
-                                    receipts.add(receipt);
-                                    receipt = new Receipt();
-                                }
-                                sale.setSale_receipts(receipts);
-                                salesArrayList.add(sale);
-                                sale = new Sale();
-                            }
-                            //setting the recycler view
-                            RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(context, 1);
-                            all_receipts_recycler_view = (RecyclerView) findViewById(R.id.all_receipts_recycler_view);
-                            adapter = new AllReciptsAdapter(context, salesArrayList);
-                            all_receipts_recycler_view.setLayoutManager(mLayoutManager);
-                            all_receipts_recycler_view.setAdapter(adapter);
-                            all_receipts_recycler_view.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-                                @Override
-                                public void onGlobalLayout() {
-                                    if (recyclerViewReadyCallback != null) {
-                                        recyclerViewReadyCallback.onLayoutReady();
+                            if(resp.getString("status_code").equals("200")) {
+                                salesArrayList = new ArrayList<>();
+                                Sale sale = new Sale();
+                                resp = resp.getJSONObject("sale");
+                                JSONArray datesArray = resp.names();
+                                //Log.d(Constants.TAG,jsonArray.toString());
+                                for (int i = 0; i < datesArray.length(); i++) {
+                                    JSONArray sales = resp.getJSONArray(datesArray.getString(i));
+                                    sale.setSale_date(datesArray.getString(i));
+                                    ArrayList<Receipt> receipts = new ArrayList<>();
+                                    Receipt receipt = new Receipt();
+                                    for (int j = 0; j < sales.length(); j++) {
+                                        JSONObject saleObejct = sales.getJSONObject(j);
+                                        receipt.setInvoice_id(saleObejct.getInt("invoice_id"));
+                                        receipt.setClient_name(saleObejct.getString("client_name"));
+                                        receipt.setCompany_name(saleObejct.getString("company_name"));
+                                        receipt.setQuantity(saleObejct.getString("quantity"));
+                                        receipt.setTotal_amount(saleObejct.getString("total_amount"));
+                                        receipt.setInvoice_date(datesArray.getString(i));
+                                        receipts.add(receipt);
+                                        receipt = new Receipt();
                                     }
-                                    recyclerViewReadyCallback = null;
+                                    sale.setSale_receipts(receipts);
+                                    salesArrayList.add(sale);
+                                    sale = new Sale();
                                 }
-                            });
-                            recyclerViewReadyCallback = new AllReceipts.RecyclerViewReadyCallback() {
-                                @Override
-                                public void onLayoutReady() {
-                                    //
-                                    //here comes your code that will be executed after all items has are laid down
-                                    //
-                                    Toast.makeText(SaleHistoryActivity.this, "layout competed", Toast.LENGTH_SHORT).show();
-                                    prgDialog.dismiss();
+                                //setting the recycler view
+                                RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(context, 1);
+                                all_receipts_recycler_view = (RecyclerView) findViewById(R.id.all_receipts_recycler_view);
+                                adapter = new AllReciptsAdapter(context, salesArrayList);
+                                all_receipts_recycler_view.setLayoutManager(mLayoutManager);
+                                all_receipts_recycler_view.setAdapter(adapter);
+                                all_receipts_recycler_view.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                                    @Override
+                                    public void onGlobalLayout() {
+                                        if (recyclerViewReadyCallback != null) {
+                                            recyclerViewReadyCallback.onLayoutReady();
+                                        }
+                                        recyclerViewReadyCallback = null;
+                                    }
+                                });
+                                recyclerViewReadyCallback = new AllReceipts.RecyclerViewReadyCallback() {
+                                    @Override
+                                    public void onLayoutReady() {
+                                        //
+                                        //here comes your code that will be executed after all items has are laid down
+                                        //
+                                        Toast.makeText(SaleHistoryActivity.this, "layout competed", Toast.LENGTH_SHORT).show();
+                                        prgDialog.dismiss();
 //                                    int resId = R.anim.layout_animation_from_left;
 //                                    LayoutAnimationController animation = AnimationUtils.loadLayoutAnimation(context, resId);
 //                                    all_receipts_recycler_view.setLayoutAnimation(animation);
 ////
-                                }
-                            };
+                                    }
+                                };
 //
 
-                            //end setting
+                                //end setting
 
+                            }
+                            else if(resp.getString("status_code").equals("456"))
+                            {
+                                prgDialog.dismiss();
 
+                                AlertDialog.Builder builder =
+                                        new AlertDialog.Builder(context, R.style.AppCompatAlertDialogStyle);
+                                builder.setTitle("Opps");
+                                builder.setIcon(R.drawable.corss);
+                                builder.setMessage(resp.optString("error"));
+                                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        finish();
+                                    }
+                                });
+                                builder.show();
+                            }
                         }
                         if(statusCode==500)
                         {
@@ -179,7 +197,7 @@ public class SaleHistoryActivity extends AppCompatActivity {
                             builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
-                                    //finish();
+                                    finish();
                                 }
                             });
                             builder.show();

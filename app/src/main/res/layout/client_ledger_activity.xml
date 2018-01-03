@@ -270,95 +270,95 @@
 
 
                 </RelativeLayout>
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/ar_account_rlv"
-                    android:layout_below="@+id/sales_account_rlv"
-                    android:padding="3dp">
-                        <TextView
-                            android:layout_width="170dp"
-                            android:layout_height="wrap_content"
-                            android:text="Accounts Receivable"
-                            android:textColor="@color/colorDrakGray"
-                            android:textSize="14dp"
-                            android:id="@+id/ar_label"
-                            android:layout_centerVertical="true"
-                            android:gravity="left"
-                            />
+                <!--<RelativeLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:id="@+id/ar_account_rlv"-->
+                    <!--android:layout_below="@+id/sales_account_rlv"-->
+                    <!--android:padding="3dp">-->
+                        <!--<TextView-->
+                            <!--android:layout_width="170dp"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:text="Accounts Receivable"-->
+                            <!--android:textColor="@color/colorDrakGray"-->
+                            <!--android:textSize="14dp"-->
+                            <!--android:id="@+id/ar_label"-->
+                            <!--android:layout_centerVertical="true"-->
+                            <!--android:gravity="left"-->
+                            <!--/>-->
 
 
-                        <TextView
-                            android:layout_width="100dp"
-                            android:layout_height="wrap_content"
-                            android:text="400.12$"
-                            android:textColor="@color/colorDrakGray"
-                            android:textSize="14dp"
-                            android:id="@+id/ar_debit_text"
-                            android:layout_centerVertical="true"
-                            android:layout_toLeftOf="@+id/ar_credit_text"
-                            android:gravity="right"
-                            />
-                        <TextView
-                            android:layout_width="80dp"
-                            android:layout_height="wrap_content"
-                            android:text="400.12$"
-                            android:textColor="@color/colorDrakGray"
-                            android:textSize="14dp"
-                            android:gravity="right"
-                            android:id="@+id/ar_credit_text"
-                            android:layout_centerVertical="true"
-                            android:layout_alignParentEnd="true"
+                        <!--<TextView-->
+                            <!--android:layout_width="100dp"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:text="400.12$"-->
+                            <!--android:textColor="@color/colorDrakGray"-->
+                            <!--android:textSize="14dp"-->
+                            <!--android:id="@+id/ar_debit_text"-->
+                            <!--android:layout_centerVertical="true"-->
+                            <!--android:layout_toLeftOf="@+id/ar_credit_text"-->
+                            <!--android:gravity="right"-->
+                            <!--/>-->
+                        <!--<TextView-->
+                            <!--android:layout_width="80dp"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:text="400.12$"-->
+                            <!--android:textColor="@color/colorDrakGray"-->
+                            <!--android:textSize="14dp"-->
+                            <!--android:gravity="right"-->
+                            <!--android:id="@+id/ar_credit_text"-->
+                            <!--android:layout_centerVertical="true"-->
+                            <!--android:layout_alignParentEnd="true"-->
 
-                            />
-
-
-
-                </RelativeLayout>
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/ap_account_rlv"
-                    android:layout_below="@+id/ar_account_rlv"
-                    android:padding="3dp">
-                        <TextView
-                            android:layout_width="170dp"
-                            android:layout_height="wrap_content"
-                            android:text="Accounts Payable"
-                            android:textColor="@color/colorDrakGray"
-                            android:textSize="14dp"
-                            android:id="@+id/ap_label"
-                            android:layout_centerVertical="true"
-                            android:gravity="left"
-                            />
-
-
-                        <TextView
-                            android:layout_width="100dp"
-                            android:layout_height="wrap_content"
-                            android:text="400.12$"
-                            android:textColor="@color/colorDrakGray"
-                            android:textSize="14dp"
-                            android:id="@+id/ap_debit_text"
-                            android:layout_centerVertical="true"
-                            android:layout_toLeftOf="@+id/ap_credit_text"
-                            android:gravity="right"
-                            />
-                        <TextView
-                            android:layout_width="80dp"
-                            android:layout_height="wrap_content"
-                            android:text="400.12$"
-                            android:textColor="@color/colorDrakGray"
-                            android:textSize="14dp"
-                            android:gravity="right"
-                            android:id="@+id/ap_credit_text"
-                            android:layout_centerVertical="true"
-                            android:layout_alignParentEnd="true"
-                            />
+                            <!--/>-->
 
 
 
-                </RelativeLayout>
+                <!--</RelativeLayout>-->
+                <!--<RelativeLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:id="@+id/ap_account_rlv"-->
+                    <!--android:layout_below="@+id/ar_account_rlv"-->
+                    <!--android:padding="3dp">-->
+                        <!--<TextView-->
+                            <!--android:layout_width="170dp"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:text="Accounts Payable"-->
+                            <!--android:textColor="@color/colorDrakGray"-->
+                            <!--android:textSize="14dp"-->
+                            <!--android:id="@+id/ap_label"-->
+                            <!--android:layout_centerVertical="true"-->
+                            <!--android:gravity="left"-->
+                            <!--/>-->
+
+
+                        <!--<TextView-->
+                            <!--android:layout_width="100dp"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:text="400.12$"-->
+                            <!--android:textColor="@color/colorDrakGray"-->
+                            <!--android:textSize="14dp"-->
+                            <!--android:id="@+id/ap_debit_text"-->
+                            <!--android:layout_centerVertical="true"-->
+                            <!--android:layout_toLeftOf="@+id/ap_credit_text"-->
+                            <!--android:gravity="right"-->
+                            <!--/>-->
+                        <!--<TextView-->
+                            <!--android:layout_width="80dp"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:text="400.12$"-->
+                            <!--android:textColor="@color/colorDrakGray"-->
+                            <!--android:textSize="14dp"-->
+                            <!--android:gravity="right"-->
+                            <!--android:id="@+id/ap_credit_text"-->
+                            <!--android:layout_centerVertical="true"-->
+                            <!--android:layout_alignParentEnd="true"-->
+                            <!--/>-->
+
+
+
+                <!--</RelativeLayout>-->
         </RelativeLayout>
 
 </RelativeLayout>

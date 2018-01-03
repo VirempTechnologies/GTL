@@ -107,7 +107,7 @@ public class AddClientFirst extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 status=statusSpinnerData[position];
-                Toast.makeText(AddClientFirst.this, "status: "+status, Toast.LENGTH_SHORT).show();
+             //   Toast.makeText(AddClientFirst.this, "status: "+status, Toast.LENGTH_SHORT).show();
             }
         });
         //initializing the forms items

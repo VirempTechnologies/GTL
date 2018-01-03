@@ -166,7 +166,7 @@ public class AllReceipts extends Fragment {
                                         //
                                         //here comes your code that will be executed after all items has are laid down
                                         //
-                                        Toast.makeText(getActivity(), "layout competed", Toast.LENGTH_SHORT).show();
+                                //        Toast.makeText(getActivity(), "layout competed", Toast.LENGTH_SHORT).show();
                                         prgDialog.dismiss();
 //                                    int resId = R.anim.layout_animation_from_left;
 //                                    LayoutAnimationController animation = AnimationUtils.loadLayoutAnimation(context, resId);
@@ -214,7 +214,7 @@ public class AllReceipts extends Fragment {
                             new AlertDialog.Builder(context, R.style.AppCompatAlertDialogStyle);
                     builder.setTitle("Opps");
                     builder.setIcon(R.drawable.corss);
-                    builder.setMessage("server not found..! ");
+                    builder.setMessage("Service Failure..! ");
                     builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
@@ -233,7 +233,7 @@ public class AllReceipts extends Fragment {
                             new AlertDialog.Builder(context, R.style.AppCompatAlertDialogStyle);
                     builder.setTitle("Opps");
                     builder.setIcon(R.drawable.corss);
-                    builder.setMessage("server not found..! ");
+                    builder.setMessage("Service Failure..!");
                     builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {

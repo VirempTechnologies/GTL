@@ -14,9 +14,19 @@ public class BagProduct {
     private int initialQuantity;
     private int bagIndex;
     private String model;
+    private long discountedPrice = 0;
 
 
     public BagProduct() {
+    }
+
+
+    public long getDiscountedPrice() {
+        return discountedPrice;
+    }
+
+    public void setDiscountedPrice(long discountedPrice) {
+        this.discountedPrice = discountedPrice;
     }
 
     public String getModel() {

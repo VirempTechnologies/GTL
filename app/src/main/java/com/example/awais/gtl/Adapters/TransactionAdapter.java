@@ -133,10 +133,10 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
         public boolean onMenuItemClick(MenuItem menuItem) {
             switch (menuItem.getItemId()) {
                 case R.id.setting_menu:
-                    Toast.makeText(mContext, "settings", Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(mContext, "settings", Toast.LENGTH_SHORT).show();
                     return true;
                 case R.id.logout:
-                    Toast.makeText(mContext, "logout", Toast.LENGTH_SHORT).show();
+                 //   Toast.makeText(mContext, "logout", Toast.LENGTH_SHORT).show();
                     return true;
                 default:
             }

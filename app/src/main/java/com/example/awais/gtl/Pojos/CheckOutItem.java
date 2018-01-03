@@ -14,11 +14,20 @@ public class CheckOutItem {
 
     long collectivePrice;
     long salePrice;
+    String productID;
     ArrayList<String> IMEINos=new ArrayList<>();
 
 
 
     public CheckOutItem() {
+    }
+
+    public String getProductID() {
+        return productID;
+    }
+
+    public void setProductID(String productID) {
+        this.productID = productID;
     }
 
     public String getProductModel() {

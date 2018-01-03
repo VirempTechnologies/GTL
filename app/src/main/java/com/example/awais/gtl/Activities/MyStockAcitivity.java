@@ -177,7 +177,8 @@ public class MyStockAcitivity extends AppCompatActivity {
                                         JSONObject product = allProducts.getJSONObject(i);
                                         bagProduct = new BagProduct();
                                         bagProduct.setProductName(product.getString("name"));
-                                        bagProduct.setSalePrice(product.getInt("sale_price"));
+//                                        bagProduct.setSalePrice(product.getInt("sale_price"));
+                                        bagProduct.setSalePrice(product.getInt("bag_price"));
                                         bagProduct.setMyStock(product.getInt("quantity"));
                                         bagProduct.setCompanyStock(00);
                                         bagProduct.setProduct_id(product.getInt("id"));

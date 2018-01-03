@@ -22,6 +22,7 @@ import android.widget.Toast;
 
 import com.example.awais.gtl.Activities.AddClientFirst;
 import com.example.awais.gtl.Activities.BagActivity;
+import com.example.awais.gtl.Activities.FindProductActivity;
 import com.example.awais.gtl.Activities.MyStockAcitivity;
 import com.example.awais.gtl.Activities.ReceiptsActivity;
 import com.example.awais.gtl.Activities.SalemanClientsActivity;
@@ -80,24 +81,29 @@ public class OperationsAdapter extends RecyclerView.Adapter<OperationsAdapter.My
                 public void onClick(View v) {
                     Log.d(Constants.TAG, holder.operationName.getText() + "");
                     if (holder.operationName.getText().toString().equals(("My Sales"))) {
-                        Toast.makeText(mContext, "my sales", Toast.LENGTH_SHORT).show();
+                    //    Toast.makeText(mContext, "my sales", Toast.LENGTH_SHORT).show();
                         (mContext).startActivity((new Intent(mContext, ReceiptsActivity.class)).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
                       //  ((Activity) mContext).overridePendingTransition(R.anim.fadein, R.anim.fadeout);
 
 
                     } else if (holder.operationName.getText().toString().equals(("My Stock"))) {
-                        Toast.makeText(mContext, "My Stock", Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(mContext, "My Stock", Toast.LENGTH_SHORT).show();
                         (mContext).startActivity((new Intent(mContext, MyStockAcitivity.class)).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
                         ((Activity) mContext).overridePendingTransition(R.anim.fadein, R.anim.fadeout);
 
                     } else if (holder.operationName.getText().toString().equals(("My Clients"))) {
-                        Toast.makeText(mContext, "My Clients", Toast.LENGTH_SHORT).show();
+                     //   Toast.makeText(mContext, "My Clients", Toast.LENGTH_SHORT).show();
                         (mContext).startActivity((new Intent(mContext, SalemanClientsActivity.class)).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
                         ((Activity) mContext).overridePendingTransition(R.anim.fadein, R.anim.fadeout);
                     }
                     else if (holder.operationName.getText().toString().equals(("Add Client"))) {
-                        Toast.makeText(mContext, "Add Client", Toast.LENGTH_SHORT).show();
+                      //  Toast.makeText(mContext, "Add Client", Toast.LENGTH_SHORT).show();
                         (mContext).startActivity((new Intent(mContext, AddClientFirst.class)).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                        ((Activity) mContext).overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+                    }
+                    else if (holder.operationName.getText().toString().equals(("Search Product"))) {
+                      //  Toast.makeText(mContext, "Add Client", Toast.LENGTH_SHORT).show();
+                        (mContext).startActivity((new Intent(mContext, FindProductActivity.class)).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
                         ((Activity) mContext).overridePendingTransition(R.anim.fadein, R.anim.fadeout);
                     }
 
@@ -147,10 +153,10 @@ public class OperationsAdapter extends RecyclerView.Adapter<OperationsAdapter.My
         public boolean onMenuItemClick(MenuItem menuItem) {
             switch (menuItem.getItemId()) {
                 case R.id.setting_menu:
-                    Toast.makeText(mContext, "settings", Toast.LENGTH_SHORT).show();
+                  //  Toast.makeText(mContext, "settings", Toast.LENGTH_SHORT).show();
                     return true;
                 case R.id.logout:
-                    Toast.makeText(mContext, "logout", Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(mContext, "logout", Toast.LENGTH_SHORT).show();
                     return true;
                 default:
             }

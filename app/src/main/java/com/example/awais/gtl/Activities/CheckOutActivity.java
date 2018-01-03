@@ -124,7 +124,7 @@ public class CheckOutActivity extends AppCompatActivity
             final String currentbalance = getIntent().getStringExtra("current_balance");
 
             ((TextView) findViewById(R.id.client_name)).setText(client.getClient_name());
-            ((TextView) findViewById(R.id.client_current_balance)).setText(currentbalance);
+            ((TextView) findViewById(R.id.client_current_balance)).setText(currentbalance+".00 €");
             ((TextView) findViewById(R.id.client_company_name)).setText(client.getCompany_name());
 //            String string = "{\n" +
 //                    "    \"imei_list\": [\n" +
@@ -158,6 +158,8 @@ public class CheckOutActivity extends AppCompatActivity
             ArrayList<SoldItem> soldItems = new ArrayList<>();
             SoldItem soldItem = new SoldItem();
             JSONArray allProducts = respObject.getJSONArray("imei_list");
+            invoice_id = respObject.optInt("sale_id");
+            invoice_date= respObject.optString("sale_date");
             for(int i=0;i<allProducts.length();i++)
             {
                 JSONObject object = allProducts.getJSONObject(i);
@@ -178,11 +180,12 @@ public class CheckOutActivity extends AppCompatActivity
             {
                 if(item.getProduct_id()!=oldProductId)
                 {
-                    checkOutItem.setProductName(item.getProduct_name());
+                    checkOutItem.setProductName(item.getProduct_name()+" "+item.getProduct_Model());
                     checkOutItem.setCollectivePrice(item.getSale_price());
                     checkOutItem.getIMEINos().add(item.getImei());
                     checkOutItem.setSalePrice(item.getSale_price());
                     checkOutItem.setProductModel(item.getProduct_Model());
+                    checkOutItem.setProductID(item.getProduct_id()+"");
                     checkOutItemsArrayList.add(checkOutItem);
                     oldProductId=item.getProduct_id();
                     checkOutItem= new CheckOutItem();
@@ -191,7 +194,7 @@ public class CheckOutActivity extends AppCompatActivity
                 {
                     for(CheckOutItem checkOutItem1:checkOutItemsArrayList)
                     {
-                        if(checkOutItem1.getProductName().equals(item.getProduct_name()))
+                        if(checkOutItem1.getProductName().equals(item.getProduct_name()+ " "+item.getProduct_Model()))
                         {
                             checkOutItem1.setCollectivePrice(checkOutItem1.getCollectivePrice()+item.getSale_price());
                             checkOutItem1.getIMEINos().add(item.getImei());
@@ -209,7 +212,7 @@ public class CheckOutActivity extends AppCompatActivity
             int resId = R.anim.layout_animation_from_left;
             LayoutAnimationController animation = AnimationUtils.loadLayoutAnimation(CheckOutActivity.this, resId);
             checkout_product_recycler_view.setLayoutAnimation(animation);
-            ((TextView) findViewById(R.id.product_grand_total_price)).setText(total+" €");
+            ((TextView) findViewById(R.id.product_grand_total_price)).setText(total+".00 €");
             createPdf(path,checkOutItemsArrayList);
 
         }
@@ -258,7 +261,7 @@ public class CheckOutActivity extends AppCompatActivity
         p4 = new Paragraph(((TextView) findViewById(R.id.client_company_name)).getText().toString());
         p4.setIndentationLeft(20.5f);
         document.add(p4);
-        p4= new Paragraph("Current Balance: "+((TextView) findViewById(R.id.client_current_balance)).getText().toString());
+        p4= new Paragraph("Current Balance: "+((TextView) findViewById(R.id.client_current_balance)).getText().toString()+"");
         p4.setIndentationLeft(20.5f);
         document.add(p4);
 
@@ -269,8 +272,8 @@ public class CheckOutActivity extends AppCompatActivity
             item= checkOutItemsArrayList.get(i);
 
             Paragraph heading = new Paragraph(item.getProductName()+" "+item.getProductModel());
-            heading.add("        ("+item.getIMEINos().size()+" x "+item.getSalePrice()+" €)");
-            heading.add("        "+item.getCollectivePrice()+" €");
+            heading.add("        ("+item.getIMEINos().size()+" x "+item.getSalePrice()+".00 €)");
+            heading.add("        "+item.getCollectivePrice()+".00 €");
 
             heading.setIndentationLeft(40.5f);
             heading.setPaddingTop(50);
@@ -278,9 +281,9 @@ public class CheckOutActivity extends AppCompatActivity
             document.add(heading);
             List imeiList = new List(List.ORDERED);
             imeiList.setFirst(1);
-            for (int j = 0; j < item.getIMEINos().size(); j++) {
-                imeiList.add(item.getIMEINos().get(j));
-            }
+//            for (int j = 0; j < item.getIMEINos().size(); j++) {
+//                imeiList.add(item.getIMEINos().get(j));
+//            }
             imeiList.setIndentationLeft(60.0f);
             document.add(imeiList);
 

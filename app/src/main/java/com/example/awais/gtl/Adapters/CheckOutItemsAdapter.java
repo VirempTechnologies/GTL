@@ -81,9 +81,10 @@ public class CheckOutItemsAdapter extends RecyclerView.Adapter<CheckOutItemsAdap
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
         try {
             final CheckOutItem checkOutItem= checkOutItemsArrayList.get(position);
-            holder.product_name.setText(checkOutItem.getProductName()+" " + checkOutItem.getProductModel());
+//            holder.product_name.setText(checkOutItem.getProductName()+" " + checkOutItem.getProductModel());
+            holder.product_name.setText(checkOutItem.getProductName());
 //            holder.product_quantity_price.setText(cartItem.getQuantity()+" x "+cartItem.getSale_price()+"€");
-            holder.product_total_price.setText(checkOutItem.getCollectivePrice()+" €");
+            holder.product_total_price.setText(checkOutItem.getCollectivePrice()+".00 €");
             holder.accordionView.setHeadingString("IMEI/Serial Numbers");
             ((TextView)holder.accordionView.findViewById(R.id.heading)).setTextColor(mContext.getResources().getColor(R.color.colorPrimaryDark));
             ((TextView)holder.accordionView.findViewById(R.id.heading)).setTextSize(15);
@@ -95,7 +96,7 @@ public class CheckOutItemsAdapter extends RecyclerView.Adapter<CheckOutItemsAdap
             RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(mContext, 1);
             holder.imei_no_recycler_view.setLayoutManager(mLayoutManager);
             holder.imei_no_recycler_view.setAdapter(adapter);
-            holder.quantity_saleprice.setText("("+checkOutItem.getIMEINos().size()+" x "+checkOutItem.getSalePrice()+" €)");
+            holder.quantity_saleprice.setText("("+checkOutItem.getIMEINos().size()+" x "+checkOutItem.getSalePrice()+".00 €)");
 
 
 
@@ -160,10 +161,10 @@ public class CheckOutItemsAdapter extends RecyclerView.Adapter<CheckOutItemsAdap
         public boolean onMenuItemClick(MenuItem menuItem) {
             switch (menuItem.getItemId()) {
                 case R.id.setting_menu:
-                    Toast.makeText(mContext, "settings", Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(mContext, "settings", Toast.LENGTH_SHORT).show();
                     return true;
                 case R.id.logout:
-                    Toast.makeText(mContext, "logout", Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(mContext, "logout", Toast.LENGTH_SHORT).show();
                     return true;
                 default:
             }

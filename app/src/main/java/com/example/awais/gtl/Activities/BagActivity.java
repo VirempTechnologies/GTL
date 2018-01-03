@@ -112,7 +112,7 @@ public class BagActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         Log.d(Constants.TAG,"here to create owerflow menu");
 
-        getMenuInflater().inflate(R.menu.profile_menu,menu);
+       // getMenuInflater().inflate(R.menu.profile_menu,menu);
 
 
         return super.onCreateOptionsMenu(menu);
@@ -181,7 +181,8 @@ public class BagActivity extends AppCompatActivity {
                                         JSONObject product = allProducts.getJSONObject(i);
                                         bagProduct = new BagProduct();
                                         bagProduct.setProductName(product.getString("name"));
-                                        bagProduct.setSalePrice(product.getInt("sale_price"));
+//                                        bagProduct.setSalePrice(product.getInt("sale_price"));
+                                        bagProduct.setSalePrice(product.getInt("bag_price"));
                                         bagProduct.setMyStock(product.getInt("quantity"));
                                         bagProduct.setCompanyStock(00);
                                         bagProduct.setProduct_id(product.getInt("id"));

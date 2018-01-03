@@ -253,7 +253,7 @@ public class SelectiveDateReceipts extends Fragment{
                                         //
                                         //here comes your code that will be executed after all items has are laid down
                                         //
-                                        Toast.makeText(getActivity(), "layout competed", Toast.LENGTH_SHORT).show();
+                                  //      Toast.makeText(getActivity(), "layout competed", Toast.LENGTH_SHORT).show();
                                         prgDialog.dismiss();
 //                                    int resId = R.anim.layout_animation_from_left;
 //                                    LayoutAnimationController animation = AnimationUtils.loadLayoutAnimation(context, resId);

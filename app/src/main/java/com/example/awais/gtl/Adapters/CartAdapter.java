@@ -74,8 +74,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
         try {
             final CartItem cartItem = cartItemArrayList.get(position);
             holder.product_name.setText(cartItem.getProduct_name());
-            holder.product_quantity_price.setText(cartItem.getQuantity()+" x "+cartItem.getSale_price()+"€");
-            holder.product_total_price.setText(cartItem.getCollective_price()+"€");
+            holder.product_quantity_price.setText(cartItem.getQuantity()+" x "+cartItem.getSale_price()+".00 €");
+            holder.product_total_price.setText(cartItem.getCollective_price()+".00 €");
             holder.btn_delete_item.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -136,10 +136,10 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
         public boolean onMenuItemClick(MenuItem menuItem) {
             switch (menuItem.getItemId()) {
                 case R.id.setting_menu:
-                    Toast.makeText(mContext, "settings", Toast.LENGTH_SHORT).show();
+                  //  Toast.makeText(mContext, "settings", Toast.LENGTH_SHORT).show();
                     return true;
                 case R.id.logout:
-                    Toast.makeText(mContext, "logout", Toast.LENGTH_SHORT).show();
+                  //  Toast.makeText(mContext, "logout", Toast.LENGTH_SHORT).show();
                     return true;
                 default:
             }

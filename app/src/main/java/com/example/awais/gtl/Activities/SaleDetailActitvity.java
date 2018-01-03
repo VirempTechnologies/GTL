@@ -186,7 +186,7 @@ public class SaleDetailActitvity extends AppCompatActivity
                                 }
                                 else
                                 {
-                                    ((TextView) findViewById(R.id.client_current_balance)).setText("-"+ resp.getString("current_balance")+" €");
+                                    ((TextView) findViewById(R.id.client_current_balance)).setText("-"+ resp.getString("current_balance")+".00 €");
                                 }
 
 
@@ -216,20 +216,20 @@ public class SaleDetailActitvity extends AppCompatActivity
                                 {
                                     if(item.getProduct_id()!=oldProductId)
                                     {
-                                        checkOutItem.setProductName(item.getProduct_name());
+                                        checkOutItem.setProductName(item.getProduct_name()+" "+item.getProduct_Model());
                                         checkOutItem.setCollectivePrice(item.getSale_price());
                                         checkOutItem.getIMEINos().add(item.getImei());
                                         checkOutItem.setSalePrice(item.getSale_price());
                                         checkOutItem.setProductModel(item.getProduct_Model());
                                         checkOutItemsArrayList.add(checkOutItem);
-                                        oldProductId=item.getProduct_id();
                                         checkOutItem= new CheckOutItem();
+                                        oldProductId=item.getProduct_id();
                                     }
                                     else
                                     {
                                         for(CheckOutItem checkOutItem1:checkOutItemsArrayList)
                                         {
-                                            if(checkOutItem1.getProductName().equals(item.getProduct_name()))
+                                            if(checkOutItem1.getProductName().equals(item.getProduct_name()+" "+item.getProduct_Model()))
                                             {
                                                 checkOutItem1.setCollectivePrice(checkOutItem1.getCollectivePrice()+item.getSale_price());
                                                 checkOutItem1.getIMEINos().add(item.getImei());
@@ -247,7 +247,7 @@ public class SaleDetailActitvity extends AppCompatActivity
                                 int resId = R.anim.layout_animation_from_left;
                                 LayoutAnimationController animation = AnimationUtils.loadLayoutAnimation(SaleDetailActitvity.this, resId);
                                 checkout_product_recycler_view.setLayoutAnimation(animation);
-                                ((TextView) findViewById(R.id.product_grand_total_price)).setText(resp.getString("total_amount")+" €");
+                                ((TextView) findViewById(R.id.product_grand_total_price)).setText(resp.getString("total_amount")+".00 €");
                                 //end setting
                                 prgDialog.dismiss();
                                 createPdf(path,checkOutItemsArrayList);
@@ -449,8 +449,8 @@ public class SaleDetailActitvity extends AppCompatActivity
             item= checkOutItemsArrayList.get(i);
 
             Paragraph heading = new Paragraph(item.getProductName()+" "+item.getProductModel());
-            heading.add("        ("+item.getIMEINos().size()+" x "+item.getSalePrice()+" €)");
-            heading.add("        "+item.getCollectivePrice()+" €");
+            heading.add("        ("+item.getIMEINos().size()+" x "+item.getSalePrice()+".00 €)");
+            heading.add("        "+item.getCollectivePrice()+".00 €");
 
             heading.setIndentationLeft(40.5f);
             heading.setPaddingTop(50);
@@ -458,9 +458,9 @@ public class SaleDetailActitvity extends AppCompatActivity
             document.add(heading);
             List imeiList = new List(List.ORDERED);
             imeiList.setFirst(1);
-            for (int j = 0; j < item.getIMEINos().size(); j++) {
-                imeiList.add(item.getIMEINos().get(j));
-            }
+//            for (int j = 0; j < item.getIMEINos().size(); j++) {
+//                imeiList.add(item.getIMEINos().get(j));
+//            }
             imeiList.setIndentationLeft(60.0f);
             document.add(imeiList);
 
